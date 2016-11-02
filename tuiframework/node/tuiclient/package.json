@@ -1,0 +1,21 @@
+{
+  "name": "tuiclient",
+  "version": "0.0.0",
+  "description": "TUIClient Node.js addon",
+  "main": "tuiclient.js",
+  "private": true,
+  "dependencies": {
+    "bindings": "~1.2.1",
+    "es5-shim": "^4.5.9",
+    "nan": "^2.3.5"
+  },
+  "scripts": {
+    "test": "node tuiclient.js",
+    "install": "node-gyp rebuild",
+    "start": "babel-node tuiclient.js --presets es2015,stage-2"
+  },
+  "gypfile": true,
+  "author": "Oliver Belaifa",
+  "license": " ",
+  "devDependencies": {}
+}
