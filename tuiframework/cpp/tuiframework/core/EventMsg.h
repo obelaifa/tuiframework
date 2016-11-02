@@ -44,8 +44,8 @@ class EventMsg : public IEventMsg<A> {
 public:
         /// Initializes the event with the delivered destination address and payload.
     EventMsg(const A & address = A(), const T & payload = T()) :
-        address(address),
-        payload(payload) {
+        payload(payload),
+        address(address) {
     }
 
 
