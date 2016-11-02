@@ -54,7 +54,7 @@ public:
         /// Sets the additional description.
     void setDescription(const std::string & description);
         /// Returns the additional description.
-    const std::string & getDescription();
+    const std::string & getDescription() const;
 
         /// Returns a mapping table, which consists of a port name as key and a channel type as value.
     std::map<std::string, Port> & getPortMap();

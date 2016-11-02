@@ -44,7 +44,9 @@
 #else
 	#include <sys/types.h>
 	#include <sys/socket.h>
+	#include <unistd.h>
 #endif
+
 #include <ctime>
 #include <assert.h>
 

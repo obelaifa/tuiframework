@@ -49,6 +49,9 @@ void registerTypes(IEventFactory * eventFactory, IEventChannelFactory * eventCha
     tuiframework::registerType<PackedType<Vector4<double> >, 24>(eventFactory, eventChannelFactory, "PackedVector4");
     tuiframework::registerType<Matrix4<double>, 25>(eventFactory, eventChannelFactory, "Matrix4");
     tuiframework::registerType<PackedType<Matrix4<double> >, 26>(eventFactory, eventChannelFactory, "PackedMatrix4");
+
+    tuiframework::registerType<Text, 100>(eventFactory, eventChannelFactory, "TextChannel");
+    tuiframework::registerType<Text, 101>(eventFactory, eventChannelFactory, "TextVectorChannel");
 }
 
 }

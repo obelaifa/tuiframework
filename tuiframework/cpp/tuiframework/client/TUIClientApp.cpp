@@ -20,6 +20,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with the TUIFramework.  If not, see <http://www.gnu.org/licenses/>.
 */
+#define USE_TFDEBUG
 
 
 #include "TUIClientApp.h"
@@ -31,7 +32,6 @@
 #include "../core/HostAddress.h"
 #include "../core/EventMsgRouter.h"
 #include "../core/EventRouter.h"
-#define USE_TFDEBUG
 #include "../logging/Logger.h"
 #include "../core/TypeRegistration.h"
 
@@ -103,15 +103,15 @@ void TUIClientApp::cancel() {
 
 
 void TUIClientApp::handleAttachedObjectsMsg(AttachedObjectsMsg * event) {
-    TFDEBUG("TUIClientApp::handleAttachedObjectsMsg " << event);
-    if ( ! this->connectedWithServer) {
-        this->stubContainer.createStubs(event->getPayload().getTUIObjectInstanceVector(), event->getPayload().getTUIObjectTypeVector());
-        this->attachedObjects = event->getPayload();
-        this->connectedWithServer = true;
-        if (this->systemNotificationSink) {
-            this->systemNotificationSink->push(new SystemMsg(CONNECTION_ESTABLISHED));
-        }
+  TFDEBUG("TUIClientApp::handleAttachedObjectsMsg " << event);
+  if ( ! this->connectedWithServer) {
+    this->stubContainer.createStubs(event->getPayload().getTUIObjectInstanceVector(), event->getPayload().getTUIObjectTypeVector());
+    this->attachedObjects = event->getPayload();
+    this->connectedWithServer = true;
+    if (this->systemNotificationSink) {
+      this->systemNotificationSink->push(new SystemMsg(CONNECTION_ESTABLISHED));
     }
+  }
 }
 
 
@@ -140,23 +140,25 @@ TUIObjectStubContainer & TUIClientApp::getTUIObjectStubContainer() {
 
 
 void TUIClientApp::processEvents() {
-    while (this->inEventQueue.size()) {
-        IEvent * event = this->inEventQueue.pop();
-        if (event) {
-            if (event->getEventTypeID() == HostEvent::EventTypeID()) {
-                HostEvent * ipEventMsg = static_cast<HostEvent *>(event);
-                IEvent * event2 = ipEventMsg->getPayload();
-                if (event2->getEventTypeID() >= EPEventMsgTypeIDOffset) {
-                    this->stubContainer.handleEvent(static_cast<IEventMsg<EPAddress> *>(event2));
-                } else if (event2->getEventTypeID() == AttachedObjectsMsg::EventTypeID()) {
-                    this->handleAttachedObjectsMsg(static_cast<AttachedObjectsMsg *>(event2));
-                } else if (event2->getEventTypeID() == MulticastGroupInvitationMsg::EventTypeID()) {
-                    this->handleMulticastGroupInvitationMsg(static_cast<MulticastGroupInvitationMsg *>(event2));
-                }
-            }
-            delete event;
+  while (this->inEventQueue.size()) {
+    IEvent * event = this->inEventQueue.pop();
+    // cout << event << endl;
+    // cout.flush();
+    if (event) {
+      if (event->getEventTypeID() == HostEvent::EventTypeID()) {
+        HostEvent * ipEventMsg = static_cast<HostEvent *>(event);
+        IEvent * event2 = ipEventMsg->getPayload();
+        if (event2->getEventTypeID() >= EPEventMsgTypeIDOffset) {
+          this->stubContainer.handleEvent(static_cast<IEventMsg<EPAddress> *>(event2));
+        } else if (event2->getEventTypeID() == AttachedObjectsMsg::EventTypeID()) {
+          this->handleAttachedObjectsMsg(static_cast<AttachedObjectsMsg *>(event2));
+        } else if (event2->getEventTypeID() == MulticastGroupInvitationMsg::EventTypeID()) {
+          this->handleMulticastGroupInvitationMsg(static_cast<MulticastGroupInvitationMsg *>(event2));
         }
+      }
+      delete event;
     }
+  }
 }
 
 

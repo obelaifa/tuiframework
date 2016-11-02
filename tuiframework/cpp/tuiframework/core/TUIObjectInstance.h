@@ -60,7 +60,7 @@ public:
         /// Sets the additional description.
     void setDescription(const std::string & description);
         /// Returns the additional description.
-    const std::string & getDescription();
+    const std::string & getDescription() const;
 
         /// Returns a mapping table, which consists of a channel name as key and channel number as value.
     const std::map<std::string, int> & getNameChannelNrMap() const;

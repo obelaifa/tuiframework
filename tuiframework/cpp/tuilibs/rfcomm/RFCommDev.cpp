@@ -39,6 +39,10 @@
 
 #include <iostream>
 
+#ifndef _WIN32
+	#include <unistd.h>
+#endif
+
 #define BTP_MODEMDEVICE "/dev/rfcomm0"
 #define BTP_BAUDRATE B38400
 #define BTP_SYNC_VALUE 170

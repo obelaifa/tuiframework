@@ -71,7 +71,7 @@ void TUIObjectInstance::setDescription(const std::string & description) {
 }
 
 
-const std::string & TUIObjectInstance::getDescription() {
+const std::string & TUIObjectInstance::getDescription() const {
     return this->description;
 }
 
@@ -93,7 +93,6 @@ void TUIObjectInstance::setNameChannelNrMap(const std::map<std::string, int> & n
 
 
 std::ostream & TUIObjectInstance::serialize(std::ostream & os) const {
-    //os << this->name << " " << this->tuiTypeName << " " << this->description;
     os << this->name << " " << this->typeName << " " << this->id;
 
     os << " " << static_cast<int>(this->nameChannelNrMap.size());
@@ -105,13 +104,17 @@ std::ostream & TUIObjectInstance::serialize(std::ostream & os) const {
             i++;
         }
     }
+    os << " " << this->description.size();
+    if (this->description.size()) {
+      os << " ";
+      os.write(this->description.c_str(), this->description.size());
+    }
 
     return os;
 }
 
 
 std::istream & TUIObjectInstance::deSerialize(std::istream & is) {
-    //is >> this->name >> this->tuiTypeName >> this->description;
     is >> this->name >> this->typeName >> this->id;
 
     int nameChannelNrCount;
@@ -124,6 +127,17 @@ std::istream & TUIObjectInstance::deSerialize(std::istream & is) {
         is >> name;
         is >> portNr;
         this->nameChannelNrMap[name] = portNr;
+    }
+    int size;
+    is >> size;
+    if (size) {
+      char * text = new char[size + 1];
+        // read the delimiter
+      is.read(text, 1);
+      is.read(text, size);
+      text[size] = 0;
+      this->description = text;
+      delete []text;
     }
 
     return is;

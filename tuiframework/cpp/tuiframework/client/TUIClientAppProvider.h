@@ -44,10 +44,11 @@ class IEventChannelFactory;
 class IEventFactory;
 class IEventSink;
 class IEventChannel;
+class AttachedObjects;
 
 /// returns the TUI object source channel by its name
 IEventChannel * getSourceChannel(const std::string & tuiObjectName, const std::string & channelName, int index = 0);
-/// returns the TUI object source channel by its name
+/// returns the TUI object source sink by its name
 IEventChannel * getSinkChannel(const std::string & tuiObjectName, const std::string & channelName, int index = 0);
 
 
@@ -64,6 +65,8 @@ void processEvents(int index = 0);
 
 IEventFactory & getEventFactory(int index = 0);
 IEventChannelFactory & getEventChannelFactory(int index = 0);
+
+const AttachedObjects & getAttachedObjects(int index = 0);
 
 }
 

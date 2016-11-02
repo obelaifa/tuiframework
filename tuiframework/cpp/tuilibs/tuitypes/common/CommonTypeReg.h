@@ -38,13 +38,15 @@
 #include "Matrix4.h"
 #include "PackedType.h"
 
+#include "Text.h"
+#include "TextVector.h"
+
 #include <tuiframework/core/EPEventMsg.h>
 #include <tuiframework/core/IEventFactory.h>
 #include <tuiframework/core/IEventChannelFactory.h>
 
 #include <string>
 
-   
 typedef tuiframework::EPEventMsg<bool, 11>                  DigitalChangedEvent;
 typedef tuiframework::EPEventMsg<float, 12>                 AnalogChangedEvent;
 typedef tuiframework::EPEventMsg<int, 13>                   IntegerChangedEvent;
@@ -62,6 +64,10 @@ typedef tuiframework::EPEventMsg<Vector4<double>, 23>                   Vector4E
 typedef tuiframework::EPEventMsg<PackedType<Vector4<double> >, 24>      PackedVector4Event;
 typedef tuiframework::EPEventMsg<Matrix4<double>, 25>                   Matrix4Event;
 typedef tuiframework::EPEventMsg<PackedType<Matrix4<double> >, 26>      PackedMatrix4Event;
+
+typedef tuiframework::EPEventMsg<Text, 100>           TextChangedEvent;
+typedef tuiframework::EPEventMsg<TextVector, 101>     TextVectorChangedEvent;
+
 
 namespace CommonTypeReg {
 

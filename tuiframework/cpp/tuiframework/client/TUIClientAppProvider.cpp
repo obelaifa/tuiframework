@@ -35,7 +35,7 @@ IEventChannel * getSourceChannel(const std::string & tuiObjectName, const std::s
     return TUIClientAppProvider::getInstance(index)->getTUIObjectStubContainer().getSourceChannel(tuiObjectName, channelName);
 }
 
-// get TUI Object Source Channel
+// get TUI Object Sink Channel
 IEventChannel * getSinkChannel(const std::string & tuiObjectName, const std::string & channelName, int index) {
     return TUIClientAppProvider::getInstance(index)->getTUIObjectStubContainer().getSinkChannel(tuiObjectName, channelName);
 }
@@ -69,6 +69,11 @@ IEventFactory & getEventFactory(int index) {
 
 IEventChannelFactory & getEventChannelFactory(int index) {
     return TUIClientAppProvider::getInstance(index)->getEventChannelFactory();
+}
+
+
+const AttachedObjects & getAttachedObjects(int index) {
+  return TUIClientAppProvider::getInstance(index)->getAttachedObjects();
 }
 
 

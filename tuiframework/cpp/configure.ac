@@ -3,11 +3,11 @@
 
 AC_PREREQ([2.61])
 AC_INIT(TUIFramework, 0.16)
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([subdir-objects])
 
 AC_CONFIG_SRCDIR([tuiframework/client/TUIClientAppProvider.h])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([foreign])
+#AM_INIT_AUTOMAKE([subdir-objects], [foreign])
 
 ######################################################################
 # DOXYGEN SUPPORT

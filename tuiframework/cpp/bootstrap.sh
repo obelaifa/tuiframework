@@ -6,7 +6,7 @@ autoheader
 
 automake --add-missing
 
-autoreconf
+autoreconf -i
 
 
 

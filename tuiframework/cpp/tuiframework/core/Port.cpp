@@ -23,6 +23,7 @@
 
 
 #include "Port.h"
+#include "../logging/Logger.h"
 
 #include <iostream>
 
@@ -86,17 +87,31 @@ void Port::setDataFlowDirection(Port::DataFlowDirection dataFlowDirection) {
 
 
 std::ostream & Port::serialize(std::ostream & os) const {
-    //os << this->name << " " << this->description << " " << this->typeName << " ";
     os << this->name << " " << this->typeName << " ";
     os << this->dataFlowDirection;
+    os << " " << this->description.size();
+    if (this->description.size()) {
+      os << " ";
+      os.write(this->description.c_str(), this->description.size());
+    }
     return os;
 }
 
 
 std::istream & Port::deSerialize(std::istream & is) {
-  //  is >> this->name >> this->description >> this->typeName;
     is >> this->name >> this->typeName;
     is >> this->dataFlowDirection;
+    int size;
+    is >> size;
+    if (size) {
+      char * text = new char[size + 1];
+        // read the delimiter
+      is.read(text, 1);
+      is.read(text, size);
+      text[size] = 0;
+      this->description = text;
+      delete []text;
+    }
     return is;
 }
 

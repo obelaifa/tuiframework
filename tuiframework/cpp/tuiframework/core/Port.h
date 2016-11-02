@@ -50,7 +50,8 @@ public:
     };
 
     Port();
-    Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection, const std::string & description = "");
+    Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection,
+      const std::string & description = "");
     virtual ~Port();
 
         /// Returns the port name.

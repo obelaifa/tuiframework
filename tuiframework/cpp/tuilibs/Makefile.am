@@ -15,6 +15,8 @@ libCommonTUITypes_la_SOURCES = \
     tuitypes/common/KinectJoint.cpp \
     tuitypes/common/Matrix4Data.cpp \
     tuitypes/common/MouseData.cpp \
+    tuitypes/common/Text.cpp \
+    tuitypes/common/TextVector.cpp \
     tuitypes/common/TrackerData.cpp \
     tuitypes/common/Vector3d.cpp \
     tuitypes/common/VectorList3d.cpp
@@ -30,6 +32,8 @@ nobase_libCommonTUITypes_la_HEADERS = \
     tuitypes/common/MouseData.h \
     tuitypes/common/PackedType.h \
     tuitypes/common/SkeletonJointID.h \
+    tuitypes/common/Text.h \
+    tuitypes/common/TextVector.h \
     tuitypes/common/TrackerData.h \
     tuitypes/common/Vector4.h \
     tuitypes/common/Vector3d.h \
@@ -369,25 +373,25 @@ libTypeConverterMSPxmldir = $(datadir)/@PACKAGE@
 
 ################################
 
-lib_LTLIBRARIES += libVRPNTUIDevice.la
-libVRPNTUIDevice_la_CXXFLAGS = -fPIC -rdynamic -c -I$(INCDIR) -ggdb -g -O3
-libVRPNTUIDevice_la_LIBADD = -lCommonTUITypes -lTUIFrameworkServer -lTUIFrameworkCore -lvrpn
-libVRPNTUIDevice_la_LDFLAGS = -L../tuiframework -version-info 1:1:0
-
-libVRPNTUIDevice_ladir = ${includedir}/tuilibs
-
-libVRPNTUIDevice_la_SOURCES = \
-    vrpn/VRPNTrackerDev.cpp \
-    vrpn/VRPNDevPlugin.cpp
-
-nobase_libVRPNTUIDevice_la_HEADERS = \
-    vrpn/VRPNTrackerDev.h \
-    vrpn/VRPNDevPlugin.h
-
-libVRPNTUIDevicexml_DATA = \
-    vrpn/VRPNTrackerDev.xml
-
-libVRPNTUIDevicexmldir = $(datadir)/@PACKAGE@
+#lib_LTLIBRARIES += libVRPNTUIDevice.la
+#libVRPNTUIDevice_la_CXXFLAGS = -fPIC -rdynamic -c -I$(INCDIR) -ggdb -g -O3
+#libVRPNTUIDevice_la_LIBADD = -lCommonTUITypes -lTUIFrameworkServer -lTUIFrameworkCore -lvrpn
+#libVRPNTUIDevice_la_LDFLAGS = -L../tuiframework -version-info 1:1:0
+#
+#libVRPNTUIDevice_ladir = ${includedir}/tuilibs
+#
+#libVRPNTUIDevice_la_SOURCES = \
+#    vrpn/VRPNTrackerDev.cpp \
+#    vrpn/VRPNDevPlugin.cpp
+#
+#nobase_libVRPNTUIDevice_la_HEADERS = \
+#    vrpn/VRPNTrackerDev.h \
+#    vrpn/VRPNDevPlugin.h
+#
+#libVRPNTUIDevicexml_DATA = \
+#    vrpn/VRPNTrackerDev.xml
+#
+#libVRPNTUIDevicexmldir = $(datadir)/@PACKAGE@
 
 ################################
 
@@ -410,4 +414,5 @@ libMatrix4CalibrationDevxml_DATA = \
     matrix4calibration/Matrix4Calibration.xml 
 
 libMatrix4CalibrationDevxmldir = $(datadir)/@PACKAGE@
+
 

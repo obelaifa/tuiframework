@@ -174,7 +174,6 @@ public:
     inline T getDeterminant() const {
         Matrix4<T> adjoint = this->getAdjoint();
         T det = 0;
-        int x = 0;
         for (int y = 0; y < 4; ++y) {
             det += (*this)[y][0]*adjoint[0][y];
         }
@@ -185,7 +184,6 @@ public:
     inline bool getInverse(Matrix4<T> & out) const {
         Matrix4<T> adjoint = this->getAdjoint();
         T det = 0;
-        int x = 0;
         for (int y = 0; y < 4; ++y) {
             det += (*this)[y][0]*adjoint[0][y];
         }

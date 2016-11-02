@@ -120,9 +120,12 @@
       <TUIObjectTypeSequence>
          <Image path="images/TUI1.png"/>
          <TUIObjectType name="TestTUIObjectType">
+
             <PortTypeSequence>
                <PortType name="Button" sink="0" source="1" typename="DigitalChannel">
-                  <Description/>
+                  <Description>
+                      Zeichnen aktivieren oder deaktivieren.
+                  </Description>
                </PortType>
                <PortType name="LED" sink="1" source="0" typename="DigitalChannel">
                   <Description/>
@@ -134,6 +137,9 @@
                   <Description/>
                </PortType>
             </PortTypeSequence>
+            <Description>
+               Das ist ein 3D Stift.
+            </Description>
          </TUIObjectType>
       </TUIObjectTypeSequence>
       <DeviceInstanceSequence>
@@ -142,7 +148,11 @@
       </DeviceInstanceSequence>
       <MSPInstanceSequence/>
       <TUIObjectInstanceSequence>
-         <TUIObjectInstance name="MyTUIObjectInstance" typename="TestTUIObjectType"/>
+         <TUIObjectInstance name="MyTUIObjectInstance" typename="TestTUIObjectType">
+             <Description>
+                 Blauer 3D Stift.
+             </Description>
+         </TUIObjectInstance>
       </TUIObjectInstanceSequence>
       <ConnectorSequence>
          <Connector>

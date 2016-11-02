@@ -51,7 +51,7 @@ void TUIObjectType::setDescription(const std::string & description) {
 }
 
 
-const std::string & TUIObjectType::getDescription() {
+const std::string & TUIObjectType::getDescription() const {
     return this->description;
 }
 
@@ -72,7 +72,6 @@ void TUIObjectType::setPortMap(const std::map<std::string, Port> & portMap) {
 
 
 std::ostream & TUIObjectType::serialize(std::ostream & os) const {
-    //os << this->tuiObjectTypeName << " " << this->description << " ";
     os << this->name << " ";
     os << static_cast<int>(this->portMap.size());
 
@@ -84,12 +83,17 @@ std::ostream & TUIObjectType::serialize(std::ostream & os) const {
         i++;
     }
 
+    os << " " << this->description.size();
+    if (this->description.size()) {
+      os << " ";
+      os.write(this->description.c_str(), this->description.size());
+    }
+
     return os;
 }
 
 
 std::istream & TUIObjectType::deSerialize(std::istream & is) {
-    //is >> this->tuiObjectTypeName >> this->description;
     is >> this->name;
     int portCount;
     is >> portCount;
@@ -99,6 +103,18 @@ std::istream & TUIObjectType::deSerialize(std::istream & is) {
         Port port;
         is >> port;
         this->portMap[port.getName()] = port;
+    }
+
+    int size;
+    is >> size;
+    if (size) {
+      char * text = new char[size + 1];
+        // read the delimiter
+      is.read(text, 1);
+      is.read(text, size);
+      text[size] = 0;
+      this->description = text;
+      delete []text;
     }
 
     return is;
