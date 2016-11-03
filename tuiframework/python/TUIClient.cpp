@@ -8,9 +8,8 @@
 
 
 using namespace std;
-
-namespace tuiframework {
-namespace python {
+using namespace tuiframework;
+using namespace python;
 
 TUIClient::TUIClient() {
 }
@@ -40,7 +39,7 @@ void TUIClient::push(IEvent * event) {
 
 void TUIClient::setEventCallback(const std::string & tuiObjectName, const std::string & portName, PyObject * callback) {
 
-    TUIObjectStubContainer & tc = TUIClientAppSingleton::getInstance()->getTUIObjectStubContainer();
+    TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
     TUIObjectStub * t = tc.getStub(tuiObjectName);
     
     IEventChannel * iec = t->getSourceChannel(portName);
@@ -57,7 +56,7 @@ void TUIClient::setEventCallback(const std::string & tuiObjectName, const std::s
 
 
 void TUIClient::removeEventCallback(const std::string & tuiObjectName, const std::string & portName) {
-    TUIObjectStubContainer & tc = TUIClientAppSingleton::getInstance()->getTUIObjectStubContainer();
+    TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
     TUIObjectStub * t = tc.getStub(tuiObjectName);
     IEventChannel * iec = t->getSinkChannel(portName);
     int tuiObjectNr = t->getID();
@@ -72,11 +71,12 @@ void TUIClient::removeEventCallback(const std::string & tuiObjectName, const std
 
 void TUIClient::sendEvent(const std::string & tuiObjectName, const std::string & portName, const std::string & serializedPayload) {
 
-    TUIObjectStubContainer & tc = TUIClientAppSingleton::getInstance()->getTUIObjectStubContainer();
+    TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
     TUIObjectStub * t = tc.getStub(tuiObjectName);
     IEventChannel * iec = t->getSinkChannel(portName);
    
-    IEvent * event = EventFactorySingleton::getInstance()->createInstance(iec->getChannelTypeID());
+    IEvent * event = TUIClientAppProvider::getInstance()->getEventFactory().createInstance(iec->getChannelTypeID());
+    // IEvent * event = EventFactorySingleton::getInstance()->createInstance(iec->getChannelTypeID());
     if (event) {
         stringstream ss;
         ss << "-1 -1 " << serializedPayload;
@@ -88,7 +88,3 @@ void TUIClient::sendEvent(const std::string & tuiObjectName, const std::string &
 }
 
 
-
-
-}
-}

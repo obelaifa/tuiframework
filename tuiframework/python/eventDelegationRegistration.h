@@ -1,5 +1,5 @@
-#ifndef _typeRegistration_h_
-#define _typeRegistration_h_
+#ifndef _eventDelegationRegistration_h_
+#define _eventDelegationRegistration_h_
 
 namespace tuiframework {
 namespace python {    

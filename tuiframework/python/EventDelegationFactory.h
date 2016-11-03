@@ -8,11 +8,10 @@
 
 namespace tuiframework {
 namespace python {
-    
-typedef Factory<int, IEventDelegation> EventDelegationFactory;
-typedef Singleton<EventDelegationFactory> EventDelegationFactorySingleton;
+typedef tuiframework::Factory<int, tuiframework::python::IEventDelegation> EventDelegationFactory;
+typedef tuiframework::Singleton<tuiframework::Factory<int, tuiframework::python::IEventDelegation> > EventDelegationFactorySingleton;
+}
+}
 
-}
-}
 
 #endif

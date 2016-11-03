@@ -13,9 +13,13 @@
 namespace tuiframework {
 namespace python {
 
-template <class T>
+template <class T, int typeID>
 class EventDelegation : public IEventDelegation {
 public:
+
+    typedef tuiframework::EPEventMsg<T, typeID> E;
+    typedef EventDelegation<T, typeID> C;
+
     EventDelegation() : callback(0) {
         std::cout << ">>>>>>>>>> EventDelegation()" << std::endl;
     }
@@ -29,8 +33,7 @@ public:
         this->tuiObjectName = tuiObjectName;
         this->portName = portName;
         try {
-            CONNECT(tuiframework::EPEventMsg<T>, tuiObjectName.c_str(), portName.c_str(),
-                EventDelegation<T>, this, &EventDelegation<T>::changed);
+            CONNECT(E, tuiObjectName.c_str(), portName.c_str(), C, this, &C::changed);
             std::cout << ">>>>>>>>>> CONNECT()" << std::endl;
         } catch (const Exception & e) {
             std::cerr << "Exception" << std::endl;
@@ -40,12 +43,11 @@ public:
 
 
     void removeConnection() {
-         DISCONNECT(tuiframework::EPEventMsg<T>, this->tuiObjectName.c_str(), this->portName.c_str(),
-                EventDelegation<T>, this, &EventDelegation<T>::changed);
+         DISCONNECT(E, this->tuiObjectName.c_str(), this->portName.c_str(), C, this, E::changed);
     }
     
 
-    void changed(const tuiframework::EPEventMsg<T> * e) {
+    void changed(const tuiframework::EPEventMsg<T, typeID> * e) {
         std::cout << *e << std::endl;
         const T & payload = e->getPayload();
         this->ss.str("");

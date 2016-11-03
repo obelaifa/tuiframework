@@ -1,6 +1,8 @@
 #include "TUIClient.h"
 #include "eventDelegationRegistration.h"
 
+#include <tuilibs/tuitypes/common/CommonTypeReg.h>
+
 #include <Python.h>
 #include <iostream>
 
@@ -47,7 +49,9 @@ PyMODINIT_FUNC PyInit_tuiclient(void) {
 static TUIClient tuiClient;
 
 static PyObject * tuiclient_init(PyObject * self, PyObject * args) {
-    initTypeRegistration();
+    TFINFO("HALLO")
+    initTypeRegistration(getEventFactory());
+    CommonTypeReg::registerTypes(&getEventFactory(), &getEventChannelFactory());
     eventDelegationRegistration();
 
     Py_INCREF(Py_None);
@@ -79,7 +83,7 @@ static PyObject * tuiclient_connectServer(PyObject * self, PyObject * args) {
 
 
 static PyObject * tuiclient_disconnectServer(PyObject * self, PyObject * args) {
-    TUIClientAppSingleton::getInstance()->disconnectFromTUIServer();
+    disconnectFromTUIServer();
 
     Py_INCREF(Py_None);
     return Py_None;
@@ -126,7 +130,7 @@ static PyObject * tuiclient_removeEventCallback(PyObject * self, PyObject * args
 
 
 static PyObject * tuiclient_processEvents(PyObject * self, PyObject * args) {
-    TUIClientAppSingleton::getInstance()->processEvents();
+    processEvents();
 
     Py_INCREF(Py_None);
     return Py_None;    
