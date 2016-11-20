@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--document xmlns:xi='http://www.w3.org/2001/XInclude'-->
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+    <ServerConfig>
+        <ServerStartupConfig/>
+        <DeviceTypeSequence>
+            <DeviceType name="DummyDevLBR100">
+                <PortTypeSequence>
+                    <PortType name="LBR100.CTR.AntriebeAn" sink="1" source="0" typename="DigitalChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.AntriebeSindAn" sink="0" source="1" typename="DigitalChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.ExternStart" sink="1" source="0" typename="DigitalChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.GreiferIstAuf" sink="0" source="1" typename="DigitalChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.GreiferIstZu" sink="0" source="1" typename="DigitalChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.GreiferAuf" sink="1" source="0" typename="DigitalChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.M01.$A1" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.M02.$A2" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.M03.$A3" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.M04.$A4" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.M05.$A5" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.M06.$A6" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.M07.$A7" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.GR.$pos_l" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.GR.$pos_r" sink="1" source="1" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.Soll_A1" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.Soll_A2" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.Soll_A3" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.Soll_A4" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.Soll_A5" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.Soll_A6" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.CTR.Soll_A7" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+                    <PortType name="LBR100.StateTrigger" sink="1" source="0" typename="AnalogChannel">
+                        <Description/>
+                    </PortType>
+
+                </PortTypeSequence>
+                <ParameterTypeDefSequence/>
+                <ParameterTypeSequence/>
+            </DeviceType>
+        </DeviceTypeSequence>
+    </ServerConfig>
+</document>

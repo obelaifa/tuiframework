@@ -50,13 +50,16 @@ libDummyTUIDevice_ladir = ${includedir}/tuilibs
 
 libDummyTUIDevice_la_SOURCES = \
     dummy/DummyDevDA.cpp \
+    dummy/DummyDevLBR100.cpp \
     dummy/DummyDevMatrix4.cpp \
     dummy/DummyDevPackedVector4.cpp \
     dummy/DummyDevPlugin.cpp \
     dummy/DummyDevTracker.cpp
 
+
 nobase_libDummyTUIDevice_la_HEADERS = \
     dummy/DummyDevDA.h \
+    dummy/DummyDevLBR100.h \
     dummy/DummyDevMatrix4.h \
     dummy/DummyDevPackedVector4.h \
     dummy/DummyDevPlugin.h \
@@ -64,6 +67,7 @@ nobase_libDummyTUIDevice_la_HEADERS = \
 
 libDummyTUIDevicexml_DATA = \
     dummy/DummyDeviceDA.xml \
+    dummy/DummyDevLBR100.xml \
     dummy/DummyDevMatrix4.xml \
     dummy/DummyDevPackedVector4.xml \
     dummy/DummyDeviceTracker.xml
