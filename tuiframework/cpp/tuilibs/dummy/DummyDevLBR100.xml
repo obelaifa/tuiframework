@@ -72,7 +72,7 @@
                     <PortType name="LBR100.CTR.Soll_A7" sink="1" source="0" typename="AnalogChannel">
                         <Description/>
                     </PortType>
-                    <PortType name="LBR100.StateTrigger" sink="1" source="0" typename="AnalogChannel">
+                    <PortType name="LBR100.StateTrigger" sink="1" source="0" typename="DigitalChannel">
                         <Description/>
                     </PortType>
 

@@ -12,6 +12,8 @@
 #include <map>
 #include <cstdio>
 
+#define AVALUE_SIZE 9
+
 namespace tuiframework {
     class ITUIServer;
 }
@@ -38,15 +40,8 @@ public:
         // IEventSink
     virtual void push(tuiframework::IEvent * event);
 
-    void setStartState();
+    void sendValueEvent(const std::string & str, int index);
 
-    void sendChangedValueEvents1();
-    void sendChangedValueEvents2();
-    void sendChangedValueEvents3();
-    void sendSteadyValueEvents1();
-    void sendControlEvents1();
-    void sendControlEvents2();
-    void sendControlEvents3();
     void sendInfoEvents2();
 
 protected:
@@ -77,8 +72,7 @@ protected:
       ~AState();
 
       bool isOn() const;
-      void setOn();
-      void setOff();
+      void setOn(bool on);
       void tick();
 
   protected:
@@ -93,12 +87,17 @@ protected:
       AValue(float increment = 1, float minValue = -170, float maxValue = 170);
       ~AValue();
 
+      void setOverride(bool on);
+
       void setTargetValue(float value);
+      void setOverrideValue(float value);
       float getCurrentValue() const;
+
       void tick();
-      void setEngineOn(bool on);
 
   protected:
+      bool override;
+
       float increment;
       float minValue;
       float maxValue;
@@ -106,62 +105,33 @@ protected:
       float currentValue;
       float targetValue;
 
-      bool engineOn;
+      float overrideValue;
   };
 
-
 protected:
-    int curTick;
+    bool engineOn;
 
     AState engine;
-    bool lastTickEngineState;
 
       // 0 - 6: Achsenwinkel, 7 - 8: Greifer
-    AValue $a[8];
+    AValue aValue[AVALUE_SIZE];
 
-    /*
-      portMap["LBR100.CTR.AntriebeAn"] =      Port("LBR100.CTR.AntriebeAn", "DigitalChannel", Port::Sink);
-      portMap["LBR100.CTR.AntriebeSindAn"] =  Port("LBR100.CTR.AntriebeSindAn", "DigitalChannel", Port::Source);
-      portMap["LBR100.CTR.ExternStart"] =     Port("LBR100.CTR.ExternStart", "DigitalChannel", Port::SourceAndSink);
-      portMap["LBR100.CTR.GreiferIstAuf"] =   Port("LBR100.CTR.GreiferIstAuf", "DigitalChannel", Port::Source);
-      portMap["LBR100.CTR.GreiferIstZu"] =    Port("LBR100.CTR.GreiferIstZu", "DigitalChannel", Port::Source);
-      portMap["LBR100.CTR.GreiferAuf"] =      Port("LBR100.CTR.GreiferAuf", "DigitalChannel", Port::SourceAndSink);
+    bool stateTrigger;
 
-      portMap["LBR100.M01.$A1"] = Port("LBR100.M01.$A1", "AnalogChannel", Port::SourceAndSink);
-      portMap["LBR100.M02.$A2"] = Port("LBR100.M02.$A2", "AnalogChannel", Port::SourceAndSink);
-      portMap["LBR100.M03.$A3"] = Port("LBR100.M03.$A3", "AnalogChannel", Port::SourceAndSink);
-      portMap["LBR100.M04.$A4"] = Port("LBR100.M04.$A4", "AnalogChannel", Port::SourceAndSink);
-      portMap["LBR100.M05.$A5"] = Port("LBR100.M05.$A5", "AnalogChannel", Port::SourceAndSink);
-      portMap["LBR100.M06.$A6"] = Port("LBR100.M06.$A6", "AnalogChannel", Port::SourceAndSink);
-      portMap["LBR100.M07.$A7"] = Port("LBR100.M07.$A7", "AnalogChannel", Port::SourceAndSink);
+    std::map<int, AValue> channelNrAValueMap;
+    std::map<int, int> channelNrInternalAValueNrMap;
 
-      portMap["LBR100.GR.$pos_l"] = Port("LBR100.GR.$pos_l", "TextChannel", Port::SourceAndSink);
-      portMap["LBR100.GR.$pos_r"] = Port("LBR100.GR.$pos_r", "TextChannel", Port::SourceAndSink);
+    int enginePortNr;
+    int greiferAufPortNr;
+    int stateTriggerPortNr;
 
+    int engineIsOnPortNr;
+    int greiferIstAufPortNr;
+    int greiferIstZuPortNr;
 
-      portMap["LBR100.CTR.Soll_A1"] = Port("LBR100.CTR.Soll_A1", "AnalogChannel", Port::Sink);
-      portMap["LBR100.CTR.Soll_A2"] = Port("LBR100.CTR.Soll_A2", "AnalogChannel", Port::Sink);
-      portMap["LBR100.CTR.Soll_A3"] = Port("LBR100.CTR.Soll_A3", "AnalogChannel", Port::Sink);
-      portMap["LBR100.CTR.Soll_A4"] = Port("LBR100.CTR.Soll_A4", "AnalogChannel", Port::Sink);
-      portMap["LBR100.CTR.Soll_A5"] = Port("LBR100.CTR.Soll_A5", "AnalogChannel", Port::Sink);
-      portMap["LBR100.CTR.Soll_A6"] = Port("LBR100.CTR.Soll_A6", "AnalogChannel", Port::Sink);
-      portMap["LBR100.CTR.Soll_A7"] = Port("LBR100.CTR.Soll_A7", "AnalogChannel", Port::Sink);
-
-      portMap["LBR100.INF.Scripts"] = Port("LBR100.INF.Scripts", "TextVectorChannel", Port::Source, "WinMod Scripts");
-      portMap["LBR100.INF.Additional"] = Port("LBR100.INF.Additional", "TextChannel", Port::Source, "Zusatzinformationen");
-
-      portMap["LBR100.CMD.StateTrigger"] = Port("LBR100.CMD.StateTrigger", "DigitalChannel", Port::Sink);
-    */
-
-
-    bool switchState[4];
-
-    float transX;
-    float transZ;
-    Vector4<double> pos;
-
-    bool highlight[3];
-    bool infopanel[3];
+    bool engineIsOn;
+    bool greiferIstAuf;
+    bool greiferIstZu;
 };
 
 }
