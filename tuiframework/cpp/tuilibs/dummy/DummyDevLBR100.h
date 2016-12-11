@@ -109,6 +109,10 @@ protected:
   };
 
 protected:
+    bool istGreiferAuf();
+    bool istGreiferZu();
+
+protected:
     bool engineOn;
 
     AState engine;

@@ -20,9 +20,37 @@
 using namespace tuiframework;
 using namespace std;
 
-
-
 namespace tuidevices {
+
+
+static std::string $A1 = "LBR100.M01.$A1";
+static std::string $A2 = "LBR100.M02.$A2";
+static std::string $A3 = "LBR100.M03.$A3";
+static std::string $A4 = "LBR100.M04.$A4";
+static std::string $A5 = "LBR100.M05.$A5";
+static std::string $A6 = "LBR100.M06.$A6";
+static std::string $A7 = "LBR100.M07.$A7";
+
+static std::string $POS_L = "LBR100.GR.$pos_l";
+static std::string $POS_R = "LBR100.GR.$pos_r";
+
+static std::string ANTRIEBE_AN = "LBR100.CTR.AntriebeAn";
+static std::string ANTRIEBE_SIND_AN = "LBR100.CTR.AntriebeSindAn";
+
+static std::string EXTERN_START = "LBR100.CTR.ExternStart";
+static std::string GREIFER_IST_AUF = "LBR100.CTR.GreiferIstAuf";
+static std::string GREIFER_IST_ZU = "LBR100.CTR.GreiferIstZu";
+static std::string GREIFER_AUF = "LBR100.CTR.GreiferAuf";
+
+static std::string SOLL_A1 = "LBR100.CTR.Soll_A1";
+static std::string SOLL_A2 = "LBR100.CTR.Soll_A2";
+static std::string SOLL_A3 = "LBR100.CTR.Soll_A3";
+static std::string SOLL_A4 = "LBR100.CTR.Soll_A4";
+static std::string SOLL_A5 = "LBR100.CTR.Soll_A5";
+static std::string SOLL_A6 = "LBR100.CTR.Soll_A6";
+static std::string SOLL_A7 = "LBR100.CTR.Soll_A7";
+
+static std::string STATE_TRIGGER = "LBR100.CMD.StateTrigger";
 
 
 IDevice * DummyDevLBR100::createFunction(void * arg) {
@@ -132,7 +160,7 @@ DummyDevLBR100::DummyDevLBR100(const DeviceConfig & deviceConfig) :
 
     map<string, Port> portMap;
 
-    portMap["LBR100.M01.$A1"] = Port("LBR100.M01.$A1", "AnalogChannel", Port::SourceAndSink);
+    portMap[$A1] = Port($A1, "AnalogChannel", Port::SourceAndSink);
     portMap["LBR100.M02.$A2"] = Port("LBR100.M02.$A2", "AnalogChannel", Port::SourceAndSink);
     portMap["LBR100.M03.$A3"] = Port("LBR100.M03.$A3", "AnalogChannel", Port::SourceAndSink);
     portMap["LBR100.M04.$A4"] = Port("LBR100.M04.$A4", "AnalogChannel", Port::SourceAndSink);
@@ -182,30 +210,30 @@ DummyDevLBR100::DummyDevLBR100(const DeviceConfig & deviceConfig) :
 
     this->deviceDescriptor.setNameChannelNrMap(nameChannelNrMap);
 
-    this->enginePortNr = this->deviceDescriptor.getNameChannelNrMap()["LBR100.CTR.AntriebeAn"];
-    this->greiferAufPortNr = this->deviceDescriptor.getNameChannelNrMap()["LBR100.CTR.GreiferAuf"];
-    this->stateTriggerPortNr = this->deviceDescriptor.getNameChannelNrMap()["LBR100.CMD.StateTrigger"];
-    this->greiferIstAufPortNr = this->deviceDescriptor.getNameChannelNrMap()["LBR100.CTR.GreiferIstAuf"];
-    this->greiferIstZuPortNr = this->deviceDescriptor.getNameChannelNrMap()["LBR100.CTR.GreiferIstZu"];
-    this->engineIsOnPortNr = this->deviceDescriptor.getNameChannelNrMap()["LBR100.CTR.AntriebeSindAn"];
+    this->enginePortNr = this->deviceDescriptor.getNameChannelNrMap()[ANTRIEBE_AN];
+    this->greiferAufPortNr = this->deviceDescriptor.getNameChannelNrMap()[GREIFER_AUF];
+    this->stateTriggerPortNr = this->deviceDescriptor.getNameChannelNrMap()[STATE_TRIGGER];
+    this->greiferIstAufPortNr = this->deviceDescriptor.getNameChannelNrMap()[GREIFER_IST_AUF];
+    this->greiferIstZuPortNr = this->deviceDescriptor.getNameChannelNrMap()[GREIFER_IST_ZU];
+    this->engineIsOnPortNr = this->deviceDescriptor.getNameChannelNrMap()[ANTRIEBE_SIND_AN];
 
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.M01.$A1"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.M01.$A2"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.M01.$A3"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.M01.$A4"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.M01.$A5"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.M01.$A6"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.M01.$A7"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.GR.$pos_l"]] = AValue();
-    this->channelNrAValueMap[nameChannelNrMap["LBR100.GR.$pos_r"]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$A1]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$A2]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$A3]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$A4]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$A5]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$A6]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$A7]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$POS_L]] = AValue();
+    this->channelNrAValueMap[nameChannelNrMap[$POS_R]] = AValue();
 
-    this->channelNrInternalAValueNrMap[nameChannelNrMap["LBR100.CTR.Soll_A1"]] = nameChannelNrMap["LBR100.M01.$A1"];
-    this->channelNrInternalAValueNrMap[nameChannelNrMap["LBR100.CTR.Soll_A2"]] = nameChannelNrMap["LBR100.M01.$A2"];
-    this->channelNrInternalAValueNrMap[nameChannelNrMap["LBR100.CTR.Soll_A3"]] = nameChannelNrMap["LBR100.M01.$A3"];
-    this->channelNrInternalAValueNrMap[nameChannelNrMap["LBR100.CTR.Soll_A4"]] = nameChannelNrMap["LBR100.M01.$A4"];
-    this->channelNrInternalAValueNrMap[nameChannelNrMap["LBR100.CTR.Soll_A5"]] = nameChannelNrMap["LBR100.M01.$A5"];
-    this->channelNrInternalAValueNrMap[nameChannelNrMap["LBR100.CTR.Soll_A6"]] = nameChannelNrMap["LBR100.M01.$A6"];
-    this->channelNrInternalAValueNrMap[nameChannelNrMap["LBR100.CTR.Soll_A7"]] = nameChannelNrMap["LBR100.M01.$A7"];
+    this->channelNrInternalAValueNrMap[nameChannelNrMap[SOLL_A1]] = nameChannelNrMap[$A1];
+    this->channelNrInternalAValueNrMap[nameChannelNrMap[SOLL_A2]] = nameChannelNrMap[$A2];
+    this->channelNrInternalAValueNrMap[nameChannelNrMap[SOLL_A3]] = nameChannelNrMap[$A3];
+    this->channelNrInternalAValueNrMap[nameChannelNrMap[SOLL_A4]] = nameChannelNrMap[$A4];
+    this->channelNrInternalAValueNrMap[nameChannelNrMap[SOLL_A5]] = nameChannelNrMap[$A5];
+    this->channelNrInternalAValueNrMap[nameChannelNrMap[SOLL_A6]] = nameChannelNrMap[$A6];
+    this->channelNrInternalAValueNrMap[nameChannelNrMap[SOLL_A7]] = nameChannelNrMap[$A7];
 }
 
 
@@ -305,6 +333,18 @@ void DummyDevLBR100::sendInfoEvents2() {
 }
 
 
+bool DummyDevLBR100::istGreiferAuf() {
+    return this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_l"]].getCurrentValue() == 25 &&
+      this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_r"]].getCurrentValue() == 25;
+}
+
+
+bool DummyDevLBR100::istGreiferZu() {
+    return this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_l"]].getCurrentValue() == 0 &&
+          this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_r"]].getCurrentValue() == 0;
+}
+
+
 void DummyDevLBR100::executeInputLoop() {
 
     this->inputLoopRunning = true;
@@ -355,13 +395,13 @@ void DummyDevLBR100::executeInputLoop() {
 
             if (this->stateTrigger) {
                 {
-                    this->greiferIstAuf = this->aValue[7].getCurrentValue() == 25 && this->aValue[8].getCurrentValue() == 25;
+                    this->greiferIstAuf = this->istGreiferAuf();
                     DigitalChangedEvent * event = new DigitalChangedEvent();
                     event->setAddress(EPAddress(this->entityID, this->greiferIstAufPortNr));
                     event->setPayload(greiferIstAuf);
                 }
                 {
-                    this->greiferIstZu = this->aValue[7].getCurrentValue() == 0 && this->aValue[8].getCurrentValue() == 0;
+                    this->greiferIstZu = this->istGreiferZu();
                     DigitalChangedEvent * event = new DigitalChangedEvent();
                     event->setAddress(EPAddress(this->entityID, this->greiferIstZuPortNr));
                     event->setPayload(greiferIstZu);
@@ -374,7 +414,7 @@ void DummyDevLBR100::executeInputLoop() {
                 }
             } else {
                 {
-                    bool state = this->aValue[7].getCurrentValue() == 25 && this->aValue[8].getCurrentValue() == 25;
+                    bool state = this->istGreiferAuf();
                     if (this->greiferIstAuf != state) {
                         this->greiferIstAuf = state;
                         DigitalChangedEvent * event = new DigitalChangedEvent();
@@ -383,7 +423,7 @@ void DummyDevLBR100::executeInputLoop() {
                     }
                 }
                 {
-                    bool state = this->aValue[7].getCurrentValue() == 25 && this->aValue[8].getCurrentValue() == 25;
+                    bool state = this->istGreiferZu();
                     if (this->greiferIstZu != state) {
                         this->greiferIstZu = state;
                         DigitalChangedEvent * event = new DigitalChangedEvent();
@@ -407,6 +447,9 @@ void DummyDevLBR100::executeInputLoop() {
 
 
 void DummyDevLBR100::executeOutputLoop() {
+
+
+
     this->outputLoopRunning = true;
     while (outputLoopRunning) {
         this->outputEventQueue.waitForData();
@@ -424,12 +467,14 @@ void DummyDevLBR100::executeOutputLoop() {
                     AnalogChangedEvent * acEvent = static_cast<AnalogChangedEvent *>(event);
 
                     {
+                          // Override Value
                         std::map<int, AValue>::iterator iter = this->channelNrAValueMap.find(address.getPortNr());
                         if (iter != this->channelNrAValueMap.end()) {
                             (*iter).second.setOverrideValue(acEvent->getPayload());
                         }
                     }
                     {
+                          // Target Value
                         std::map<int, int>::iterator iter = this->channelNrInternalAValueNrMap.find(address.getPortNr());
                         if (iter != this->channelNrInternalAValueNrMap.end()) {
                             this->channelNrAValueMap[(*iter).second].setTargetValue(acEvent->getPayload());
@@ -443,15 +488,17 @@ void DummyDevLBR100::executeOutputLoop() {
                     if (this->enginePortNr == address.getPortNr()) {
                         this->engine.setOn(dcEvent->getPayload());
                     } else if (this->greiferAufPortNr == address.getPortNr()) {
-                        this->aValue[7].setTargetValue(dcEvent->getPayload() ? 25 : 0);
-                        this->aValue[8].setTargetValue(dcEvent->getPayload() ? 25 : 0);
+                        this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_l"]]
+                            .setTargetValue(dcEvent->getPayload() ? 25 : 0);
+                        this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_r"]]
+                            .setTargetValue(dcEvent->getPayload() ? 25 : 0);
                     } else if (this->stateTriggerPortNr == address.getPortNr()) {
                         this->stateTrigger = true;
                     }
                 }
             }
 
-            //delete event;
+            delete event;
         }
     }
 }
