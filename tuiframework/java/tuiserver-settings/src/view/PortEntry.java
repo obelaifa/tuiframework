@@ -32,6 +32,7 @@ import java.awt.Point;
  * @author Oliver Belaifa
  */
 public class PortEntry {
+	private String idName;
 	private Point textOffset;
 	private Point circleOffset;
 	private String text;
@@ -41,7 +42,8 @@ public class PortEntry {
 	private boolean source;
 	private PortSet owner;
 	
-	public PortEntry(Point textOffset, Point circleOffset, String text, int height, Point connectionPoint, boolean source, PortSet owner) {
+	public PortEntry(String idName, Point textOffset, Point circleOffset, String text, int height, Point connectionPoint, boolean source, PortSet owner) {
+		this.idName = idName;
 		this.textOffset = textOffset;
 		this.circleOffset = circleOffset;
 		this.text = text;
@@ -59,7 +61,11 @@ public class PortEntry {
 	public void setConnected(boolean isConnected) {
 		this.isConnected = isConnected;
 	}
-
+	
+	public String getIdName() {
+		return this.idName;
+	}
+	
 	public Point getTextOffset() {
 		return this.textOffset;
 	}

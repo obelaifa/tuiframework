@@ -115,12 +115,19 @@ public class Exporter {
 			portElement.setAttribute("typename", p.getTypeName());
 			if (isTUI) {
 				// TODO tui bug fix
-				portElement.setAttribute("source", p.getDataFlowDirection().equals(Port.DataFlowDirection.Source) ? "0" : "1");
-				portElement.setAttribute("sink", p.getDataFlowDirection().equals(Port.DataFlowDirection.Sink) ? "0" : "1");
+				int a = p.getDataFlowDirection();
+				int b = Port.Source;
+				int c = Port.Sink;
+				int d = p.getDataFlowDirection() & Port.Source;
+				int g = p.getDataFlowDirection() & Port.Sink;
+				String src = (p.getDataFlowDirection() & Port.Source) != 0 ? "0" : "1";
+				String snk = (p.getDataFlowDirection() & Port.Sink) != 0 ? "0" : "1";
+				portElement.setAttribute("source", (p.getDataFlowDirection() & Port.Sink) == Port.Sink ? "1" : "0");
+				portElement.setAttribute("sink", (p.getDataFlowDirection() & Port.Source) == Port.Source ? "1" : "0");
 			}
 			else {
-				portElement.setAttribute("source", p.getDataFlowDirection().equals(Port.DataFlowDirection.Source) ? "1" : "0");
-				portElement.setAttribute("sink", p.getDataFlowDirection().equals(Port.DataFlowDirection.Sink) ? "1" : "0");
+				portElement.setAttribute("source", (p.getDataFlowDirection() & Port.Source) == Port.Source ? "1" : "0");
+				portElement.setAttribute("sink", (p.getDataFlowDirection() & Port.Sink) == Port.Sink ? "1" : "0");
 			}
 			this.appendDescription(doc, portElement, p.getDescription());
 		}

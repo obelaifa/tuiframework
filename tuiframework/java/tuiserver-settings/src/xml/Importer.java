@@ -50,7 +50,6 @@ import configmodel.ParameterGroup;
 import configmodel.ParameterTypeDef;
 import configmodel.Port;
 import configmodel.ServerConfig;
-import configmodel.Port.DataFlowDirection;
 
 /**
  * Importer
@@ -64,15 +63,21 @@ public class Importer {
 		String typeName = rootElement.getAttribute("typename");
 		String sink = rootElement.getAttribute("sink");
 		String source = rootElement.getAttribute("source");
-		Port.DataFlowDirection dataFlowDirection = Port.DataFlowDirection.Sink;
+		int dataFlowDirection = 0;
 		if (isTUI) {
 			// TODO tui bug fix
 			if (rootElement.getAttribute("sink").equals("1")) {
-				dataFlowDirection = Port.DataFlowDirection.Source;
+				dataFlowDirection |= Port.Source;
+			}
+			if (rootElement.getAttribute("source").equals("1")) {
+				dataFlowDirection |= Port.Sink;
 			}
 		} else {
+			if (rootElement.getAttribute("sink").equals("1")) {
+				dataFlowDirection |= Port.Sink;
+			}
 			if (rootElement.getAttribute("source").equals("1")) {
-				dataFlowDirection = Port.DataFlowDirection.Source;
+				dataFlowDirection |= Port.Source;
 			}
 		}
 		
@@ -449,7 +454,7 @@ public class Importer {
 					}
 				}
 			}
-			editor.connectPorts(new EntityID(srcEntityName, srcEntityType), srcPortName, new EntityID(dstEntityName, dstEntityType), dstPortName);
+			editor.connectPorts(new EntityID(srcEntityName, srcEntityType), "Source_" + srcPortName, srcPortName, new EntityID(dstEntityName, dstEntityType), "Sink_" + dstPortName, dstPortName);
 		} catch (InternalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

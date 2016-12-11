@@ -32,10 +32,12 @@ package configmodel;
  */
 public class PortAddress {
 	protected EntityID entityID;
+	protected String portLabel;
 	protected String portName;
 
-	public PortAddress(EntityID entityID, String portName) {
+	public PortAddress(EntityID entityID, String portLabel, String portName) {
 		this.entityID = entityID;
+		this.portLabel = portLabel;
 		this.portName = portName;
 	}
 	
@@ -47,8 +49,12 @@ public class PortAddress {
 		this.entityID = entityID;
 	}
 
-	public void setPortName(String portName) {
-		this.portName = portName;
+	public void setPortLabel(String portLabel) {
+		this.portLabel = portLabel;
+	}
+	
+	public String getPortLabel() {
+		return this.portLabel;
 	}
 	
 	public String getPortName() {
@@ -57,7 +63,7 @@ public class PortAddress {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return this.entityID.equals(((PortAddress)obj).getEntityID()) && this.portName.equals(((PortAddress)obj).getPortName());
+		return this.entityID.equals(((PortAddress)obj).getEntityID()) && this.portLabel.equals(((PortAddress)obj).getPortLabel());
 	}
 }
 

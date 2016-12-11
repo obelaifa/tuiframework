@@ -37,7 +37,6 @@ import java.awt.event.*;
 import configmodel.EntityType;
 import configmodel.EntityID;
 import configmodel.Port;
-import configmodel.Port.DataFlowDirection;
 import view.Playground;
 
 
@@ -207,11 +206,11 @@ public class TUIObjectDialogue extends JDialog implements ActionListener {
         	while (it.hasNext()){
         		Object[] row = it.next();
         		
-        		Port.DataFlowDirection dfd;
+        		int dfd;
         		if (((Boolean)row[3]).booleanValue()) {
-        			dfd = Port.DataFlowDirection.Source;
+        			dfd = Port.Source;
         		} else {
-        			dfd = Port.DataFlowDirection.Sink;
+        			dfd = Port.Sink;
         		}
         		
         		Port newPort = new Port((String)row[0], (String)row[1], dfd, (String)row[2]);

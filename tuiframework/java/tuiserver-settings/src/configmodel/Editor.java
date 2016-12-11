@@ -96,7 +96,7 @@ public class Editor {
 		return inst;
 	}
 
-	public Connector connectPorts(EntityID srcEntityID, String srcPortName, EntityID dstEntityID, String dstPortName) throws InternalException {
+	public Connector connectPorts(EntityID srcEntityID, String srcPortLabel, String srcPortName, EntityID dstEntityID, String dstPortLabel, String dstPortName) throws InternalException {
 		this.assertEntityInstanceExist(srcEntityID);
 		this.assertEntityInstanceExist(dstEntityID);
 		
@@ -115,7 +115,7 @@ public class Editor {
 		this.assertPortExist(srcEntityType, srcPortName);
 		this.assertPortExist(dstEntityType, dstPortName);
 		
-		Connector connector = new Connector(new PortAddress(srcEntity.getEntityID(), srcPortName), new PortAddress(dstEntity.getEntityID(), dstPortName));
+		Connector connector = new Connector(new PortAddress(srcEntity.getEntityID(), srcPortLabel, srcPortName), new PortAddress(dstEntity.getEntityID(), dstPortLabel, dstPortName));
 		this.project.getServerConfig().connectorVector.add(connector);
 
 		return connector;

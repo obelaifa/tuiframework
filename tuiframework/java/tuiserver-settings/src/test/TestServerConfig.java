@@ -32,7 +32,6 @@ import view.ImageDB;
 import view.ServerConfigView;
 
 import configmodel.*;
-import configmodel.Port.DataFlowDirection;
 import configmodel.EntityID.Type;
 
 /**
@@ -42,11 +41,11 @@ import configmodel.EntityID.Type;
  */
 public class TestServerConfig {
 	public static void addSourcePort(Hashtable<String, Port> portMap, String name, String typeName) {
-		portMap.put(name, new Port(name, typeName, DataFlowDirection.Source, ""));
+		portMap.put(name, new Port(name, typeName, Port.Source, ""));
 	}
 	
 	public static void addSinkPort(Hashtable<String, Port> portMap, String name, String typeName) {
-		portMap.put(name, new Port(name, typeName, DataFlowDirection.Sink, ""));
+		portMap.put(name, new Port(name, typeName, Port.Sink, ""));
 	}
 
 	public static EntityType createDeviceTypeDummyDA() {

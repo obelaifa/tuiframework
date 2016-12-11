@@ -305,7 +305,7 @@ public class Playground extends JPanel implements DropTargetListener {
 	public PortEntry getPort(PortAddress portAddress) {
 		Entity entity = this.entities.get(portAddress.getEntityID());
 		EntityContent entityContent = entity.getContent();
-		return entityContent.getPortEntry(portAddress.getPortName());
+		return entityContent.getPortEntry(portAddress.getPortLabel());
 	}
 	
 	public void mousePressed(Point pos, int button) {
@@ -355,9 +355,9 @@ public class Playground extends JPanel implements DropTargetListener {
 					if (oldSelectedType == SelectedType.PORT) {
 						if ( ! portEntry.isConnected() && portEntry.getOwner().getTypeName().equals(this.selectedPortTypeName)) {
 							
-							PortEntry selectedPortEntry = this.entities.get(this.selectedPortAddress.getEntityID()).getContent().getPortEntry(this.selectedPortAddress.getPortName());
+							PortEntry selectedPortEntry = this.entities.get(this.selectedPortAddress.getEntityID()).getContent().getPortEntry(this.selectedPortAddress.getPortLabel());
 							if (portEntry.isSource() != selectedPortEntry.isSource()) {
-								PortAddress portAddress = new PortAddress(entity.getInst().getEntityID(), portEntry.getText());
+								PortAddress portAddress = new PortAddress(entity.getInst().getEntityID(), portEntry.getIdName(), portEntry.getText());
 								if (portEntry.isSource()) {
 									this.project.getServerConfig().getConnectorVector().add(new Connector(portAddress, this.selectedPortAddress));
 								} else {
@@ -373,7 +373,7 @@ public class Playground extends JPanel implements DropTargetListener {
 					} else {
 						if ( ! portEntry.isConnected()) {
 							this.selectedType = SelectedType.PORT;
-							this.selectedPortAddress = new PortAddress(entity.getInst().getEntityID(), portEntry.getText());
+							this.selectedPortAddress = new PortAddress(entity.getInst().getEntityID(), portEntry.getIdName(), portEntry.getText());
 							this.selectedPortTypeName = portEntry.getOwner().getTypeName();
 						}
 					}
@@ -391,8 +391,8 @@ public class Playground extends JPanel implements DropTargetListener {
 					Entity srcEntity = this.entities.get(srcAddress.getEntityID());
 					Entity dstEntity = this.entities.get(dstAddress.getEntityID());
 					 
-					PortEntry srcPortEntry = srcEntity.getContent().getPortEntry(srcAddress.getPortName());
-					PortEntry dstPortEntry = dstEntity.getContent().getPortEntry(dstAddress.getPortName());
+					PortEntry srcPortEntry = srcEntity.getContent().getPortEntry(srcAddress.getPortLabel());
+					PortEntry dstPortEntry = dstEntity.getContent().getPortEntry(dstAddress.getPortLabel());
 					
 					Point srcPoint = new Point(srcPortEntry.getConnectionPoint().x + srcEntity.getContentPos().x,
 							srcPortEntry.getConnectionPoint().y + srcEntity.getContentPos().y);
@@ -450,8 +450,8 @@ public class Playground extends JPanel implements DropTargetListener {
 			Entity srcEntity = this.entities.get(srcAddress.getEntityID());
 			Entity dstEntity = this.entities.get(dstAddress.getEntityID());
 			 
-			PortEntry srcPortEntry = srcEntity.getContent().getPortEntry(srcAddress.getPortName());
-			PortEntry dstPortEntry = dstEntity.getContent().getPortEntry(dstAddress.getPortName());
+			PortEntry srcPortEntry = srcEntity.getContent().getPortEntry(srcAddress.getPortLabel());
+			PortEntry dstPortEntry = dstEntity.getContent().getPortEntry(dstAddress.getPortLabel());
 			
 			Point srcPoint = new Point(srcPortEntry.getConnectionPoint().x + srcEntity.getContentPos().x,
 					srcPortEntry.getConnectionPoint().y + srcEntity.getContentPos().y);
@@ -589,8 +589,8 @@ public class Playground extends JPanel implements DropTargetListener {
 		Entity srcEntity = this.entities.get(srcAddress.getEntityID());
 		Entity dstEntity = this.entities.get(dstAddress.getEntityID());
 		 
-		PortEntry srcPortEntry = srcEntity.getContent().getPortEntry(srcAddress.getPortName());
-		PortEntry dstPortEntry = dstEntity.getContent().getPortEntry(dstAddress.getPortName());
+		PortEntry srcPortEntry = srcEntity.getContent().getPortEntry(srcAddress.getPortLabel());
+		PortEntry dstPortEntry = dstEntity.getContent().getPortEntry(dstAddress.getPortLabel());
 		 
 		srcPortEntry.setConnected(true);
 		dstPortEntry.setConnected(true);
@@ -650,7 +650,7 @@ public class Playground extends JPanel implements DropTargetListener {
 		 
 		 if (this.selectedType == SelectedType.PORT) {
 			 Entity entity = this.entities.get(this.selectedPortAddress.getEntityID());
-			 PortEntry portEntry = entity.getContent().getPortEntry(this.selectedPortAddress.getPortName());
+			 PortEntry portEntry = entity.getContent().getPortEntry(this.selectedPortAddress.getPortLabel());
 			 
 			 Point connectionPoint = new Point(
 					 portEntry.getConnectionPoint().x + entity.getContentPos().x,

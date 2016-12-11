@@ -31,20 +31,19 @@ package configmodel;
  * @author Oliver Belaifa
  */
 public class Port {
-	public enum DataFlowDirection {
-		Source,
-		Sink
-	}
 	
+	public static final int Source = 1;
+	public static final int Sink = 2;
+
 	protected String name;
 	protected String typeName;
-	protected DataFlowDirection dataFlowDirection;
+	protected int dataFlowDirection;
 	protected String description;
 	
 	public Port() {
 	}
 	
-	public Port(String name, String typeName, DataFlowDirection dataFlowDirection, String description) {
+	public Port(String name, String typeName, int dataFlowDirection, String description) {
 		this.name = name;
 		this.typeName = typeName;
 		this.dataFlowDirection = dataFlowDirection;
@@ -67,11 +66,11 @@ public class Port {
 		this.typeName = typeName;
 	}
 	
-	public DataFlowDirection getDataFlowDirection() {
+	public int getDataFlowDirection() {
 		return this.dataFlowDirection;
 	}
 	
-	public void setDataFlowDirection(DataFlowDirection dataFlowDirection) {
+	public void setDataFlowDirection(int dataFlowDirection) {
 		this.dataFlowDirection = dataFlowDirection;
 	}
 	
