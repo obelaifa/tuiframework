@@ -50,7 +50,7 @@ static std::string SOLL_A5 = "LBR100.CTR.Soll_A5";
 static std::string SOLL_A6 = "LBR100.CTR.Soll_A6";
 static std::string SOLL_A7 = "LBR100.CTR.Soll_A7";
 
-static std::string STATE_TRIGGER = "LBR100.CMD.StateTrigger";
+static std::string STATE_TRIGGER = "LBR100.StateTrigger";
 
 
 IDevice * DummyDevLBR100::createFunction(void * arg) {
@@ -161,36 +161,36 @@ DummyDevLBR100::DummyDevLBR100(const DeviceConfig & deviceConfig) :
     map<string, Port> portMap;
 
     portMap[$A1] = Port($A1, "AnalogChannel", Port::SourceAndSink);
-    portMap["LBR100.M02.$A2"] = Port("LBR100.M02.$A2", "AnalogChannel", Port::SourceAndSink);
-    portMap["LBR100.M03.$A3"] = Port("LBR100.M03.$A3", "AnalogChannel", Port::SourceAndSink);
-    portMap["LBR100.M04.$A4"] = Port("LBR100.M04.$A4", "AnalogChannel", Port::SourceAndSink);
-    portMap["LBR100.M05.$A5"] = Port("LBR100.M05.$A5", "AnalogChannel", Port::SourceAndSink);
-    portMap["LBR100.M06.$A6"] = Port("LBR100.M06.$A6", "AnalogChannel", Port::SourceAndSink);
-    portMap["LBR100.M07.$A7"] = Port("LBR100.M07.$A7", "AnalogChannel", Port::SourceAndSink);
+    portMap[$A2] = Port($A2, "AnalogChannel", Port::SourceAndSink);
+    portMap[$A3] = Port($A3, "AnalogChannel", Port::SourceAndSink);
+    portMap[$A4] = Port($A4, "AnalogChannel", Port::SourceAndSink);
+    portMap[$A5] = Port($A5, "AnalogChannel", Port::SourceAndSink);
+    portMap[$A6] = Port($A6, "AnalogChannel", Port::SourceAndSink);
+    portMap[$A7] = Port($A7, "AnalogChannel", Port::SourceAndSink);
 
-    portMap["LBR100.GR.$pos_l"] = Port("LBR100.GR.$pos_l", "AnalogChannel", Port::SourceAndSink);
-    portMap["LBR100.GR.$pos_r"] = Port("LBR100.GR.$pos_r", "AnalogChannel", Port::SourceAndSink);
+    portMap[$POS_L] = Port($POS_L, "AnalogChannel", Port::SourceAndSink);
+    portMap[$POS_R] = Port($POS_R, "AnalogChannel", Port::SourceAndSink);
 
-    portMap["LBR100.CTR.AntriebeAn"] = Port("LBR100.CTR.AntriebeAn", "DigitalChannel", Port::Sink);
-    portMap["LBR100.CTR.AntriebeSindAn"] = Port("LBR100.CTR.AntriebeSindAn", "DigitalChannel", Port::Source);
+    portMap[ANTRIEBE_AN] = Port(ANTRIEBE_AN, "DigitalChannel", Port::Sink);
+    portMap[ANTRIEBE_SIND_AN] = Port(ANTRIEBE_SIND_AN, "DigitalChannel", Port::Source);
 
-    portMap["LBR100.CTR.ExternStart"] = Port("LBR100.CTR.ExternStart", "DigitalChannel", Port::SourceAndSink);
-    portMap["LBR100.CTR.GreiferIstAuf"] = Port("LBR100.CTR.GreiferIstAuf", "DigitalChannel", Port::Source);
-    portMap["LBR100.CTR.GreiferIstZu"] = Port("LBR100.CTR.GreiferIstZu", "DigitalChannel", Port::Source);
-    portMap["LBR100.CTR.GreiferAuf"] = Port("LBR100.CTR.GreiferAuf", "DigitalChannel", Port::SourceAndSink);
+    portMap[EXTERN_START] = Port(EXTERN_START, "DigitalChannel", Port::SourceAndSink);
+    portMap[GREIFER_IST_AUF] = Port(GREIFER_IST_AUF, "DigitalChannel", Port::Source);
+    portMap[GREIFER_IST_ZU] = Port(GREIFER_IST_ZU, "DigitalChannel", Port::Source);
+    portMap[GREIFER_AUF] = Port(GREIFER_AUF, "DigitalChannel", Port::SourceAndSink);
 
-    portMap["LBR100.CTR.Soll_A1"] = Port("LBR100.CTR.Soll_A1", "AnalogChannel", Port::Sink);
-    portMap["LBR100.CTR.Soll_A2"] = Port("LBR100.CTR.Soll_A2", "AnalogChannel", Port::Sink);
-    portMap["LBR100.CTR.Soll_A3"] = Port("LBR100.CTR.Soll_A3", "AnalogChannel", Port::Sink);
-    portMap["LBR100.CTR.Soll_A4"] = Port("LBR100.CTR.Soll_A4", "AnalogChannel", Port::Sink);
-    portMap["LBR100.CTR.Soll_A5"] = Port("LBR100.CTR.Soll_A5", "AnalogChannel", Port::Sink);
-    portMap["LBR100.CTR.Soll_A6"] = Port("LBR100.CTR.Soll_A6", "AnalogChannel", Port::Sink);
-    portMap["LBR100.CTR.Soll_A7"] = Port("LBR100.CTR.Soll_A7", "AnalogChannel", Port::Sink);
+    portMap[SOLL_A1] = Port(SOLL_A1, "AnalogChannel", Port::Sink);
+    portMap[SOLL_A2] = Port(SOLL_A2, "AnalogChannel", Port::Sink);
+    portMap[SOLL_A3] = Port(SOLL_A3, "AnalogChannel", Port::Sink);
+    portMap[SOLL_A4] = Port(SOLL_A4, "AnalogChannel", Port::Sink);
+    portMap[SOLL_A5] = Port(SOLL_A5, "AnalogChannel", Port::Sink);
+    portMap[SOLL_A6] = Port(SOLL_A6, "AnalogChannel", Port::Sink);
+    portMap[SOLL_A7] = Port(SOLL_A7, "AnalogChannel", Port::Sink);
 
     //portMap["LBR100.INF.Scripts"] = Port("LBR100.INF.Scripts", "TextVectorChannel", Port::Source, "WinMod Scripts");
     //portMap["LBR100.INF.Additional"] = Port("LBR100.INF.Additional", "TextChannel", Port::Source, "Zusatzinformationen");
 
-    portMap["LBR100.CMD.StateTrigger"] = Port("LBR100.CMD.StateTrigger", "DigitalChannel", Port::Sink);
+    portMap[STATE_TRIGGER] = Port(STATE_TRIGGER, "DigitalChannel", Port::Sink);
 
     DeviceType deviceType;
     deviceType.setPortMap(portMap);
@@ -306,7 +306,7 @@ void * DummyDevLBR100::inputLoopThread_run(void * arg) {
     return 0;
 }
 
-
+  // not used at the moment
 void DummyDevLBR100::sendInfoEvents2() {
     {
         std::vector<std::string> vs;
@@ -316,7 +316,7 @@ void DummyDevLBR100::sendInfoEvents2() {
         TextVector tv;
         tv.setTextVector(vs);
         TextVectorChangedEvent * event = new TextVectorChangedEvent();
-        event->setAddress(EPAddress(this->entityID, this->deviceDescriptor.getNameChannelNrMap()["HT100.02|info.Scripts"]));
+        event->setAddress(EPAddress(this->entityID, this->deviceDescriptor.getNameChannelNrMap()["LBR100.INF.Scripts"]));
         event->setPayload(tv);
         eventSink->push(event);
     }
@@ -326,7 +326,7 @@ void DummyDevLBR100::sendInfoEvents2() {
         Text t;
         t.setText(text);
         TextChangedEvent * event = new TextChangedEvent();
-        event->setAddress(EPAddress(this->entityID, this->deviceDescriptor.getNameChannelNrMap()["HT100.02|info.Additional"]));
+        event->setAddress(EPAddress(this->entityID, this->deviceDescriptor.getNameChannelNrMap()["LBR100.INF.Additional"]));
         event->setPayload(t);
         eventSink->push(event);
     }
@@ -334,14 +334,14 @@ void DummyDevLBR100::sendInfoEvents2() {
 
 
 bool DummyDevLBR100::istGreiferAuf() {
-    return this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_l"]].getCurrentValue() == 25 &&
-      this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_r"]].getCurrentValue() == 25;
+    return this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()[$POS_L]].getCurrentValue() == 25 &&
+      this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()[$POS_R]].getCurrentValue() == 25;
 }
 
 
 bool DummyDevLBR100::istGreiferZu() {
-    return this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_l"]].getCurrentValue() == 0 &&
-          this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_r"]].getCurrentValue() == 0;
+    return this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()[$POS_L]].getCurrentValue() == 0 &&
+          this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()[$POS_R]].getCurrentValue() == 0;
 }
 
 
@@ -488,9 +488,9 @@ void DummyDevLBR100::executeOutputLoop() {
                     if (this->enginePortNr == address.getPortNr()) {
                         this->engine.setOn(dcEvent->getPayload());
                     } else if (this->greiferAufPortNr == address.getPortNr()) {
-                        this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_l"]]
+                        this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()[$POS_L]]
                             .setTargetValue(dcEvent->getPayload() ? 25 : 0);
-                        this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()["LBR100.GR.$pos_r"]]
+                        this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()[$POS_R]]
                             .setTargetValue(dcEvent->getPayload() ? 25 : 0);
                     } else if (this->stateTriggerPortNr == address.getPortNr()) {
                         this->stateTrigger = true;
