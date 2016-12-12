@@ -115,7 +115,8 @@ testtuiserver2xml_DATA = \
     tuiserver2/mousetestconfig.xml \
     tuiserver2/testconfig.xml  \
     tuiserver2/mctestconfig.xml \
-    tuiserver2/matrix4calib.xml
+    tuiserver2/matrix4calib.xml \
+    tuiserver2/lbrtestconfig.xml
 
 
 testtuiserver2xmldir = $(datadir)/@PACKAGE@
