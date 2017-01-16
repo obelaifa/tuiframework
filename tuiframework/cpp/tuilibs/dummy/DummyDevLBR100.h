@@ -12,7 +12,6 @@
 #include <map>
 #include <cstdio>
 
-#define AVALUE_SIZE 9
 
 namespace tuiframework {
     class ITUIServer;
@@ -68,7 +67,7 @@ protected:
 protected:
   class AState {
   public:
-      AState(int threshold = 100);
+      AState(int threshold = 1);
       ~AState();
 
       bool isOn() const;
@@ -116,9 +115,6 @@ protected:
     bool engineOn;
 
     AState engine;
-
-      // 0 - 6: Achsenwinkel, 7 - 8: Greifer
-    AValue aValue[AVALUE_SIZE];
 
     bool stateTrigger;
 

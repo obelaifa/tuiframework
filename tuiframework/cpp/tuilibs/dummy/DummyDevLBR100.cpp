@@ -148,6 +148,7 @@ void DummyDevLBR100::AValue::tick() {
             this->targetValue = this->currentValue;
         }
     }
+    cout << "===> " << this->currentValue << "    " << this->targetValue << endl;
 }
 
 
@@ -347,6 +348,9 @@ bool DummyDevLBR100::istGreiferZu() {
 
 void DummyDevLBR100::executeInputLoop() {
 
+    this->engine.setOn(true);
+    this->channelNrAValueMap[this->deviceDescriptor.getNameChannelNrMap()[$A1]].setTargetValue(100);
+
     this->inputLoopRunning = true;
     while (this->inputLoopRunning) {
 
@@ -359,7 +363,7 @@ void DummyDevLBR100::executeInputLoop() {
         FD_SET(0, &rfds);
 
         tv.tv_sec = 0;
-        tv.tv_usec = 300000;
+        tv.tv_usec = 100000;
         retval = select(1, &rfds, 0, 0, &tv);
 #endif
 
@@ -374,10 +378,6 @@ void DummyDevLBR100::executeInputLoop() {
             while (i != e) {
                 (*i).second.tick();
                 ++i;
-            }
-
-            for (int i = 0; i < AVALUE_SIZE; ++i) {
-                this->aValue[i].tick();
             }
         }
 
