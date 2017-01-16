@@ -32,7 +32,7 @@ v8::Local<v8::Object> AttachedObjectsWrap::getWrapped() const {
       tuiObjectTypeMap->Set(Nan::New((*i).getName()).ToLocalChecked(), tuiObjectType);
       ++i;
     }
-    obj->Set(Nan::New("tuiObjectTypes").ToLocalChecked(), tuiObjectTypeMap);
+    obj->Set(Nan::New("tuiObjectTypeObjs").ToLocalChecked(), tuiObjectTypeMap);
   }
 
   {

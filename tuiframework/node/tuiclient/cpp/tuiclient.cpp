@@ -79,7 +79,12 @@ static std::string convertString(const v8::Local<v8::String> & str) {
 void registerEventCallback(const Nan::FunctionCallbackInfo<v8::Value> & info) {
   string instanceName = convertString(info[0]->ToString());
   string portName = convertString(info[1]->ToString());
-  eventConverter.registerEventCallback(instanceName, portName, info[2].As<v8::Function>());
+
+  v8::Isolate * isolate = info.GetIsolate();
+  v8::Local<v8::Function> func = info[2].As<v8::Function>();
+  v8::Local<v8::Object> self = info[3]->ToObject();
+  CallbackParam param = CallbackParam(*isolate, func, self);
+  eventConverter.registerEventCallback(instanceName, portName, param);
 }
 
 

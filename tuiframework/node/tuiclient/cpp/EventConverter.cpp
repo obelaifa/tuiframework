@@ -51,7 +51,7 @@ void EventConverter::set(const tuiframework::AttachedObjects & attachedObjects) 
 
 
 bool EventConverter::registerEventCallback(const string & instanceName, const string & portName,
-    const v8::Local<v8::Function> & func) {
+    const CallbackParam & param) {
 
   this->deregisterEventCallback(instanceName, portName);
 
@@ -79,7 +79,7 @@ bool EventConverter::registerEventCallback(const string & instanceName, const st
 
   IEventChannel * sourceChannel = getSourceChannel(instanceName, portName);
 
-  void * arg = reinterpret_cast<void *>(&const_cast<v8::Local<v8::Function> &>(func));
+  void * arg = reinterpret_cast<void *>(&const_cast<CallbackParam &>(param));
   NodeEventEmitter * emitter = this->nodeEventEmitterFactory.createInstance((*portIter).second.getTypeName(), arg);
   TFINFO("Factory -> port '" << portName << "' type: '" << (*portIter).second.getTypeName() << "'" << emitter)
   sourceChannel->addEventSink(emitter);

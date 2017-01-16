@@ -3,6 +3,7 @@
 
 #include "NodeEventEmitterFactory.h"
 #include "TFEventEmitter.h"
+#include "CallbackParam.h"
 
 #include <tuiframework/core/AttachedObjects.h>
 #include <tuiframework/core/TUIObjectType.h>
@@ -28,7 +29,7 @@ public:
   NodeEventEmitterFactory & getNodeEventEmitterFactory();
   TFEventEmitter & getTFEventEmitter();
 
-  bool registerEventCallback(const std::string & instanceName, const std::string & portName, const v8::Local<v8::Function> & func);
+  bool registerEventCallback(const std::string & instanceName, const std::string & portName, const CallbackParam & param);
   bool deregisterEventCallback(const std::string & instanceName, const std::string & portName);
 
   bool emitEvent(const std::string & instanceName, const std::string & portName, const v8::Local<v8::Value> & value);

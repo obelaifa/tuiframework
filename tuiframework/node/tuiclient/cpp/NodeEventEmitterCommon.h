@@ -13,7 +13,7 @@ class IEvent;
 
 class AnalogNodeEventEmitter : public NodeEventEmitter {
 public:
-  AnalogNodeEventEmitter(const v8::Local<v8::Function> & func) : NodeEventEmitter(func) { }
+  AnalogNodeEventEmitter(const CallbackParam & param) : NodeEventEmitter(param) { }
   virtual ~AnalogNodeEventEmitter() { }
 
   virtual void push(tuiframework::IEvent * event);
@@ -22,7 +22,7 @@ public:
 
 class DigitalNodeEventEmitter : public NodeEventEmitter {
 public:
-  DigitalNodeEventEmitter(const v8::Local<v8::Function> & func) : NodeEventEmitter(func) { }
+  DigitalNodeEventEmitter(const CallbackParam & param) : NodeEventEmitter(param) { }
   virtual ~DigitalNodeEventEmitter() { }
 
   virtual void push(tuiframework::IEvent * event);
@@ -31,7 +31,7 @@ public:
 
 class IntegerNodeEventEmitter : public NodeEventEmitter {
 public:
-  IntegerNodeEventEmitter(const v8::Local<v8::Function> & func) : NodeEventEmitter(func) { }
+  IntegerNodeEventEmitter(const CallbackParam & param) : NodeEventEmitter(param) { }
   virtual ~IntegerNodeEventEmitter() { }
 
   virtual void push(tuiframework::IEvent * event);

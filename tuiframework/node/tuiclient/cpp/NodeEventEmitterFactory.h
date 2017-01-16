@@ -12,8 +12,8 @@
 
 //template <class T> NodeEventEmitter * nedCreateEventFunction(const v8::Local<v8::Function> & func) {
 template <class T> NodeEventEmitter * nedCreateEventFunction(void * arg) {
-  v8::Local<v8::Function> * func = static_cast<v8::Local<v8::Function> *>(arg);
-  return new T(*func);
+  CallbackParam * param = static_cast<CallbackParam *>(arg);
+  return new T(*param);
 }
 
 
