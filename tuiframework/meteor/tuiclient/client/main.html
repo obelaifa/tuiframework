@@ -1,11 +1,31 @@
 <head>
   <title>tuiclient</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+    $( function() {
+      $( "#slider" ).slider();
+    } );
+  </script>
 </head>
 
 <body>
   <h1>TUIClient</h1>
   {{> hello}}
 </body>
+
+<template name="myTest">
+  <div class="outerbox">
+    {{this.tuiObject.name}}.{{this.port.name}}: {{this.value}}
+    <div class="mytext mycol1" id="slider-range-min"></div>
+  </div>
+</template>
 
 
 <template name="hello">
@@ -14,6 +34,17 @@
     <input class="mycheckbox" type="checkbox" />
     LED
   </label>
+  <p>
+    {{#each entry in entryArray}}
+      <div>
+        {{entry.tuiObject.name}}.{{entry.port.name}}: {{entry.value}}
+
+        {{> Template.dynamic template=(tempName entry.port.type) data=entry}}
+
+        {{!-- > Template.dynamic template=localTemp--}}
+      </div>
+    {{/each}}
+  </p>
 </template>
 
 

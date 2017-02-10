@@ -5,11 +5,11 @@ class TUIEventHandler {
     this.collection = collection;
     this.tuiObjectName = tuiObjectName;
     this.tuiPortName = tuiPortName;
-    console.log('====> ', this.tuiObjectName, this.tuiPortName);
+    //console.log('====> ', this.tuiObjectName, this.tuiPortName);
   }
 
   update(value) {
-    console.log(this.tuiObjectName, this.tuiPortName, ": ", value);
+    //console.log(this.tuiObjectName, this.tuiPortName, ": ", value);
     let query = {"tuiObject.name": this.tuiObjectName, "port.name": this.tuiPortName};
     this.collection.update({"tuiObject.name": this.tuiObjectName, "port.name": this.tuiPortName},
       {
