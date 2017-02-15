@@ -1,0 +1,9 @@
+<template name="TUIObject">
+    {{#each entry in entryArray}}
+      <div>
+        {{entry.tuiObject.name}}.{{entry.port.name}}: {{entry.value}}
+        {{> Template.dynamic template=entry.port.type data=entry}}
+      </div>
+    {{/each}}
+
+</template>

@@ -22,29 +22,14 @@
 
 <body>
   <h1>TUIClient</h1>
-  {{> hello}}
+  {{> main}}
 </body>
 
-<template name="myTest">
-  <div class="outerbox">
-    {{this.tuiObject.name}}.{{this.port.name}}: {{this.value}}
-    <div class="mytext mycol1" id="slider-range-min"></div>
-  </div>
-</template>
 
-
-<template name="hello">
-  <p>Value: {{counter}}</p>
-  <label class="mylabel">
-    <input class="mycheckbox" type="checkbox" />
-    LED
-  </label>
+<template name="main">
   <p>
-    {{#each entry in entryArray}}
-      <div>
-        {{entry.tuiObject.name}}.{{entry.port.name}}: {{entry.value}}
-        {{> Template.dynamic template=(tempName entry.port.type) data=entry}}
-      </div>
+    {{#each tuiObjectName in tuiObjectNameArray}}
+      {{> TUIObject tuiObjectName}}
     {{/each}}
   </p>
 </template>
