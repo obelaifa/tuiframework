@@ -17,9 +17,9 @@ void AnalogNodeEventEmitter::push(IEvent * event) {
 
 
 void DigitalNodeEventEmitter::push(IEvent * event) {
-  AnalogChangedEvent * e = static_cast<AnalogChangedEvent *>(event);
+  DigitalChangedEvent * e = static_cast<DigitalChangedEvent *>(event);
   bool value = e->getPayload();
-  // TFINFO("AnalogNodeEventEmitter: " << *event)
+  // TFINFO("DigitalNodeEventEmitter: " << *event)
   v8::Local<v8::Value> localValue = Nan::New(value);
   this->emit(localValue);
 }

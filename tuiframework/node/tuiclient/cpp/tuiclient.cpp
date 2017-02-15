@@ -35,8 +35,10 @@ void connected() {
 
   NodeEventEmitterFactory & nodeEventEmitterFactory = eventConverter.getNodeEventEmitterFactory();
   nodeEventEmitterFactory.registerCreateFunction("AnalogChannel", &nedCreateEventFunction<AnalogNodeEventEmitter>);
+  nodeEventEmitterFactory.registerCreateFunction("DigitalChannel", &nedCreateEventFunction<DigitalNodeEventEmitter>);
 
   TFEventEmitter & tfEventEmitter = eventConverter.getTFEventEmitter();
+  tfEventEmitter.registerEmitterFunction("AnalogChannel", &emitAnalogChangedEvent);
   tfEventEmitter.registerEmitterFunction("DigitalChannel", &emitDigitalChangedEvent);
 }
 
