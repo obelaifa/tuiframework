@@ -57,7 +57,8 @@ class TUIPortsHandler {
           //console.log('===>', doc)
 
           let eventHandler = new TUIEventHandler(this.collection, tuiObjectInstance.name, port.name);
-          if (port.flowDirection == 1 && port.type == 'AnalogChannel') {
+          if (port.flowDirection == 1 && (port.type == 'AnalogChannel' || port.type == 'DigitalChannel')) {
+          //if (port.flowDirection == 1 && (port.type == 'AnalogChannel')) {
             addon.registerEventCallback(tuiObjectInstance.name, port.name, eventHandler.update, eventHandler);
           }
         }

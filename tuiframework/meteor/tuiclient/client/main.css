@@ -1,12 +1,12 @@
 /* CSS declarations go here */
-
+/*
 .outerbox {
     border: 1px gray solid;
     border-radius: 50px;
     padding: 1px;
     border-color: #000000;
 }
-
+*/
 .ui-slider, .ui-slider-handle {
     margin: 30px;
     border-radius: 50px;
@@ -19,10 +19,11 @@
     font-size: 2em;
 }
 
-
+/*
 .ui-state-focus:focus {
     outline:none
 }
+*/
 
 .ui-slider, .ui-slider-range {
     border-radius: 50px;
@@ -49,4 +50,5 @@
 .mycol2 .ui-widget-header {
     background-color: #009804;
 }
+
 
