@@ -9,7 +9,7 @@ class TUIEventHandler {
   }
 
   update(value) {
-    //console.log(this.tuiObjectName, this.tuiPortName, ": ", value);
+    console.log(this.tuiObjectName, this.tuiPortName, ": ", value);
     let query = {"tuiObject.name": this.tuiObjectName, "port.name": this.tuiPortName};
     this.collection.update({"tuiObject.name": this.tuiObjectName, "port.name": this.tuiPortName},
       {
@@ -25,6 +25,5 @@ class TUIEventHandler {
     );
   }
 }
-
 
 module.exports = TUIEventHandler;

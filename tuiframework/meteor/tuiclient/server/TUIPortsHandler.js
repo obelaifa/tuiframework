@@ -30,9 +30,15 @@ class TUIPortsHandler {
 
         let keys = Object.keys(tuiObjectType.ports);
         console.log(keys);
-
+        let id = 1;
         for (let key of keys) {
           let port = tuiObjectType.ports[key];
+          let displayName = port.name;
+
+          if (port.name.lastIndexOf('.') !== -1) {
+            displayName = port.name.substring(port.name.lastIndexOf('.') + 1, port.name.length);
+          }
+
           //console.log('===> ', key, tuiObjectType.ports[key]);
           let doc = {
             tuiObject: {
@@ -41,11 +47,15 @@ class TUIPortsHandler {
             },
             port: {
               name: port.name,
+              displayName: displayName,
+              id: id,
               type: port.type,
               flowDirection: port.flowDirection,
               description: port.description
-            }
+            },
+            value: null
           }
+          ++id;
           let curFiber = Fiber.current;
           this.collection.insert(doc, (err) => {
             if (err) {
@@ -55,12 +65,13 @@ class TUIPortsHandler {
           });
           Fiber.yield();
           //console.log('===>', doc)
-
+            console.log(id, key);
           let eventHandler = new TUIEventHandler(this.collection, tuiObjectInstance.name, port.name);
-          if (port.flowDirection == 1 && (port.type == 'AnalogChannel' || port.type == 'DigitalChannel')) {
+          if (port.flowDirection != 2 && (port.type == 'AnalogChannel' || port.type == 'DigitalChannel')) {
           //if (port.flowDirection == 1 && (port.type == 'AnalogChannel')) {
             addon.registerEventCallback(tuiObjectInstance.name, port.name, eventHandler.update, eventHandler);
           }
+
         }
       }
     }).run();

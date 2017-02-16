@@ -1,4 +1,40 @@
 /* CSS declarations go here */
+
+.TUIObject-Box{
+    border-color: #000000;
+    border: 1px solid black;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.TUIObject-Content {
+    margin: 10px;
+}
+
+.TUIObject-Content table {
+    width: 100%
+}
+
+.TUIObject-Name {
+    margin-top: 5px;
+    padding: 0px;
+}
+
+
+.TUIObject-Content th, .TUIObject-Content td {
+    text-align: left;
+    padding-right: 20px;
+    padding-top: 15px;
+}
+
+h2 {
+    margin: 5px;
+}
+
+h3 {
+    margin: 5px;
+}
+
 /*
 .outerbox {
     border: 1px gray solid;
@@ -7,23 +43,18 @@
     border-color: #000000;
 }
 */
-.ui-slider, .ui-slider-handle {
-    margin: 30px;
-    border-radius: 50px;
-    font-size: 1em;
-}
 
 .ui-slider.ui-slider-handle {
     margin: 5px;
     border-radius: 50px;
-    font-size: 2em;
+    font-size: 1em;
 }
 
-/*
+
 .ui-state-focus:focus {
     outline:none
 }
-*/
+
 
 .ui-slider, .ui-slider-range {
     border-radius: 50px;
@@ -32,23 +63,20 @@
 
 .ui-widget.ui-widget-content {
     border-radius: 50px;
-    font-size: 3em;
+    font-size: 1.5em;
 }
 
 .ui-slider-horizontal .ui-slider-handle {
-//margin-left: -1.5em;
+    //margin-left: -1.5em;
     margin-top: 0.1em;
     border-radius: 50px;
     z-index: 1;
 }
 
 
-.mycol1 .ui-widget-header {
+.AnalogChannelSlider .ui-widget-header {
     background-color: #FC9804;
 }
 
-.mycol2 .ui-widget-header {
-    background-color: #009804;
-}
 
 

@@ -14,7 +14,7 @@ Meteor.methods({
   },
   sendPortValue(tuiObjectName, portName, value) {
     console.log("addon.emitEvent('" + tuiObjectName + "', '" + portName + "', " + JSON.stringify(value) + ")");
-    //addon.emitEvent(tuiObjectName, portName, value);
+    addon.emitEvent(tuiObjectName, portName, value);
   }
 });
 

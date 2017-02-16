@@ -1,7 +1,10 @@
 <template name="AnalogChannel">
-  <div class="outerbox">
-    {{this.tuiObject.name}}.{{this.port.name}}: {{this.value}}
-    <div class="{{this.tuiObject.name}}-{{this.port.name}} mycol1" id="slider-range-min"></div>
-    {{updater}}
-  </div>
+  <td>{{this.port.displayName}}</td>
+  <td>
+    <div class="outerbox">
+      <!--{{this.tuiObject.name}}.{{this.port.id}}: {{this.value}} -->
+      <div class="{{this.tuiObject.name}}-{{this.port.id}} AnalogChannelSlider"></div>
+      {{updater}}
+    </div>
+  </td>
 </template>

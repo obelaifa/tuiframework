@@ -1,13 +1,13 @@
 <template name="DigitalChannel">
-  <form>
-    <fieldset>
-      <div id="{{this.tuiObject.name}}-{{this.port.name}}" >
-        <input type="radio" name="radio-{{this.tuiObject.name}}-{{this.port.name}}" id="radio-1-{{this.tuiObject.name}}-{{this.port.name}}">
-        <label for="radio-1-{{this.tuiObject.name}}-{{this.port.name}}">On</label>
-        <input type="radio" name="radio-{{this.tuiObject.name}}-{{this.port.name}}" id="radio-2-{{this.tuiObject.name}}-{{this.port.name}}">
-        <label for="radio-2-{{this.tuiObject.name}}-{{this.port.name}}">Off</label>
-      </div>
-    </fieldset>
-  </form>
+  <td>{{this.port.displayName}}</td>
+  <td>
+        <div id="{{this.tuiObject.name}}-{{this.port.id}}" >
+          <input type="radio" name="radio-{{this.tuiObject.name}}-{{this.port.id}}" id="radio-1-{{this.tuiObject.name}}-{{this.port.id}}">
+          <label for="radio-1-{{this.tuiObject.name}}-{{this.port.id}}">On</label>
+          <input type="radio" name="radio-{{this.tuiObject.name}}-{{this.port.id}}" id="radio-2-{{this.tuiObject.name}}-{{this.port.id}}">
+          <label for="radio-2-{{this.tuiObject.name}}-{{this.port.id}}">Off</label>
+        </div>
+  </td>
+  <td>{{this.port.description}}</td>
   {{updater}}
 </template>

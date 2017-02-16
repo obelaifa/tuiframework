@@ -7,6 +7,7 @@ Template.DigitalChannel.onCreated(function DigitalChannelOnCreated() {
 
 
 Template.DigitalChannel.onRendered(() => {
+
   let instance = Template.instance();
   let disabled = false;
 
@@ -14,10 +15,11 @@ Template.DigitalChannel.onRendered(() => {
     disabled = true;
   }
 
-  $("#" + instance.data.tuiObject.name + '-' + instance.data.port.name).buttonset();
+  $("#" + instance.data.tuiObject.name + '-' + instance.data.port.id).buttonset();
 
-  let a = $("input[name='radio-" + instance.data.tuiObject.name + '-' + instance.data.port.name + "']").attr('disabled', disabled);
-  $("input[name='radio-" + instance.data.tuiObject.name + '-' + instance.data.port.name + "']").button('option', 'disabled', disabled);
+  let a = $("input[name='radio-" + instance.data.tuiObject.name + '-' + instance.data.port.id + "']").attr('disabled', disabled);
+  $("input[name='radio-" + instance.data.tuiObject.name + '-' + instance.data.port.id + "']").button('option', 'disabled', disabled);
+
   console.log(a);
 });
 
@@ -31,17 +33,17 @@ Template.DigitalChannel.helpers({
       instance.buttonState = this.value;
       /*
       if (this.value) {
-        $("#radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.name).prop("checked", true);
+        $("#radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.id).prop("checked", true);
       } else {
-        $("#radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.name).prop("checked", true);
+        $("#radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.id).prop("checked", true);
       }
       */
       if (this.value) {
-        $("label[for='radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.name).addClass('ui-state-active');
-        $("label[for='radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.name).removeClass('ui-state-active');
+        $("label[for='radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.id).addClass('ui-state-active');
+        $("label[for='radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.id).removeClass('ui-state-active');
       } else {
-        $("label[for='radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.name).removeClass('ui-state-active');
-        $("label[for='radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.name).addClass('ui-state-active');
+        $("label[for='radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.id).removeClass('ui-state-active');
+        $("label[for='radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.id).addClass('ui-state-active');
       }
     }
   }
@@ -51,8 +53,8 @@ Template.DigitalChannel.helpers({
 Template.DigitalChannel.events({
   'click label': function(event) {
     let instance = Template.instance();
-    let radio1 = "radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.name;
-    let radio2 = "radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.name;
+    let radio1 = "radio-1-" + instance.data.tuiObject.name + '-' + instance.data.port.id;
+    let radio2 = "radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.id;
     let id = event.currentTarget.control.id;
     if (id === radio1) {
       console.log('radio1');

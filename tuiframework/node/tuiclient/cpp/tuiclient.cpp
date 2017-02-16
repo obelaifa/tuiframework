@@ -81,7 +81,7 @@ static std::string convertString(const v8::Local<v8::String> & str) {
 void registerEventCallback(const Nan::FunctionCallbackInfo<v8::Value> & info) {
   string instanceName = convertString(info[0]->ToString());
   string portName = convertString(info[1]->ToString());
-
+  cout << "registerEventCallback - " << instanceName << "  " << portName << "  "<< endl;
   v8::Isolate * isolate = info.GetIsolate();
   v8::Local<v8::Function> func = info[2].As<v8::Function>();
   v8::Local<v8::Object> self = info[3]->ToObject();
