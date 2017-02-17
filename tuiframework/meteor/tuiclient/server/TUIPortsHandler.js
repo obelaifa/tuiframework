@@ -5,15 +5,8 @@ var TUIEventHandler = require('./TUIEventHandler');
 
 class TUIPortsHandler {
 
-  constructor(collectionName) {
-    this.collection = new Mongo.Collection(collectionName);
-
-    this.collection.remove({}, (err) => {
-      if (err) {
-        console.log('MongoDB Error: Failed to initialize an empty Collection.')
-      }
-    })
-
+  constructor(collection) {
+    this.collection = collection;
     this.eventHandlerArray = [];
   }
 
@@ -65,10 +58,9 @@ class TUIPortsHandler {
           });
           Fiber.yield();
           //console.log('===>', doc)
-            console.log(id, key);
+          // console.log(id, key);
           let eventHandler = new TUIEventHandler(this.collection, tuiObjectInstance.name, port.name);
-          if (port.flowDirection != 2 && (port.type == 'AnalogChannel' || port.type == 'DigitalChannel')) {
-          //if (port.flowDirection == 1 && (port.type == 'AnalogChannel')) {
+          if ((port.flowDirection & 1) && (port.type == 'AnalogChannel' || port.type == 'DigitalChannel')) {
             addon.registerEventCallback(tuiObjectInstance.name, port.name, eventHandler.update, eventHandler);
           }
 
