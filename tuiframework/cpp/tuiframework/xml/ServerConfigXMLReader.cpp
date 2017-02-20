@@ -84,7 +84,6 @@ static Port extractPort(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker
     } else {
         TFERROR("");
     }
-
     DOMNode * sourceAttribute = nodeMap->getNamedItem(XMLString::transcode("source"));
     if (sourceAttribute) {
         if (XMLString::compareString(XMLString::transcode(sourceAttribute->getNodeValue()), "1") == 0) {
@@ -98,17 +97,84 @@ static Port extractPort(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker
 
     port.setDataFlowDirection(static_cast<Port::DataFlowDirection>(dataFlowDirection));
 
-    while (node) {
-        //TFDEBUG("");
-        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0) {
-            XMLCh * textContent = XMLString::replicate(node->getTextContent());
-            XMLString::trim(textContent);
-            port.setDescription(XMLString::transcode(textContent));
-            XMLString::release(&textContent);
-        }
+	int i = 0;
+    while (node) 
+	{
 
+		//TFDEBUG("");
+		if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0)
+		{
+			string value = XMLString::transcode(node->getTextContent());
+			if (!value.empty())
+			{
+				port.setDescription(value);
+			}
+			else
+			{
+				port.setDescription("empty");
+			}
+		}
+		else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Constraint") == 0)
+		{
+			DOMNodeList * childrenNode = node->getChildNodes();
+			
+			for (int index = 0; index < childrenNode->getLength(); index++)
+			{
+				DOMNode * childNode = childrenNode -> item(index);
+				string value = XMLString::transcode(childNode->getTextContent());
+
+				if (XMLString::compareString(XMLString::transcode(childNode->getNodeName()), "Min") == 0)
+				{
+					if (!value.empty())
+					{
+						port.setConstraintMin(value);
+					}
+					else
+					{
+						port.setConstraintMin("empty");
+					}
+				}
+				else if (XMLString::compareString(XMLString::transcode(childNode->getNodeName()), "Max") == 0)
+				{
+					if (!value.empty())
+					{
+						port.setConstraintMax(value);
+					}
+					else
+					{
+						port.setConstraintMax("empty");
+					}
+				}
+			}
+		}
+		else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "MetaElement") == 0)
+		{
+			DOMNodeList * childrenNode = node->getChildNodes();
+
+			for (int index = 0; index < childrenNode->getLength(); index++)
+			{
+				DOMNode * childNode = childrenNode->item(index);
+				string value = XMLString::transcode(childNode->getTextContent());
+
+				if (XMLString::compareString(XMLString::transcode(childNode->getNodeName()), "TrafoType") == 0)
+				{
+					if (!value.empty())
+					{
+						port.setTransfoType(value);
+					}
+					else
+					{
+						port.setTransfoType("empty");
+					}
+					cout << port.getTransfoType() << endl;
+				}
+			}
+		}
+
+		i++;
         node = domTreeWalker->nextNode();
     }
+	
 
     return port;
 }
@@ -369,10 +435,22 @@ static TUIObjectType extractTUIObjectType(DOMDocument * domDocument, DOMTreeWalk
             d->release();
             delete nodeFilter;
         } else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0) {
-            XMLCh * textContent = XMLString::replicate(node->getTextContent());
-            XMLString::trim(textContent);
-            tuiObjectType.setDescription(XMLString::transcode(textContent));
-            XMLString::release(&textContent);
+           // XMLCh * textContent = XMLString::replicate(node->getTextContent());
+           // XMLString::trim(textContent);
+          //  tuiObjectType.setDescription(XMLString::transcode(textContent));
+           // XMLString::release(&textContent);
+
+			string value = XMLString::transcode(node->getTextContent());
+			cout << value << endl;
+
+			if (!value.empty())
+			{
+				tuiObjectType.setDescription(value);
+			}
+			else
+			{
+				tuiObjectType.setDescription("empty");
+			}
         }
         node = domTreeWalker->nextNode();
     }
@@ -398,10 +476,21 @@ static TUIObjectInstance extractTUIObjectInstance(DOMDocument * domDocument, DOM
 
     while (node) {
         if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0) {
-            XMLCh * textContent = XMLString::replicate(node->getTextContent());
-            XMLString::trim(textContent);
-            tuiObjectInstance.setDescription(XMLString::transcode(textContent));
-            XMLString::release(&textContent);
+           // XMLCh * textContent = XMLString::replicate(node->getTextContent());
+           // XMLString::trim(textContent);
+           // tuiObjectInstance.setDescription(XMLString::transcode(textContent));
+           // XMLString::release(&textContent);
+
+			string value = XMLString::transcode(node->getTextContent());
+			if (!value.empty())
+			{
+				tuiObjectInstance.setDescription(value);
+			}
+			else
+			{
+				tuiObjectInstance.setDescription("empty");
+
+			}
         }
         node = domTreeWalker->nextNode();
     }
@@ -535,6 +624,14 @@ static map<string, TUIObjectType> extractTUIObjectTypeMap(DOMDocument * domDocum
             DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
             TUIObjectType tuiObjectType = extractTUIObjectType(domDocument, d);
             tuiObjectTypeMap[tuiObjectType.getName()] = tuiObjectType;
+			tuiObjectType = tuiObjectTypeMap[tuiObjectType.getName()];
+			//Debug M.Pastor 2017
+			/*for (map<string, tuiframework::Port>::iterator typeMapIt2 = tuiObjectType.getPortMap().begin(); typeMapIt2 != tuiObjectType.getPortMap().end(); typeMapIt2++)
+			{
+				cout << "DEBUG 2017" << endl;
+				cout << "name: " << typeMapIt2->second.getName() << " Description: " << typeMapIt2->second.getDescription() << "Constraint Min: " << typeMapIt2->second.getConstraintMin() << endl;
+			}*/
+
             d->release();
             delete nodeFilter;
         }

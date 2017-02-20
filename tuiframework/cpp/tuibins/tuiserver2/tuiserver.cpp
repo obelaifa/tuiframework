@@ -47,7 +47,8 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
     if (argc != 5) {
-        cout << "Usage tuiserver <sender port> <receiver port> <server config path> <plugin directory path>" << endl;
+        cout << "Usage tuiserver <sender port> <receiver port> <server config path> <plugin directory path>"<< endl;
+		getchar();
         return 1;
     }
 
@@ -67,6 +68,7 @@ int main(int argc, char* argv[]) {
         serverConfig = serverConfigXMLReader.getServerConfig();
     } else {
         TFERROR("Error reading configuration");
+		getchar();
         return 0;
     }
     serverApp.init(serverConfig);

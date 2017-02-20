@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--document xmlns:xi='http://www.w3.org/2001/XInclude'-->
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+	<ServerConfig>
+		<ServerStartupConfig/>
+		<DeviceTypeSequence>
+			<DeviceType name="DummyDeviceWinMod">
+				<PortTypeSequence>
+					<PortType name="wO" sink="0" source="1" typename="WinModChannel">
+						<Description>Test</Description>
+					</PortType>
+					<PortType name="wordOutput" sink="0" source="1" typename="PackedWord">
+						<Description>Test</Description>
+					</PortType>
+					<PortType name="analogOutput" sink="0" source="1" typename="PackedAnalog">
+						<Description>Test</Description>
+					</PortType>
+					<PortType name="byteOutput" sink="0" source="1" typename="PackedInteger">
+						<Description>Test</Description>
+					</PortType>
+					<PortType name="dwordOutput" sink="0" source="1" typename="PackedDWord">
+						<Description>Test</Description>
+					</PortType>
+				</PortTypeSequence>
+				<ParameterTypeDefSequence/>
+				<ParameterTypeSequence/>
+				<ParameterGroup name="Client">
+					<Parameter name="boolSize" value="6"/>
+					<Parameter name="floatSize" value="56"/>
+					<Parameter name="timer" value="10"/>
+				</ParameterGroup>
+			</DeviceType>
+		</DeviceTypeSequence>
+		<MSPTypeSequence>
+			<MSPType name="PackedFloatToFloatMSP">
+				<PortTypeSequence>
+					<PortType name="in" sink="1" source="0" typename="PackedAnalog">
+						<Description>Test</Description>
+					</PortType>
+					<PortType name="out" sink="0" source="1" typename="AnalogChannel">
+						<Description>Test</Description>
+					</PortType>
+					<PortType name="outPacked" sink="0" source="1" typename="PackedAnalog">
+						<Description>Test</Description>
+					</PortType>
+				</PortTypeSequence>
+				<ParameterTypeDefSequence/>
+				<ParameterTypeSequence/>
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="0"/>
+				</ParameterGroup>
+			</MSPType>
+		</MSPTypeSequence>
+		<TUIObjectTypeSequence>
+			<TUIObjectType name="LBR">
+				<PortTypeSequence>
+					<PortType name="mouse.$pos" sink="0" source="1" typename="AnalogChannel">
+							<Constraint>
+								<Min>-170</Min>
+								<Max>170</Max>
+							</Constraint>
+							<MetaElement> 
+								<TrafoType>rot</TrafoType>
+							</MetaElement>
+						<Description>LBR_A1</Description>
+					</PortType>
+					<PortType name="mouse2.$pos" sink="0" source="1" typename="AnalogChannel">
+							<Constraint>
+								<Min>-170</Min>
+								<Max>170</Max>
+							</Constraint>
+							<MetaElement> 
+								<TrafoType>rot</TrafoType>
+							</MetaElement>
+						<Description>LBR_A2</Description>
+					</PortType>
+					<PortType name="mouse3.$pos" sink="0" source="1" typename="AnalogChannel">
+							<Constraint>
+								<Min>-170</Min>
+								<Max>170</Max>
+							</Constraint>
+							<MetaElement> 
+								<TrafoType>rot</TrafoType>
+							</MetaElement>
+						<Description>LBR_A3</Description>
+					</PortType>
+					<PortType name="mouse4.$pos" sink="0" source="1" typename="AnalogChannel">
+							<Constraint>
+								<Min>-170</Min>
+								<Max>170</Max>
+							</Constraint>
+							<MetaElement> 
+								<TrafoType>rot</TrafoType>
+							</MetaElement>
+						<Description>LBR_A4</Description>
+					</PortType>
+					<PortType name="mouse5.$pos" sink="0" source="1" typename="AnalogChannel">
+							<Constraint>
+								<Min>-170</Min>
+								<Max>170</Max>
+							</Constraint>
+							<MetaElement> 
+								<TrafoType>rot</TrafoType>
+							</MetaElement>
+						<Description>LBR_A5</Description>
+					</PortType>
+					<PortType name="mouse6.$pos" sink="0" source="1" typename="AnalogChannel">
+							<Constraint>
+								<Min>-170</Min>
+								<Max>170</Max>
+							</Constraint>
+							<MetaElement> 
+								<TrafoType>rot</TrafoType>
+							</MetaElement>
+						<Description>LBR_A6</Description>
+					</PortType>
+					<Description>
+						LBRInstance
+					</Description>
+				</PortTypeSequence>
+			</TUIObjectType>
+			<TUIObjectType name = "HT">
+				<PortTypeSequence>
+					<PortType name="mouse7.$pos" sink="0" source="1" typename="AnalogChannel">
+						<Constraint>
+							<Min>-170</Min>
+							<Max>170</Max>
+						</Constraint>
+						<MetaElement> 
+							<TrafoType>trans</TrafoType>
+						</MetaElement>
+						<Description>HT_sub_59</Description>
+					</PortType>
+					<Description>
+						HTInstance
+					</Description>
+				</PortTypeSequence>
+			</TUIObjectType>
+		</TUIObjectTypeSequence>
+		<DeviceInstanceSequence>
+			<DeviceInstance name="DummyWinMod" typename="DummyDeviceWinMod">
+				<ParameterGroup name="Client">
+					<Parameter name="boolSize" value="8"/>
+					<Parameter name="floatSize" value="16"/>
+					<Parameter name="timer" value="10"/>
+				</ParameterGroup>
+			</DeviceInstance>
+		</DeviceInstanceSequence>
+		<MSPInstanceSequence>
+			<MSPInstance name="analog10" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="1"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog11" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="2"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog12" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="3"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog13" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="4"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog14" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="5"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog15" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="6"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog16" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="7"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog17" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="8"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog18" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="9"/>
+				</ParameterGroup>
+			</MSPInstance>
+			<MSPInstance name="analog19" typename="PackedFloatToFloatMSP">
+				<ParameterGroup name="Convert">
+					<Parameter name="id" value="10"/>
+				</ParameterGroup>
+			</MSPInstance>
+		</MSPInstanceSequence>
+		<TUIObjectInstanceSequence>
+			<TUIObjectInstance name="LBR100" typename="LBR"/>
+			<TUIObjectInstance name="HT100" typename="HT"/>
+			<TUIObjectInstance name="HT200" typename="HT"/>
+			<TUIObjectInstance name="HT300" typename="HT"/>
+			<TUIObjectInstance name="HT400" typename="HT"/>
+		</TUIObjectInstanceSequence>
+		<ConnectorSequence>
+			<Connector>
+				<SrcAddress entityName="DummyWinMod" entityType="DEV" portName="analogOutput"/>
+				<DstAddress entityName="analog10" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog10" entityType="MSP" portName="out"/>
+				<DstAddress entityName="LBR100" entityType="TUI" portName="mouse.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog10" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog11" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog11" entityType="MSP" portName="out"/>
+				<DstAddress entityName="LBR100" entityType="TUI" portName="mouse2.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog11" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog12" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog12" entityType="MSP" portName="out"/>
+				<DstAddress entityName="LBR100" entityType="TUI" portName="mouse3.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog12" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog13" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog13" entityType="MSP" portName="out"/>
+				<DstAddress entityName="LBR100" entityType="TUI" portName="mouse4.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog13" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog14" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog14" entityType="MSP" portName="out"/>
+				<DstAddress entityName="LBR100" entityType="TUI" portName="mouse5.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog14" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog15" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog15" entityType="MSP" portName="out"/>
+				<DstAddress entityName="LBR100" entityType="TUI" portName="mouse6.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog15" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog16" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog16" entityType="MSP" portName="out"/>
+				<DstAddress entityName="HT100" entityType="TUI" portName="mouse7.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog16" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog17" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog17" entityType="MSP" portName="out"/>
+				<DstAddress entityName="HT200" entityType="TUI" portName="mouse7.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog17" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog18" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog18" entityType="MSP" portName="out"/>
+				<DstAddress entityName="HT300" entityType="TUI" portName="mouse7.$pos"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog18" entityType="MSP" portName="outPacked"/>
+				<DstAddress entityName="analog19" entityType="MSP" portName="in"/>
+			</Connector>
+			<Connector>
+				<SrcAddress entityName="analog19" entityType="MSP" portName="out"/>
+				<DstAddress entityName="HT400" entityType="TUI" portName="mouse7.$pos"/>
+			</Connector>
+		</ConnectorSequence>
+	</ServerConfig>
+</document>

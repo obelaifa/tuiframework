@@ -23,22 +23,23 @@
 
 
 #include "Port.h"
-#include "../logging/Logger.h"
 
 #include <iostream>
-
+#include <ios>
 namespace tuiframework {
 
 
-Port::Port() {
+Port::Port()
+	:name(""), typeName(""), description(""), dataFlowDirection(-1), constraintMin(""), constraintMax(""), trafotype("")
+{
+
 }
 
+Port::Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection, 
+	const std::string & description, const std::string & constraintMin, const std::string & constraintMax, const std::string & trafotype)
+	:name(name), typeName(typeName), description(description), dataFlowDirection(dataFlowDirection), constraintMin(constraintMin), constraintMax(constraintMax), trafotype(trafotype)
+{
 
-Port::Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection, const std::string & description) :
-    name(name),
-    typeName(typeName),
-    dataFlowDirection(dataFlowDirection),
-    description(description) {
 }
 
 
@@ -75,6 +76,29 @@ void Port::setTypeName(const std::string & typeName) {
     this->typeName = typeName;
 }
 
+const std::string & Port::getConstraintMin() const {
+	return this->constraintMin;
+}
+
+void Port::setConstraintMin(const std::string & constraintMin) {
+	this->constraintMin = constraintMin;
+}
+
+const std::string & Port::getConstraintMax() const {
+	return this->constraintMax;
+}
+
+void Port::setConstraintMax(const std::string & constraintMax) {
+	this->constraintMax = constraintMax;
+}
+
+const std::string & Port::getTransfoType() const {
+	return this->trafotype;
+}
+
+void Port::setTransfoType(const std::string & trafoType) {
+	this->trafotype = trafoType;
+}
 
 Port::DataFlowDirection Port::getDataFlowDirection() const {
     return static_cast<Port::DataFlowDirection>(this->dataFlowDirection);
@@ -86,32 +110,23 @@ void Port::setDataFlowDirection(Port::DataFlowDirection dataFlowDirection) {
 }
 
 
-std::ostream & Port::serialize(std::ostream & os) const {
-    os << this->name << " " << this->typeName << " ";
-    os << this->dataFlowDirection;
-    os << " " << this->description.size();
-    if (this->description.size()) {
-      os << " ";
-      os.write(this->description.c_str(), this->description.size());
-    }
+std::ostream & Port::serialize(std::ostream & os) const 
+{
+	std::cout << description << std::endl;
+	os << this->name << " " << this->typeName << " " << this->description << " ";
+
+    os << this->dataFlowDirection ;
+	os << " " << this->constraintMin << " " << this->constraintMax << " " << this->trafotype;
     return os;
 }
 
 
 std::istream & Port::deSerialize(std::istream & is) {
-    is >> this->name >> this->typeName;
+	std::cout << description << std::endl;
+	is >> this->name >> this->typeName >> this->description;
+
     is >> this->dataFlowDirection;
-    int size;
-    is >> size;
-    if (size) {
-      char * text = new char[size + 1];
-        // read the delimiter
-      is.read(text, 1);
-      is.read(text, size);
-      text[size] = 0;
-      this->description = text;
-      delete []text;
-    }
+	is >> this->constraintMin >> this->constraintMax >> this->trafotype;
     return is;
 }
 

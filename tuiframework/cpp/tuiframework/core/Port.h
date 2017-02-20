@@ -50,8 +50,8 @@ public:
     };
 
     Port();
-    Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection,
-      const std::string & description = "");
+	Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection, 
+		const std::string & description = "", const std::string & constraintMin = "", const std::string & constraintMax = "", const std::string & trafotype = "");
     virtual ~Port();
 
         /// Returns the port name.
@@ -69,6 +69,21 @@ public:
         /// Sets the type name of the port.
     void setTypeName(const std::string & typeName);
 
+	/// Returns the constraint min of the port.
+	const std::string & getConstraintMin() const;
+	/// Sets the type name of the port.
+	void setConstraintMin(const std::string & constraintMin);
+
+	/// Returns the constraint max of the port.
+	const std::string & getConstraintMax() const;
+	/// Sets the type name of the port.
+	void setConstraintMax(const std::string & constraintMax);
+
+	/// Returns the transformation type of the port.
+	const std::string & getTransfoType() const;
+	/// Sets the type name of the port.
+	void setTransfoType(const std::string & trafotype);
+
         /// Returns the data flow direction of the port.
     DataFlowDirection getDataFlowDirection() const;
         /// Sets the data flow direction of the port.
@@ -84,6 +99,12 @@ protected:
     std::string description;
         /// Type name of the port
     std::string typeName;
+		/// Constraint min value
+	std::string constraintMin;
+		/// Constraint max value
+	std::string constraintMax;
+		/// Type of transformation
+	std::string trafotype;
         /// Data flow direction.
     int dataFlowDirection;
 };

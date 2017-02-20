@@ -1,0 +1,4 @@
+*.db
+*.opendb
+tuiframework/cpp/tuibins/tuipythonclient/
+tuiframework/cpp/tuilibs/opc/
