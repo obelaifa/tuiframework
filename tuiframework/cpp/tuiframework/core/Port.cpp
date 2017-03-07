@@ -98,7 +98,8 @@ const ParameterGroup & Port::getParameterGroup() const {
 
 std::ostream & Port::serialize(std::ostream & os) const {
     os << this->name << " " << this->typeName << " ";
-    os << this->dataFlowDirection;
+    os << this->dataFlowDirection << " ";
+    os << this->parameterGroup;
     os << " " << this->description.size();
     if (this->description.size()) {
       os << " ";
@@ -111,6 +112,7 @@ std::ostream & Port::serialize(std::ostream & os) const {
 std::istream & Port::deSerialize(std::istream & is) {
     is >> this->name >> this->typeName;
     is >> this->dataFlowDirection;
+    is >> this->parameterGroup;
     int size;
     is >> size;
     if (size) {

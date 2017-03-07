@@ -16,13 +16,7 @@
                   <Description/>
                </PortType>
                <PortType name="LBR100.CTR.Soll_A1" sink="1" source="0" typename="AnalogChannel">
-                   <Constraint>
-                       <Min>-170</Min>
-                       <Max>170</Max>
-                   </Constraint>
-                   <Description>
-                       Constraint Test Soll_A1
-                   </Description>
+                   <Description/>
                </PortType>
                <PortType name="LBR100.CTR.ExternStart" sink="1" source="0" typename="DigitalChannel">
                   <Description/>
@@ -145,10 +139,10 @@
                   <Description/>
                </PortType>
                <PortType name="value.A1" sink="1" source="1" typename="AnalogChannel">
-                   <Constraint>
-                       <Min>-170</Min>
-                       <Max>170</Max>
-                   </Constraint>
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
                    <Description>
                        Constraint Test A1
                    </Description>
@@ -175,6 +169,16 @@
                   <Description/>
                </PortType>
                <PortType name="control.SollA1" sink="1" source="0" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="trans"/>
+                   </ParameterGroup>
+                   <Description>
+                       Constraint Test Soll_A1
+                   </Description>
                   <Description/>
                </PortType>
                <PortType name="value.GreiferIstZu" sink="0" source="1" typename="DigitalChannel">
