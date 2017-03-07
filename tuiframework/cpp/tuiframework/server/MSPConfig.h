@@ -25,7 +25,7 @@
 #ifndef _tuiframework_MSPConfig_h_
 #define _tuiframework_MSPConfig_h_
 
-#include "ParameterGroup.h"
+#include "../core/ParameterGroup.h"
 #include "../core/ISerializable.h"
 
 #include <string>

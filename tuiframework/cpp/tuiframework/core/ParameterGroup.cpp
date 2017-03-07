@@ -6,7 +6,7 @@
     It includes a software framework which contains common code
     providing generic functionality for developing applications
     with a tangible user interface (TUI).
-    
+
     The TUIFramework library is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as
     published by the Free Software Foundation, either version 3 of the

@@ -86,6 +86,16 @@ void Port::setDataFlowDirection(Port::DataFlowDirection dataFlowDirection) {
 }
 
 
+void Port::setParameterGroup(const ParameterGroup & parameterGroup) {
+    this->parameterGroup = parameterGroup;
+}
+
+
+const ParameterGroup & Port::getParameterGroup() const {
+    return this->parameterGroup;
+}
+
+
 std::ostream & Port::serialize(std::ostream & os) const {
     os << this->name << " " << this->typeName << " ";
     os << this->dataFlowDirection;

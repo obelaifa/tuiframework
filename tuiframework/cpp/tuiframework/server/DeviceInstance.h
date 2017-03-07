@@ -25,7 +25,7 @@
 #ifndef _tuiframework_DeviceInstance_h_
 #define _tuiframework_DeviceInstance_h_
 
-#include "ParameterGroup.h"
+#include "../core/ParameterGroup.h"
 #include "../core/ISerializable.h"
 
 

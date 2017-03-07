@@ -26,7 +26,7 @@
 #include "Matrix4TimesMSP.h"
 
 #include <tuitypes/common/CommonTypeReg.h>
-#include <tuiframework/server/ParameterGroup.h>
+#include <tuiframework/core/ParameterGroup.h>
 #include <tuiframework/core/Exception.h>
 #define USE_TFDEBUG
 #include <tuiframework/logging/Logger.h>

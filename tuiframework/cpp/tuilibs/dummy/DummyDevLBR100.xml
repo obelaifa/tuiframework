@@ -25,6 +25,10 @@
                         <Description/>
                     </PortType>
                     <PortType name="LBR100.M01.$A1" sink="1" source="1" typename="AnalogChannel">
+                        <Constraint>
+                            <Min>-170</Min>
+                            <Max>170</Max>
+                        </Constraint>
                         <Description/>
                     </PortType>
                     <PortType name="LBR100.M02.$A2" sink="1" source="1" typename="AnalogChannel">
@@ -52,7 +56,13 @@
                         <Description/>
                     </PortType>
                     <PortType name="LBR100.CTR.Soll_A1" sink="1" source="0" typename="AnalogChannel">
-                        <Description/>
+                        <Constraint>
+                            <Min>-170</Min>
+                            <Max>170</Max>
+                        </Constraint>
+                        <Description>
+                            Constraint Test
+                        </Description>
                     </PortType>
                     <PortType name="LBR100.CTR.Soll_A2" sink="1" source="0" typename="AnalogChannel">
                         <Description/>

@@ -51,9 +51,62 @@ using namespace std;
 
 namespace tuiframework {
 
+
+static ParameterGroup extractParameterGroup(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
+
+    map<string, string> parameterMap;
+    map<string, ParameterGroup> parameterGroupMap;
+
+    DOMNode * node = domTreeWalker->nextNode();
+    while (node) {
+        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Parameter") == 0) {
+            DOMNamedNodeMap * nodeMap = node->getAttributes();
+
+            string name;
+            DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
+            if (nameAttribute) {
+                name = XMLString::transcode(nameAttribute->getNodeValue());
+            }
+            string value;
+            DOMNode * valueAttribute = nodeMap->getNamedItem(XMLString::transcode("value"));
+            if (valueAttribute) {
+                value = XMLString::transcode(valueAttribute->getNodeValue());
+            }
+            parameterMap[name] = value;
+
+            //TFINFO("Parameter: " << name << " -> " << value);
+        } else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "ParameterGroup") == 0) {
+
+            DOMNamedNodeMap * nodeMap = node->getAttributes();
+            string name;
+            DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
+            if (nameAttribute) {
+                name = XMLString::transcode(nameAttribute->getNodeValue());
+            }
+
+            XMLNodeFilter * nodeFilter = new XMLNodeFilter();
+            DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
+            ParameterGroup pg = extractParameterGroup(domDocument, d);
+            pg.setName(name);
+            parameterGroupMap[name] = pg;
+            d->release();
+            delete nodeFilter;
+        }
+        node = domTreeWalker->nextNode();
+    }
+
+    ParameterGroup parameterGroup;
+    parameterGroup.setParameterMap(parameterMap);
+    parameterGroup.setParameterGroupMap(parameterGroupMap);
+
+    return parameterGroup;
+}
+
+
 static Port extractPort(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
 
     Port port;
+    map<string, ParameterGroup> parameterGroupMap;
     int dataFlowDirection = 0;
 
     DOMNode * node = domTreeWalker->getCurrentNode();
@@ -107,8 +160,32 @@ static Port extractPort(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker
             XMLString::release(&textContent);
         }
 
+        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "ParameterGroup") == 0) {
+            DOMNamedNodeMap * nodeMap = node->getAttributes();
+            string name;
+            DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
+            if (nameAttribute) {
+               name = XMLString::transcode(nameAttribute->getNodeValue());
+            }
+
+            XMLNodeFilter * nodeFilter = new XMLNodeFilter();
+            DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
+
+            ParameterGroup pg = extractParameterGroup(domDocument, d);
+            pg.setName(name);
+            parameterGroupMap[name] = pg;
+
+            d->release();
+            delete nodeFilter;
+        }
+
         node = domTreeWalker->nextNode();
     }
+
+    ParameterGroup parameterGroup;
+    parameterGroup.setName("root");
+    parameterGroup.setParameterGroupMap(parameterGroupMap);
+    port.setParameterGroup(parameterGroup);
 
     return port;
 }
@@ -132,58 +209,6 @@ static map<string, Port> extractPortMap(DOMDocument * domDocument, DOMTreeWalker
 
     return portMap;
 }
-
-
-static ParameterGroup extractParameterGroup(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
-
-    map<string, string> parameterMap;
-    map<string, ParameterGroup> parameterGroupMap;
-
-    DOMNode * node = domTreeWalker->nextNode();
-    while (node) {
-        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Parameter") == 0) {
-            DOMNamedNodeMap * nodeMap = node->getAttributes();
-
-            string name;
-            DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
-            if (nameAttribute) {
-                name = XMLString::transcode(nameAttribute->getNodeValue());
-            }
-            string value;
-            DOMNode * valueAttribute = nodeMap->getNamedItem(XMLString::transcode("value"));
-            if (valueAttribute) {
-                value = XMLString::transcode(valueAttribute->getNodeValue());
-            }
-            parameterMap[name] = value;
-
-            //TFINFO("Parameter: " << name << " -> " << value);
-        } else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "ParameterGroup") == 0) {
-
-            DOMNamedNodeMap * nodeMap = node->getAttributes();
-            string name;
-            DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
-            if (nameAttribute) {
-                name = XMLString::transcode(nameAttribute->getNodeValue());
-            }
-
-            XMLNodeFilter * nodeFilter = new XMLNodeFilter();
-            DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
-            ParameterGroup pg = extractParameterGroup(domDocument, d);
-            pg.setName(name);
-            parameterGroupMap[name] = pg;
-            d->release();
-            delete nodeFilter;
-        }
-        node = domTreeWalker->nextNode();
-    }
-
-    ParameterGroup parameterGroup;
-    parameterGroup.setParameterMap(parameterMap);
-    parameterGroup.setParameterGroupMap(parameterGroupMap);
-
-    return parameterGroup;
-}
-
 
 
 static DeviceInstance extractDeviceInstance(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
@@ -408,9 +433,6 @@ static TUIObjectInstance extractTUIObjectInstance(DOMDocument * domDocument, DOM
 
     return tuiObjectInstance;
 }
-
-
-
 
 
 static MSPInstance extractMSPInstance(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
@@ -798,7 +820,7 @@ bool ServerConfigXMLReader::readServerConfig(const std::string & path) {
     
     parser2->setDoNamespaces(true);
     parser2->setDoXInclude(true);
-  //  parser2->setValidationScheme(XercesDOMParser::Val_Always);
+   // parser2->setValidationScheme(XercesDOMParser::Val_Always);
    // parser2->setDoSchema(true);
    // parser2->setValidationSchemaFullChecking(true);
 
@@ -830,7 +852,6 @@ bool ServerConfigXMLReader::readServerConfig(const std::string & path) {
 
     domTreeWalker->release();
     delete xmlNodeFilter;
- 
 
     delete xmlDOMErrorReporter;
     delete xmlParseErrorReporter;
