@@ -27,10 +27,10 @@
 
 #include "IEventSink.h"
 #include "IEventMsg.h"
+#include "../logging/Logger.h"
+
 #include <map>
 #include <functional>
-
-#include <tuiframework/logging/Logger.h>
 
 namespace tuiframework {
 

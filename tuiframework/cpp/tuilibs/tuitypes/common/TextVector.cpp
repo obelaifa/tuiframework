@@ -63,4 +63,5 @@ std::istream & TextVector::deSerialize(std::istream & is) {
           strVec.push_back("");
         }
     }
+	return is;
 }
