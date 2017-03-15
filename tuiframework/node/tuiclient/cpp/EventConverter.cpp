@@ -87,7 +87,7 @@ bool EventConverter::registerEventCallback(const string & instanceName, const st
 
 
 bool EventConverter::deregisterEventCallback(const string & instanceName, const string & portName) {
-
+    return false;
 }
 
 
