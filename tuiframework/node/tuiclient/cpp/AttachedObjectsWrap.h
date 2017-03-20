@@ -10,6 +10,7 @@ namespace tuiframework {
 class TUIObjectInstance;
 class TUIObjectType;
 class Port;
+class ParameterGroup;
 
 }
 
@@ -27,6 +28,7 @@ protected:
   v8::Local<v8::Object> getWrappedTUIObjectInstance(const tuiframework::TUIObjectInstance & instance) const;
   v8::Local<v8::Object> getWrappedTUIObjectType(const tuiframework::TUIObjectType & type) const;
   v8::Local<v8::Object> getWrappedPort(const tuiframework::Port & port) const;
+  v8::Local<v8::Object> getWrappedParameterGroup(const tuiframework::ParameterGroup & parameterGroup, bool root) const;
 
 protected:
   tuiframework::AttachedObjects attachedObjects;

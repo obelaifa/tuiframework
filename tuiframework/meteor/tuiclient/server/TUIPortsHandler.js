@@ -44,7 +44,8 @@ class TUIPortsHandler {
               id: id,
               type: port.type,
               flowDirection: port.flowDirection,
-              description: port.description
+              description: port.description,
+              parameterGroupSet: port.parameterGroupSet,
             },
             value: null
           }

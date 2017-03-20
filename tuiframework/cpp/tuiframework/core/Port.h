@@ -25,6 +25,8 @@
 #ifndef _tuiframework_Port_h_
 #define _tuiframework_Port_h_
 
+#include "ParameterGroup.h"
+
 #include "ISerializable.h"
 
 #include <string>
@@ -89,6 +91,9 @@ public:
         /// Sets the data flow direction of the port.
     void setDataFlowDirection(DataFlowDirection dataFlowDirection);
 
+    void setParameterGroup(const ParameterGroup & parameterGroup);
+    const ParameterGroup & getParameterGroup() const;
+
     std::ostream & serialize(std::ostream & os) const;
     std::istream & deSerialize(std::istream & is);
 
@@ -107,6 +112,8 @@ protected:
 	std::string trafotype;
         /// Data flow direction.
     int dataFlowDirection;
+
+    ParameterGroup parameterGroup;
 };
 
 }

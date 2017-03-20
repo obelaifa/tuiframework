@@ -51,154 +51,6 @@ using namespace std;
 
 namespace tuiframework {
 
-static Port extractPort(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
-
-    Port port;
-    int dataFlowDirection = 0;
-
-    DOMNode * node = domTreeWalker->getCurrentNode();
-    DOMNamedNodeMap * nodeMap = node->getAttributes();
-
-    DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
-    if (nameAttribute) {
-        port.setName(XMLString::transcode(nameAttribute->getNodeValue()));
-        //TFDEBUG(XMLString::transcode(nameAttribute->getNodeValue()));
-    } else {
-        TFERROR("");
-    }
-
-    DOMNode * typenameAttribute = nodeMap->getNamedItem(XMLString::transcode("typename"));
-    if (typenameAttribute) {
-        port.setTypeName(XMLString::transcode(typenameAttribute->getNodeValue()));
-        //TFDEBUG(XMLString::transcode(typenameAttribute->getNodeValue()));
-    } else {
-        TFERROR("");
-    }
-
-    DOMNode * sinkAttribute = nodeMap->getNamedItem(XMLString::transcode("sink"));
-    if (sinkAttribute) {
-        if (XMLString::compareString(XMLString::transcode(sinkAttribute->getNodeValue()), "1") == 0) {
-            dataFlowDirection |= static_cast<int>(Port::Sink);
-            //TFDEBUG("DataFlowDirection = " << dataFlowDirection);
-        }
-    } else {
-        TFERROR("");
-    }
-    DOMNode * sourceAttribute = nodeMap->getNamedItem(XMLString::transcode("source"));
-    if (sourceAttribute) {
-        if (XMLString::compareString(XMLString::transcode(sourceAttribute->getNodeValue()), "1") == 0) {
-            dataFlowDirection |= static_cast<int>(Port::Source);
-
-            //TFDEBUG("DataFlowDirection = " << dataFlowDirection);
-        }
-    } else {
-        TFERROR("");
-    }
-
-    port.setDataFlowDirection(static_cast<Port::DataFlowDirection>(dataFlowDirection));
-
-	int i = 0;
-    while (node) 
-	{
-
-		//TFDEBUG("");
-		if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0)
-		{
-			string value = XMLString::transcode(node->getTextContent());
-			if (!value.empty())
-			{
-				port.setDescription(value);
-			}
-			else
-			{
-				port.setDescription("empty");
-			}
-		}
-		else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Constraint") == 0)
-		{
-			DOMNodeList * childrenNode = node->getChildNodes();
-			
-			for (int index = 0; index < childrenNode->getLength(); index++)
-			{
-				DOMNode * childNode = childrenNode -> item(index);
-				string value = XMLString::transcode(childNode->getTextContent());
-
-				if (XMLString::compareString(XMLString::transcode(childNode->getNodeName()), "Min") == 0)
-				{
-					if (!value.empty())
-					{
-						port.setConstraintMin(value);
-					}
-					else
-					{
-						port.setConstraintMin("empty");
-					}
-				}
-				else if (XMLString::compareString(XMLString::transcode(childNode->getNodeName()), "Max") == 0)
-				{
-					if (!value.empty())
-					{
-						port.setConstraintMax(value);
-					}
-					else
-					{
-						port.setConstraintMax("empty");
-					}
-				}
-			}
-		}
-		else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "MetaElement") == 0)
-		{
-			DOMNodeList * childrenNode = node->getChildNodes();
-
-			for (int index = 0; index < childrenNode->getLength(); index++)
-			{
-				DOMNode * childNode = childrenNode->item(index);
-				string value = XMLString::transcode(childNode->getTextContent());
-
-				if (XMLString::compareString(XMLString::transcode(childNode->getNodeName()), "TrafoType") == 0)
-				{
-					if (!value.empty())
-					{
-						port.setTransfoType(value);
-					}
-					else
-					{
-						port.setTransfoType("empty");
-					}
-					cout << port.getTransfoType() << endl;
-				}
-			}
-		}
-
-		i++;
-        node = domTreeWalker->nextNode();
-    }
-	
-
-    return port;
-}
-
-
-static map<string, Port> extractPortMap(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
-    map<string, Port> portMap;
-
-    DOMNode * node = domTreeWalker->getCurrentNode();
-    while (node) {
-        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "PortType") == 0) {
-            XMLNodeFilter * nodeFilter = new XMLNodeFilter();
-            DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
-            Port port = extractPort(domDocument, d);
-            portMap[port.getName()] = port;
-            d->release();
-            delete nodeFilter;
-        }
-        node = domTreeWalker->nextNode();
-    }
-
-    return portMap;
-}
-
 
 static ParameterGroup extractParameterGroup(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
 
@@ -250,6 +102,113 @@ static ParameterGroup extractParameterGroup(DOMDocument * domDocument, DOMTreeWa
     return parameterGroup;
 }
 
+
+static Port extractPort(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
+
+    Port port;
+    map<string, ParameterGroup> parameterGroupMap;
+    int dataFlowDirection = 0;
+
+    DOMNode * node = domTreeWalker->getCurrentNode();
+    DOMNamedNodeMap * nodeMap = node->getAttributes();
+
+    DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
+    if (nameAttribute) {
+        port.setName(XMLString::transcode(nameAttribute->getNodeValue()));
+        //TFDEBUG(XMLString::transcode(nameAttribute->getNodeValue()));
+    } else {
+        TFERROR("");
+    }
+
+    DOMNode * typenameAttribute = nodeMap->getNamedItem(XMLString::transcode("typename"));
+    if (typenameAttribute) {
+        port.setTypeName(XMLString::transcode(typenameAttribute->getNodeValue()));
+        //TFDEBUG(XMLString::transcode(typenameAttribute->getNodeValue()));
+    } else {
+        TFERROR("");
+    }
+
+    DOMNode * sinkAttribute = nodeMap->getNamedItem(XMLString::transcode("sink"));
+    if (sinkAttribute) {
+        if (XMLString::compareString(XMLString::transcode(sinkAttribute->getNodeValue()), "1") == 0) {
+            dataFlowDirection |= static_cast<int>(Port::Sink);
+            //TFDEBUG("DataFlowDirection = " << dataFlowDirection);
+        }
+    } else {
+        TFERROR("");
+    }
+
+    DOMNode * sourceAttribute = nodeMap->getNamedItem(XMLString::transcode("source"));
+    if (sourceAttribute) {
+        if (XMLString::compareString(XMLString::transcode(sourceAttribute->getNodeValue()), "1") == 0) {
+            dataFlowDirection |= static_cast<int>(Port::Source);
+
+            //TFDEBUG("DataFlowDirection = " << dataFlowDirection);
+        }
+    } else {
+        TFERROR("");
+    }
+
+    port.setDataFlowDirection(static_cast<Port::DataFlowDirection>(dataFlowDirection));
+
+    while (node) {
+        //TFDEBUG("");
+        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0) {
+            XMLCh * textContent = XMLString::replicate(node->getTextContent());
+            XMLString::trim(textContent);
+            port.setDescription(XMLString::transcode(textContent));
+            XMLString::release(&textContent);
+        }
+
+        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "ParameterGroup") == 0) {
+            DOMNamedNodeMap * nodeMap = node->getAttributes();
+            string name;
+            DOMNode * nameAttribute = nodeMap->getNamedItem(XMLString::transcode("name"));
+            if (nameAttribute) {
+               name = XMLString::transcode(nameAttribute->getNodeValue());
+            }
+
+            XMLNodeFilter * nodeFilter = new XMLNodeFilter();
+            DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
+
+            ParameterGroup pg = extractParameterGroup(domDocument, d);
+            pg.setName(name);
+            parameterGroupMap[name] = pg;
+
+            d->release();
+            delete nodeFilter;
+        }
+
+        node = domTreeWalker->nextNode();
+    }
+
+    ParameterGroup parameterGroup;
+    parameterGroup.setName("root");
+    parameterGroup.setParameterGroupMap(parameterGroupMap);
+    port.setParameterGroup(parameterGroup);
+
+    return port;
+}
+
+
+static map<string, Port> extractPortMap(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
+    map<string, Port> portMap;
+
+    DOMNode * node = domTreeWalker->getCurrentNode();
+    while (node) {
+        if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "PortType") == 0) {
+            XMLNodeFilter * nodeFilter = new XMLNodeFilter();
+            DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
+            Port port = extractPort(domDocument, d);
+            portMap[port.getName()] = port;
+            d->release();
+            delete nodeFilter;
+        }
+        node = domTreeWalker->nextNode();
+    }
+
+    return portMap;
+}
 
 
 static DeviceInstance extractDeviceInstance(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
@@ -435,22 +394,10 @@ static TUIObjectType extractTUIObjectType(DOMDocument * domDocument, DOMTreeWalk
             d->release();
             delete nodeFilter;
         } else if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0) {
-           // XMLCh * textContent = XMLString::replicate(node->getTextContent());
-           // XMLString::trim(textContent);
-          //  tuiObjectType.setDescription(XMLString::transcode(textContent));
-           // XMLString::release(&textContent);
-
-			string value = XMLString::transcode(node->getTextContent());
-			cout << value << endl;
-
-			if (!value.empty())
-			{
-				tuiObjectType.setDescription(value);
-			}
-			else
-			{
-				tuiObjectType.setDescription("empty");
-			}
+            XMLCh * textContent = XMLString::replicate(node->getTextContent());
+            XMLString::trim(textContent);
+            tuiObjectType.setDescription(XMLString::transcode(textContent));
+            XMLString::release(&textContent);
         }
         node = domTreeWalker->nextNode();
     }
@@ -476,30 +423,16 @@ static TUIObjectInstance extractTUIObjectInstance(DOMDocument * domDocument, DOM
 
     while (node) {
         if (XMLString::compareString(XMLString::transcode(node->getNodeName()), "Description") == 0) {
-           // XMLCh * textContent = XMLString::replicate(node->getTextContent());
-           // XMLString::trim(textContent);
-           // tuiObjectInstance.setDescription(XMLString::transcode(textContent));
-           // XMLString::release(&textContent);
-
-			string value = XMLString::transcode(node->getTextContent());
-			if (!value.empty())
-			{
-				tuiObjectInstance.setDescription(value);
-			}
-			else
-			{
-				tuiObjectInstance.setDescription("empty");
-
-			}
+            XMLCh * textContent = XMLString::replicate(node->getTextContent());
+            XMLString::trim(textContent);
+            tuiObjectInstance.setDescription(XMLString::transcode(textContent));
+            XMLString::release(&textContent);
         }
         node = domTreeWalker->nextNode();
     }
 
     return tuiObjectInstance;
 }
-
-
-
 
 
 static MSPInstance extractMSPInstance(DOMDocument * domDocument, DOMTreeWalker * domTreeWalker) {
@@ -624,14 +557,6 @@ static map<string, TUIObjectType> extractTUIObjectTypeMap(DOMDocument * domDocum
             DOMTreeWalker * d = domDocument->createTreeWalker(node, DOMNodeFilter::SHOW_ALL, nodeFilter, true);
             TUIObjectType tuiObjectType = extractTUIObjectType(domDocument, d);
             tuiObjectTypeMap[tuiObjectType.getName()] = tuiObjectType;
-			tuiObjectType = tuiObjectTypeMap[tuiObjectType.getName()];
-			//Debug M.Pastor 2017
-			/*for (map<string, tuiframework::Port>::iterator typeMapIt2 = tuiObjectType.getPortMap().begin(); typeMapIt2 != tuiObjectType.getPortMap().end(); typeMapIt2++)
-			{
-				cout << "DEBUG 2017" << endl;
-				cout << "name: " << typeMapIt2->second.getName() << " Description: " << typeMapIt2->second.getDescription() << "Constraint Min: " << typeMapIt2->second.getConstraintMin() << endl;
-			}*/
-
             d->release();
             delete nodeFilter;
         }
@@ -895,7 +820,7 @@ bool ServerConfigXMLReader::readServerConfig(const std::string & path) {
     
     parser2->setDoNamespaces(true);
     parser2->setDoXInclude(true);
-  //  parser2->setValidationScheme(XercesDOMParser::Val_Always);
+   // parser2->setValidationScheme(XercesDOMParser::Val_Always);
    // parser2->setDoSchema(true);
    // parser2->setValidationSchemaFullChecking(true);
 
@@ -927,7 +852,6 @@ bool ServerConfigXMLReader::readServerConfig(const std::string & path) {
 
     domTreeWalker->release();
     delete xmlNodeFilter;
- 
 
     delete xmlDOMErrorReporter;
     delete xmlParseErrorReporter;

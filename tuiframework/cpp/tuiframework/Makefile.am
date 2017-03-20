@@ -43,7 +43,6 @@ libTUIFrameworkServer_a_SOURCES = \
     server/MSPFactorySingleton.cpp \
     server/MSPInstance.cpp \
     server/MSPType.cpp \
-    server/ParameterGroup.cpp \
     server/PluginLib.cpp \
     server/PluginShelf.cpp \
     server/PluginShelfSingleton.cpp \
@@ -71,7 +70,6 @@ nobase_libTUIFrameworkServer_a_HEADERS = \
     server/MSPFactorySingleton.h \
     server/MSPInstance.h \
     server/MSPType.h \
-    server/ParameterGroup.h \
     server/PluginLib.h \
     server/PluginShelf.h \
     server/PluginShelfSingleton.h \
@@ -122,6 +120,7 @@ libTUIFrameworkCore_a_SOURCES = \
     core/HostMsg.cpp \
     core/HostMsgDispatcher.cpp \
     core/ISerializable.cpp \
+    core/ParameterGroup.cpp \
     core/Port.cpp \
     core/SystemCmd.cpp \
     core/TUIObjectDescriptor.cpp \
@@ -178,6 +177,7 @@ core_headers = \
     core/IThreadMessageSink.h \
     core/ITUIServer.h \
     core/Multiton.h \
+    core/ParameterGroup.h \
     core/Port.h \
     core/Queue.h \
     core/SerializedDataQueue.h \

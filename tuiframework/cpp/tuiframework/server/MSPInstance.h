@@ -25,8 +25,8 @@
 #ifndef _tuiframework_MSPInstance_h_
 #define _tuiframework_MSPInstance_h_
 
+#include "../core/ParameterGroup.h"
 #include "../core/ISerializable.h"
-#include "ParameterGroup.h"
 #include <string>
 #include <map>
 

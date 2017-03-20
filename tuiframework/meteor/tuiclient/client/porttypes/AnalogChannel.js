@@ -11,10 +11,17 @@ Template.AnalogChannel.onRendered(() => {
   let instance = Template.instance();
 
   //Meteor.defer(() => {
+
     let min = 0;
     let max = 100;
     let step = (max - min)/100.0;
     let disabled = false;
+
+    if (instance.data.port.parameterGroupSet.Constraint) {
+      min = Number(instance.data.port.parameterGroupSet.Constraint.parameterSet.min);
+      max = Number(instance.data.port.parameterGroupSet.Constraint.parameterSet.max);
+      console.log('=========> ', min, max);
+    }
 
     if ((instance.data.port.flowDirection & 2) == 0) {
       disabled = true;

@@ -6,7 +6,7 @@
     It includes a software framework which contains common code
     providing generic functionality for developing applications
     with a tangible user interface (TUI).
-    
+
     The TUIFramework library is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as
     published by the Free Software Foundation, either version 3 of the
@@ -27,6 +27,8 @@
 #include <map>
 #include <string>
 
+#include "ISerializable.h"
+
 namespace tuiframework {
 
 /**
@@ -35,7 +37,7 @@ namespace tuiframework {
  *  \author Oliver Belaifa
  *  \date 2010-2012
  */
-class ParameterGroup {
+class ParameterGroup : public ISerializable {
 
 public:
     ParameterGroup(const std::string & name = "");
@@ -56,6 +58,9 @@ public:
     double getDouble(const std::string & path) const;
     const std::string & getString(const std::string & path) const;
     const ParameterGroup & getParameterGroup(const std::string & path) const;
+
+    std::ostream & serialize(std::ostream & os) const;
+    std::istream & deSerialize(std::istream & is);
 
 protected:
     std::string name;

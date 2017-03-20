@@ -110,8 +110,6 @@ void emitEvent(const Nan::FunctionCallbackInfo<v8::Value> & info) {
 
 
 
-
-
 void InitFunc(v8::Local<v8::Object> exports, v8::Local<v8::Object> module) {
   exports->Set(Nan::New("tuiclient").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::connect)->GetFunction());
   exports->Set(Nan::New("processEvents").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::processEvents)->GetFunction());

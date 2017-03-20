@@ -85,3 +85,55 @@ label.ui-button.ui-widget.ui-state-default.ui-button-text-only {
 label.ui-button.ui-widget.ui-state-default.ui-button-text-only > span {
     font-size: 0.8em;
 }
+
+
+
+
+div#start {
+    width: 100%;
+}
+
+div#start > h1 {
+    text-align: center;
+}
+
+#start > table > tbody   td:nth-child(1) {
+    height: 20px;
+    width: 200px;
+
+}
+
+
+input,textarea {
+    width: 100%;
+    overflow-x: hidden;
+    resize: horizontal;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+#start div.button {
+    padding-top: 11px;
+}
+
+#start button {
+    left: 0;
+    position: relative;
+//margin-top: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+}
+
+table {
+    align-items:center;
+    vertical-align: middle;
+    valign: center;
+    padding: 40px;
+    width: 100%;
+}
+
+#start > table > tbody > tr:nth-child(1) {
+    height: 44px;
+}

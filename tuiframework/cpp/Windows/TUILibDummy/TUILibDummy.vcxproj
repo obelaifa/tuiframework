@@ -54,7 +54,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(Solutiondir)\..;$(Solutiondir)\..\tuilibs;$(SolutionDir)\netsrc\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;HAVE_STRUCT_TIMESPEC;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -69,7 +69,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(Solutiondir)\..;$(Solutiondir)\..\tuilibs;$(SolutionDir)\netsrc\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -83,14 +83,12 @@
     <ClCompile Include="..\..\tuilibs\dummy\DummyDevMatrix4.cpp" />
     <ClCompile Include="..\..\tuilibs\dummy\DummyDevPackedVector4.cpp" />
     <ClCompile Include="..\..\tuilibs\dummy\DummyDevTracker.cpp" />
-    <ClCompile Include="..\..\tuilibs\dummy\DummyDevWinMod.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevDA.h" />
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevMatrix4.h" />
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevPackedVector4.h" />
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevTracker.h" />
-    <ClInclude Include="..\..\tuilibs\dummy\DummyDevWinMod.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\tuilibs\dummy\DummyDeviceDA.xml" />

@@ -27,7 +27,7 @@
 #define _tuiframework_KinectARTTransfUnit_h_
 
 #include <tuiframework/core/IEventSink.h>
-#include <tuiframework/server/ParameterGroup.h>
+#include <tuiframework/core/ParameterGroup.h>
 #include <tuitypes/common/CommonTypeReg.h>
 
 #include <map>

@@ -54,7 +54,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)\netsrc\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;HAVE_STRUCT_TIMESPEC;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -69,7 +69,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(SolutionDir)\netsrc\Pre-built.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -92,6 +92,7 @@
     <ClCompile Include="..\..\tuiframework\core\HostMsg.cpp" />
     <ClCompile Include="..\..\tuiframework\core\HostMsgDispatcher.cpp" />
     <ClCompile Include="..\..\tuiframework\core\ISerializable.cpp" />
+    <ClCompile Include="..\..\tuiframework\core\ParameterGroup.cpp" />
     <ClCompile Include="..\..\tuiframework\logging\Logger.cpp" />
     <ClCompile Include="..\..\tuiframework\sockets\MulticastListenerWinSock2.cpp" />
     <ClCompile Include="..\..\tuiframework\core\Port.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="..\..\tuiframework\core\ISerializedDataSource.h" />
     <ClInclude Include="..\..\tuiframework\core\IThreadMessageSink.h" />
     <ClInclude Include="..\..\tuiframework\core\ITUIServer.h" />
+    <ClInclude Include="..\..\tuiframework\core\ParameterGroup.h" />
     <ClInclude Include="..\..\tuiframework\logging\Logger.h" />
     <ClInclude Include="..\..\tuiframework\sockets\MulticastListenerWinSock2.h" />
     <ClInclude Include="..\..\tuiframework\core\Multiton.h" />

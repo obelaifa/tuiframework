@@ -56,7 +56,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(Solutiondir)\..;$(SolutionDir)\netsrc\Pre-built.2\include;$(Solutiondir)\..\tuilibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;HAVE_STRUCT_TIMESPEC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -73,8 +73,12 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy "$(SolutionDir)\netsrc\Pre-built.2\lib\pthreadVCE2.dll" "$(OutDir)"
+copy "$(SolutionDir)\netsrc\xerces-c-3.1.1-x86-windows-vc-9.0\bin\xerces-c_3_1.dll" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\testconfig.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig2.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mousetestconfig.xml" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,7 +86,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>$(Solutiondir)\..;$(SolutionDir)\netsrc\Pre-built.2\include;$(Solutiondir)\..\tuilibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
@@ -100,11 +104,12 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)\netsrc\Pre-built.2\lib\pthreadVCE2.dll $(OutDir)
-copy $(SolutionDir)\netsrc\xerces-c-3.1.1-x86-windows-vc-9.0\bin\xerces-c_3_1.dll $(OutDir)
-copy $(SolutionDir)\..\tuibins\tuiserver2\testconfig.xml  $(OutDir)
-copy $(SolutionDir)\..\tuibins\tuiserver2\mousetestconfig.xml  $(OutDir)
-</Command>
+      <Command>copy "$(SolutionDir)\netsrc\Pre-built.2\lib\pthreadVCE2.dll" "$(OutDir)"
+copy "$(SolutionDir)\netsrc\xerces-c-3.1.1-x86-windows-vc-9.0\bin\xerces-c_3_1.dll" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\testconfig.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig2.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mousetestconfig.xml" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

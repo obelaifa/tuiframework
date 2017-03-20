@@ -6,7 +6,7 @@
     It includes a software framework which contains common code
     providing generic functionality for developing applications
     with a tangible user interface (TUI).
-    
+
     The TUIFramework library is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as
     published by the Free Software Foundation, either version 3 of the
@@ -43,7 +43,6 @@ ParameterGroup::ParameterGroup(const std::string & name) :
 
 
 ParameterGroup::~ParameterGroup() {
-    parameterGroupMap;
 }
 
 
@@ -149,6 +148,69 @@ const ParameterGroup & ParameterGroup::getParameterGroup(const std::string & pat
        e.addErrorMessage(TFSTR("in ParameterGroup\"" << this->name << "\""), __FILE__, __LINE__);
        throw e;
    }
+}
+
+
+std::ostream & ParameterGroup::serialize(std::ostream & os) const {
+    int parameterCount = this->parameterMap.size();
+
+    os << parameterCount << " ";
+
+    {
+        std::map<std::string, std::string>::const_iterator i = this->parameterMap.begin();
+        std::map<std::string, std::string>::const_iterator e = this->parameterMap.end();
+        while (i != e) {
+            os << (*i).first << " " << (*i).second << " ";
+            ++i;
+        }
+    }
+
+    int parameterGroupCount = this->parameterGroupMap.size();
+    os << parameterGroupCount;
+
+    {
+        std::map<std::string, ParameterGroup>::const_iterator i = this->parameterGroupMap.begin();
+        std::map<std::string, ParameterGroup>::const_iterator e = this->parameterGroupMap.end();
+        while (i != e) {
+            os << " " << (*i).first << " " << (*i).second;
+            ++i;
+        }
+    }
+
+    return os;
+}
+
+
+std::istream & ParameterGroup::deSerialize(std::istream & is) {
+    int parameterCount;
+    is >> parameterCount;
+
+    this->parameterMap.clear();
+    for (int i = 0; i < parameterCount; ++i) {
+        std::string key;
+        std::string value;
+
+        is >> key >> value;
+
+        this->parameterMap[key] = value;
+    }
+
+    int parameterGroupCount;
+    is >> parameterGroupCount;
+
+    this->parameterGroupMap.clear();
+    for (int i = 0; i < parameterGroupCount; ++i) {
+        std::string name;
+        is >> name;
+
+        ParameterGroup parameterGroup;
+        is >> parameterGroup;
+        parameterGroup.setName(name);
+
+        this->parameterGroupMap[name] = parameterGroup;
+    }
+
+    return is;
 }
 
 

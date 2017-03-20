@@ -91,8 +91,54 @@ v8::Local<v8::Object> AttachedObjectsWrap::getWrappedPort(const tuiframework::Po
   v8::Local<v8::Object> obj = Nan::New<v8::Object>();
   obj->Set(Nan::New("name").ToLocalChecked(), Nan::New(port.getName()).ToLocalChecked());
   obj->Set(Nan::New("type").ToLocalChecked(), Nan::New(port.getTypeName()).ToLocalChecked());
+
   Port::DataFlowDirection flowDirection = port.getDataFlowDirection();
   obj->Set(Nan::New("flowDirection").ToLocalChecked(), Nan::New(flowDirection));
   obj->Set(Nan::New("description").ToLocalChecked(), Nan::New(port.getDescription()).ToLocalChecked());
+
+  v8::Local<v8::Object> wrappedParameterGroup = this->getWrappedParameterGroup(port.getParameterGroup(), true);
+  obj->Set(Nan::New("parameterGroupSet").ToLocalChecked(), wrappedParameterGroup);
+
+  return obj;
+}
+
+
+v8::Local<v8::Object> AttachedObjectsWrap::getWrappedParameterGroup(
+  const tuiframework::ParameterGroup & parameterGroup, bool root) const {
+
+  v8::Local<v8::Object> obj = Nan::New<v8::Object>();
+
+  {
+    const map<string, ParameterGroup> & parameterGroupMap = parameterGroup.getParameterGroupMap();
+    map<string, ParameterGroup>::const_iterator i = parameterGroupMap.begin();
+    map<string, ParameterGroup>::const_iterator e = parameterGroupMap.end();
+    v8::Local<v8::Object> wrappedParameterGroupMap = Nan::New<v8::Object>();
+    while (i != e) {
+      v8::Local<v8::Object> parameterGroupObj = getWrappedParameterGroup((*i).second, false);
+      wrappedParameterGroupMap->Set(Nan::New((*i).first).ToLocalChecked(), parameterGroupObj);
+      ++i;
+    }
+    if (root) {
+      return wrappedParameterGroupMap;
+    } else {
+      obj->Set(Nan::New("parameterGroupSet").ToLocalChecked(), wrappedParameterGroupMap);
+    }
+  }
+
+  obj->Set(Nan::New("name").ToLocalChecked(), Nan::New(parameterGroup.getName()).ToLocalChecked());
+
+  {
+    const map<string, string> & parameterMap = parameterGroup.getParameterMap();
+    map<string, string>::const_iterator i = parameterMap.begin();
+    map<string, string>::const_iterator e = parameterMap.end();
+    v8::Local<v8::Object> wrappedParameterMap = Nan::New<v8::Object>();
+    while (i != e) {
+      wrappedParameterMap->Set(Nan::New((*i).first).ToLocalChecked(), Nan::New((*i).second).ToLocalChecked());
+      ++i;
+    }
+
+    obj->Set(Nan::New("parameterSet").ToLocalChecked(), wrappedParameterMap);
+  }
+
   return obj;
 }

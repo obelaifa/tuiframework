@@ -148,7 +148,6 @@ void DummyDevLBR100::AValue::tick() {
             this->targetValue = this->currentValue;
         }
     }
-    cout << "===> " << this->currentValue << "    " << this->targetValue << endl;
 }
 
 
@@ -362,6 +361,7 @@ void DummyDevLBR100::executeInputLoop() {
         FD_ZERO(&rfds);
         FD_SET(0, &rfds);
 
+        //tv.tv_sec = 1;
         tv.tv_sec = 0;
         tv.tv_usec = 100000;
         retval = select(1, &rfds, 0, 0, &tv);
@@ -399,19 +399,24 @@ void DummyDevLBR100::executeInputLoop() {
                     DigitalChangedEvent * event = new DigitalChangedEvent();
                     event->setAddress(EPAddress(this->entityID, this->greiferIstAufPortNr));
                     event->setPayload(greiferIstAuf);
+                    eventSink->push(event);
                 }
                 {
                     this->greiferIstZu = this->istGreiferZu();
                     DigitalChangedEvent * event = new DigitalChangedEvent();
                     event->setAddress(EPAddress(this->entityID, this->greiferIstZuPortNr));
                     event->setPayload(greiferIstZu);
+                    eventSink->push(event);
                 }
                 {
                     this->engineIsOn = this->engine.isOn();
                     DigitalChangedEvent * event = new DigitalChangedEvent();
                     event->setAddress(EPAddress(this->entityID, this->engineIsOnPortNr));
                     event->setPayload(engineIsOn);
+                    eventSink->push(event);
                 }
+
+                this->stateTrigger = false;
             } else {
                 {
                     bool state = this->istGreiferAuf();
@@ -420,6 +425,7 @@ void DummyDevLBR100::executeInputLoop() {
                         DigitalChangedEvent * event = new DigitalChangedEvent();
                         event->setAddress(EPAddress(this->entityID, this->greiferIstAufPortNr));
                         event->setPayload(greiferIstAuf);
+                        eventSink->push(event);
                     }
                 }
                 {
@@ -429,6 +435,7 @@ void DummyDevLBR100::executeInputLoop() {
                         DigitalChangedEvent * event = new DigitalChangedEvent();
                         event->setAddress(EPAddress(this->entityID, this->greiferIstZuPortNr));
                         event->setPayload(greiferIstZu);
+                        eventSink->push(event);
                     }
                 }
                 {
@@ -438,6 +445,7 @@ void DummyDevLBR100::executeInputLoop() {
                         DigitalChangedEvent * event = new DigitalChangedEvent();
                         event->setAddress(EPAddress(this->entityID, this->engineIsOnPortNr));
                         event->setPayload(this->engineIsOn);
+                        eventSink->push(event);
                     }
                 }
             }
