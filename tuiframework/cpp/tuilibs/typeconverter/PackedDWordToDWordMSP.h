@@ -3,7 +3,6 @@
 #include <tuiframework/server/MSPType.h>
 #include <tuiframework/core/IMSP.h>
 #include <tuiframework/core/EventDelegate.h>
-
 #include <tuitypes/common/CommonTypeReg.h>
 
 namespace tuiframework {

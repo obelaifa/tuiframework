@@ -25,6 +25,9 @@
     <ClCompile Include="WinModDevPluginWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -81,9 +84,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,14 +113,18 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;HAVE_STRUCT_TIMESPEC;_DEBUG;_WINDOWS;_USRDLL;TUILIBWINMODDLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(Solutiondir)\..;$(Solutiondir)\..\tuilibs;$(SolutionDir)\netsrc\Pre-built.2\include;%(AdditionalIncludeDirectories)$(SolutionDir)\netsrc\winmod\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Solutiondir)\..;$(Solutiondir)\..\tuilibs;$(SolutionDir)netsrc\Pre-built.2\include; $(SolutionDir)netsrc\winmod\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\netsrc\Pre-built.2\lib;$(SolutionDir)\netsrc\winmod\lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;$(SolutionDir)\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pthreadVCE2.lib;Y200Clntd.lib;TUILibWinMod.lib;TUILibTUITypes.lib;TUIFrameworkCore.lib;TUIFrameworkServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)netsrc\Pre-built.2\lib;$(SolutionDir)netsrc\winmod\lib;$(SolutionDir)Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pthreadVCE2.lib;TUILibWinMod.lib;TUIFrameworkCore.lib;TUIFrameworkServer.lib;TUILibTUITypes.lib;Y200ClntD.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>TUILibWinModDLL.def</ModuleDefinitionFile>
+      <OutputFile>$(OutDir)$(TargetName)D$(TargetExt)</OutputFile>
+      <ImportLibrary>$(OutDir)linker\$(TargetName).lib</ImportLibrary>
+      <ProgramDatabaseFile>$(OutDir)debug\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

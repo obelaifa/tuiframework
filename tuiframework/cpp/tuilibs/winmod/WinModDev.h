@@ -6,7 +6,6 @@
 #include <tuiframework/core/IDevice.h>
 #include <tuiframework/core/IEventSink.h>
 #include <tuiframework/server/DeviceDescriptor.h>
-
 #include <tuitypes/common/CommonTypeReg.h>
 
 #include <iostream>
@@ -293,5 +292,6 @@ namespace tuidevices{
 		int dWordOff;
 		/** \brief Size of DwOrd-Values. */
 		int dWordSize;
+		PackedType<int> packedInteger;
 	};
 }

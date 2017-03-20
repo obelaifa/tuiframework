@@ -2,7 +2,7 @@
 
 #include <tuiframework/core/Exception.h>
 #define USE_TFDEBUG
-#include <tuiframework/logging/Logger.h>
+#include <TUIFramework/logging/Logger.h>
 
 static const char * inTag = "in";
 static const char * outTagValue = "out";
@@ -77,11 +77,14 @@ namespace tuiframework {
 	}
 	void PackedFloatToFloatMSP::handleEvent(PackedAnalogEvent * e)
 	{
+
 		if (this->out[0])
 		{
 			AnalogChangedEvent* event = new AnalogChangedEvent(-1, -1, e->getPayload().getItems().at(this->id).second);
+			//cout << "GetPayload : " << e->getPayload() << endl;
 			//for(int i=0;i<wd.getFloats().size();i++)
-			//cout <<"MSPOut: Floats: "  << event2->getPayload().at(i)<< endl;
+				//cout <<"MSPOut: Floats: "  << event2->getPayload().at(i)<< endl;
+			//cout << "MSPOut: Floats: " << e->getPayload() << endl;
 
 			this->out[0]->push(event);
 		}
