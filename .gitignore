@@ -2,3 +2,4 @@
 *.opendb
 tuiframework/cpp/tuibins/tuipythonclient/
 tuiframework/cpp/tuilibs/opc/
+tuiframework/cpp/x86/

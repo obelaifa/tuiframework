@@ -1,9 +1,9 @@
 #pragma once
-#include "../../tuiframework/server/MSPConfig.h"
-#include "../../tuiframework/server/MSPType.h"
-#include "../../tuiframework/core/IMSP.h"
-#include "../../tuiframework/core/EventDelegate.h"
-#include "../../TUIPlugins/tuitypes/common/CommonTypeReg.h"
+#include <tuiframework/server/MSPConfig.h>
+#include <tuiframework/server/MSPType.h>
+#include <tuiframework/core/IMSP.h>
+#include <tuiframework/core/EventDelegate.h>
+#include <tuitypes/common/CommonTypeReg.h>
 
 namespace tuiframework {
 	class ByteToPackedByteMSP :

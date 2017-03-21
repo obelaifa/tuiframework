@@ -1,7 +1,7 @@
 #include "ByteToPackedByteMSP.h"
-#include "../../tuiframework/core/Exception.h"
+#include <tuiframework/core/Exception.h>
 #define USE_TFDEBUG
-#include "../../TUIFramework/logging/Logger.h"
+#include <TUIFramework/logging/Logger.h>
 
 #define SIZE_VECTOR 8
 
