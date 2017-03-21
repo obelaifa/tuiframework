@@ -3,11 +3,18 @@ import addon from 'tuiclient';
 var Fiber = require('fibers');
 var TUIEventHandler = require('./TUIEventHandler');
 
+const tuiPortsCollectionName = 'TUIPorts';
+
+
 class TUIPortsHandler {
 
-  constructor(collection) {
-    this.collection = collection;
-    this.eventHandlerArray = [];
+  constructor() {
+    this.tuiPortsCollection = new Mongo.Collection(tuiPortsCollectionName);
+    this.tuiPortsCollection.remove({}, (err) => {
+      if (err) {
+        console.log('MongoDB Error: Failed to initialize an empty Collection.')
+      }
+    });
   }
 
 
@@ -51,7 +58,7 @@ class TUIPortsHandler {
           }
           ++id;
           let curFiber = Fiber.current;
-          this.collection.insert(doc, (err) => {
+          this.tuiPortsCollection.insert(doc, (err) => {
             if (err) {
               console.log('MongoDB Error: Failed to insert a TUIObject-Port document.')
             }
@@ -60,7 +67,7 @@ class TUIPortsHandler {
           Fiber.yield();
           //console.log('===>', doc)
           // console.log(id, key);
-          let eventHandler = new TUIEventHandler(this.collection, tuiObjectInstance.name, port.name);
+          let eventHandler = new TUIEventHandler(this.tuiPortsCollection, tuiObjectInstance.name, port.name);
           if ((port.flowDirection & 1) && (port.type == 'AnalogChannel' || port.type == 'DigitalChannel')) {
             addon.registerEventCallback(tuiObjectInstance.name, port.name, eventHandler.update, eventHandler);
           }
@@ -68,9 +75,25 @@ class TUIPortsHandler {
         }
       }
     }).run();
+  }
 
+
+  updateValue(tuiObjectName, portName, value) {
+    this.tuiPortsCollection.update({"tuiObject.name": tuiObjectName, "port.name": portName},
+      {
+        $set: {
+          value: value
+        }
+      },
+      (err) => {
+        if (err) {
+          console.log('MongoDB Error: Failed to update port value')
+        }
+      }
+    );
   }
 
 };
+
 
 module.exports = TUIPortsHandler;

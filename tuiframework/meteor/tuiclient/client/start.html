@@ -1,5 +1,4 @@
 <template name="start">
-  <!--connectWithTUIServer(8998, 8999, "127.0.0.1:7999", &tuiClientWrap, false); -->
   <div id="start">
     <h1>TUIClient</h1>
     <table>
@@ -7,39 +6,36 @@
       <tr>
         <td>TUIServer IP address:</td>
         <td>
-          <input type="text" class="tuiserver" value="127.0.0.1:7999"/>
+          <input type="text" id="tuiserver-url" value="127.0.0.1:7999"/>
         </td>
       </tr>
       <tr>
         <td>CDB Server URL:</td>
         <td>
-          <input type="url" class="cdb-server-url" value="http://vm-vib-shp.contact.de"/>
+          <input type="url" id="cdb-server-url" value="http://vm-vib-shp.contact.de"/>
         </td>
       </tr>
       <tr>
         <td>User:</td>
         <td>
-          <input type="text" class="cdb-user" value="test"/>
+          <input type="text" id="cdb-user" value="test"/>
         </td>
       </tr>
       <tr>
         <td>Password:</td>
         <td>
-          <input type="password" class="cdb-password" value="" />
+          <input type="password" id="cdb-password" value="" />
         </td>
       </tr>
       <tr>
         <td></td>
         <td>
           <div class="button">
-            <button type="button">Start</button>
+            <button type="button" id='start-button'>Start</button>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
-
-
   </div>
-
 </template>
