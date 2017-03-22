@@ -34,6 +34,20 @@
   <ItemGroup>
     <None Include="TUILibWinModDLL.def" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TUIFrameworkCore\TUIFrameworkCore.vcxproj">
+      <Project>{0c30b2c6-6fc0-41df-b6ef-3a85631c74f1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TUIFrameworkServer\TUIFrameworkServer.vcxproj">
+      <Project>{5d7f7dd6-c45a-48f2-98df-23cb789a54eb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TUILibTUITypes\TUILibTUITypes.vcxproj">
+      <Project>{a7d1680a-72cb-498b-abcb-ee29a58b086c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TUILibWinmod\TUILibWinMod.vcxproj">
+      <Project>{98cdf38c-5ed4-4f7f-b9f5-2fb27b864c3a}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{17E0AD5C-4A42-4545-B17F-8F72E0025D63}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -97,8 +111,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\lib\TUIPlugins\shared</OutDir>
-    <TargetName>..\..\$(PlatformTarget)\$(Configuration)\$(MSBuildProjectName)</TargetName>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -119,8 +133,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)netsrc\Pre-built.2\lib;$(SolutionDir)netsrc\winmod\lib;$(SolutionDir)Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pthreadVCE2.lib;TUILibWinMod.lib;TUIFrameworkCore.lib;TUIFrameworkServer.lib;TUILibTUITypes.lib;Y200ClntD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)netsrc\Pre-built.2\lib;$(SolutionDir)netsrc\winmod\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pthreadVCE2.lib;Y200ClntD.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>TUILibWinModDLL.def</ModuleDefinitionFile>
       <OutputFile>$(OutDir)$(TargetName)D$(TargetExt)</OutputFile>
       <ImportLibrary>$(OutDir)linker\$(TargetName).lib</ImportLibrary>
@@ -153,17 +167,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;HAVE_STRUCT_TIMESPEC;NDEBUG;_WINDOWS;_USRDLL;TUILIBWINMODDLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DebugInformationFormat>None</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\..\include; ..\..\..\..\3rdParty\Pre-built.2\include; ..\..\..\..\3rdParty\winmod\include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(Solutiondir)\..;$(Solutiondir)\..\tuilibs;$(SolutionDir)netsrc\Pre-built.2\include; $(SolutionDir)netsrc\winmod\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>..\..\..\..\3rdParty\Pre-built.2\lib;..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\lib\TUIPlugins\static;..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\lib\TUIFramework;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;..\..\..\..\3rdParty\winmod</AdditionalLibraryDirectories>
-      <AdditionalDependencies>pthreadVCE2.lib;TUILibWinMod.lib;TUIFrameworkCore.lib;TUIFrameworkServer.lib;TUILibTUITypes.lib;Y200Clnt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ModuleDefinitionFile>..\..\..\..\src\TUIPluginsDLL\winmod\TUILibWinModDLL.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>$(SolutionDir)netsrc\Pre-built.2\lib;$(SolutionDir)netsrc\winmod\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pthreadVCE2.lib;Y200Clnt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>TUILibWinModDLL.def</ModuleDefinitionFile>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>

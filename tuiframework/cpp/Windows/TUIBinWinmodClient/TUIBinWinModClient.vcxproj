@@ -27,6 +27,17 @@
     <ClInclude Include="..\..\tuibins\tuiwinmodclient\Init.h" />
     <ClInclude Include="..\..\tuibins\tuiwinmodclient\TUIWinMod.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TUIFrameworkClient\TUIFrameworkClient.vcxproj">
+      <Project>{6affb021-9e85-4380-a37d-006c4d32bc13}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TUIFrameworkCore\TUIFrameworkCore.vcxproj">
+      <Project>{0c30b2c6-6fc0-41df-b6ef-3a85631c74f1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TUILibTUITypes\TUILibTUITypes.vcxproj">
+      <Project>{a7d1680a-72cb-498b-abcb-ee29a58b086c}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1C7D3ABE-9CE5-426D-BEA1-21C76902402D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -90,8 +101,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\tuiexampleclients\$(TargetName)</OutDir>
-    <IntDir>..\..\$(PlatformTarget)\$(Configuration)\$(MSBuildProjectName)</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -110,8 +121,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>pthreadVCE2.lib;Ws2_32.lib;TUIFrameworkCore.lib;TUIFrameworkClient.lib;TUILibTUITypes.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;$(SolutionDir)\netsrc\Pre-built.2\lib;%(AdditionalLibraryDirectories);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pthreadVCE2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\netsrc\Pre-built.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -140,15 +151,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>HAVE_STRUCT_TIMESPEC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>None</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../../../../include;..\..\..\..\3rdParty\Pre-built.2\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Solutiondir)\..;$(SolutionDir)\netsrc\Pre-built.2\include;$(Solutiondir)\..\tuilibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>No</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>pthreadVCE2.lib;Ws2_32.lib;TUIFrameworkCore.lib;TUIFrameworkClient.lib;TUILibTUITypes.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\lib\TUIFramework;..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\lib\TUIPlugins\static;..\..\..\..\3rdParty\xerces-c-3.1.1-x86-windows-vc-9.0\lib;..\..\..\..\3rdParty\Pre-built.2\lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pthreadVCE2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\netsrc\Pre-built.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
