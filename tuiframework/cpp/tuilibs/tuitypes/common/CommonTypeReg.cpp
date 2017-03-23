@@ -65,8 +65,10 @@ void registerTypes(IEventFactory * eventFactory, IEventChannelFactory * eventCha
 	tuiframework::registerType<VectorList<int>, 31>(eventFactory,eventChannelFactory, "IntegerVectorChannel");
 	*/
 
+#ifdef _WIN32
 	tuiframework::registerType<XControllerData, 32>(eventFactory,eventChannelFactory, "XControllerChannel");
 	tuiframework::registerType<WinModData,33>(eventFactory,eventChannelFactory,"WinModChannel");
+#endif
 
 	// OPC
 	/*
@@ -82,11 +84,17 @@ void registerTypes(IEventFactory * eventFactory, IEventChannelFactory * eventCha
 	// PackedTypes
 	tuiframework::registerType<PackedType<float >, 101>(eventFactory, eventChannelFactory, "PackedAnalog");
 	tuiframework::registerType<PackedType<int >, 102>(eventFactory, eventChannelFactory, "PackedInteger");
+
+#ifdef _WIN32
 	tuiframework::registerType<PackedType<WORD >, 103>(eventFactory, eventChannelFactory, "PackedWORD");
 	tuiframework::registerType<PackedType<DWORD >, 104>(eventFactory, eventChannelFactory, "PackedDWORD");
 
 	tuiframework::registerType<WORD, 105>(eventFactory, eventChannelFactory, "WordChannel");
 	tuiframework::registerType<DWORD, 106>(eventFactory, eventChannelFactory, "DWordChannel");
+#endif
+
+  tuiframework::registerType<Text, 110>(eventFactory, eventChannelFactory, "TextChannel");
+  tuiframework::registerType<Text, 111>(eventFactory, eventChannelFactory, "TextVectorChannel");
 
 
 }

@@ -25,6 +25,8 @@
 #ifndef _tuiframework_Port_h_
 #define _tuiframework_Port_h_
 
+#include "ParameterGroup.h"
+
 #include "ISerializable.h"
 
 #include <string>
@@ -50,8 +52,8 @@ public:
     };
 
     Port();
-	Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection, 
-		const std::string & description = "", const std::string & constraintMin = "", const std::string & constraintMax = "", const std::string & trafotype = "");
+    Port(const std::string & name, const std::string & typeName, DataFlowDirection dataFlowDirection,
+      const std::string & description = "");
     virtual ~Port();
 
         /// Returns the port name.
@@ -69,30 +71,13 @@ public:
         /// Sets the type name of the port.
     void setTypeName(const std::string & typeName);
 
-		/// Returns the constraint min of the port.
-	const std::string & getConstraintMin() const;
-		/// Sets the type name of the port.
-	void setConstraintMin(const std::string & constraintMin);
-
-		/// Returns the constraint max of the port.
-	const std::string & getConstraintMax() const;
-		/// Sets the type name of the port.
-	void setConstraintMax(const std::string & constraintMax);
-
-		/// Returns the transformation number of the port.
-	const std::string & getTrafoType() const;
-		/// Sets the type name of the port.
-	void setTrafoType(const std::string & trafotype);
-
-		/// Returns the transformation number of the port.
-	const std::string & getTrafoNo() const;
-		/// Sets the type name of the port.
-	void setTrafoNo(const std::string & trafotype);
-
         /// Returns the data flow direction of the port.
     DataFlowDirection getDataFlowDirection() const;
         /// Sets the data flow direction of the port.
     void setDataFlowDirection(DataFlowDirection dataFlowDirection);
+
+    void setParameterGroup(const ParameterGroup & parameterGroup);
+    const ParameterGroup & getParameterGroup() const;
 
     std::ostream & serialize(std::ostream & os) const;
     std::istream & deSerialize(std::istream & is);
@@ -104,16 +89,10 @@ protected:
     std::string description;
         /// Type name of the port
     std::string typeName;
-		/// Constraint min value
-	std::string constraintMin;
-		/// Constraint max value
-	std::string constraintMax;
-		/// Type of transformation
-	std::string trafotype;
-		/// Number of transformation
-	std::string trafono;
         /// Data flow direction.
     int dataFlowDirection;
+
+    ParameterGroup parameterGroup;
 };
 
 }

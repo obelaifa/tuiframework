@@ -30,7 +30,10 @@
 * or even Class-Structures like Vector or Matrix. Every new Class-Structure needs to be included here.
 */
 
+#ifdef _WIN32
 #include "XControllerData.h"
+#endif
+
 #include "Gesture.h"
 #include "HapticAngle.h"
 #include "KinectJoint.h"
@@ -45,11 +48,17 @@
 #include "Vector4.h"
 #include "Matrix4.h"
 #include "PackedType.h"
+#ifdef _WIN32
 #include "WinModData.h"
+#endif
 //#include "OPCType.h"
 //#include "SceneObject.h"
 
 //#include "TUIPair.h"
+
+#include "Text.h"
+#include "TextVector.h"
+
 
 #include <tuiframework/core/EPEventMsg.h>
 #include <tuiframework/core/IEventFactory.h>
@@ -104,10 +113,11 @@ typedef tuiframework::EPEventMsg<PackedType<Matrix4<double> >, 26>      PackedMa
 //typedef tuiframework::EPEventMsg<VectorList<int>,31>					IntegerVectorChangedEvent;
 
 /** \brief Defines an alias representing a XInput-controller event. */
+#ifdef _WIN32
 typedef tuiframework::EPEventMsg<XControllerData,32>					XControllerEvent;
 /** \brief Defines an alias representing a WinMod event. */
 typedef tuiframework::EPEventMsg<WinModData,33>							WinModEvent;
-
+#endif
 /** \brief Defines an alias representing OPC-boolean-Values as Event */
 //typedef tuiframework::EPEventMsg<OPCType<bool>, 34>	DigitalChangedOPCEvent;
 /** \brief Defines an alias representing OPC-boolean-Values as Event */
@@ -122,14 +132,21 @@ typedef tuiframework::EPEventMsg<WinModData,33>							WinModEvent;
 
 typedef tuiframework::EPEventMsg<PackedType<float>, 100> PackedAnalogEvent;
 typedef tuiframework::EPEventMsg<PackedType<int>, 101> PackedIntegerEvent;
+
+#ifdef _WIN32
 typedef tuiframework::EPEventMsg<PackedType<WORD>, 102> PackedWORDEvent;
 typedef tuiframework::EPEventMsg<PackedType<DWORD>, 103> PackedDWORDEvent;
+#endif
 
+#ifdef _WIN32
 /** \brief Defines an alias representing a vectorLis of Word-Values as event. */
 typedef tuiframework::EPEventMsg<WORD, 104>					WordChangedEvent;
 /** \brief Defines an alias representing a vectorList of Dword-Values as event. */
 typedef tuiframework::EPEventMsg<DWORD, 105>					DWordChangedEvent;
+#endif
 
+typedef tuiframework::EPEventMsg<Text, 110>           TextChangedEvent;
+typedef tuiframework::EPEventMsg<TextVector, 111>     TextVectorChangedEvent;
 
 namespace CommonTypeReg {
 

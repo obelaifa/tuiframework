@@ -54,7 +54,7 @@ public:
 	{
 		std::vector<T> valueVector;
 
-		for (std::vector<std::pair<int, T>>::iterator it = this->items.begin(); it != this->items.end(); ++it )
+		for (typename std::vector<std::pair<int, T> >::iterator it = this->items.begin(); it != this->items.end(); ++it )
 		{
 			valueVector.push_back(it->second);
 		}
@@ -62,7 +62,7 @@ public:
 		return valueVector;
 	}
     
-	void setItems(std::vector<std::pair<int, T>> pItems)
+	void setItems(std::vector<std::pair<int, T> > pItems)
 	{
 		this->items = pItems;
 	}
