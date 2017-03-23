@@ -26,6 +26,12 @@ EventConverter eventConverter;
 
 namespace tfnode {
 
+static std::string convertString(const v8::Local<v8::String> & str) {
+  v8::String::Utf8Value param1(str);
+  return std::string(*param1);
+}
+
+
 void connected() {
   //cout << "===> connected called" << endl;
   //cout.flush();
@@ -44,13 +50,27 @@ void connected() {
 
 
 void connect(const Nan::FunctionCallbackInfo<v8::Value> & info) {
+  int senderPort = info[0]->ToInteger()->Value();
+  int receiverPort = info[1]->ToInteger()->Value();
+  string ipAddressAndPort = convertString(info[2]->ToString());
+
+  cout << "==> senderPort: " << senderPort << endl;
+  cout << "==> receiverPort: " << receiverPort << endl;
+  cout << "==> ipAddressAndPort: " << ipAddressAndPort << endl;
+
   initTypeRegistration(getEventFactory());
   CommonTypeReg::registerTypes(&getEventFactory(), &getEventChannelFactory());
   tuiClientWrap.setInitCallback(&connected);
 
-  tuiClientWrap.setNodeCallback(info);
-  connectWithTUIServer(8998, 8999, "127.0.0.1:7999", &tuiClientWrap, false);
+  tuiClientWrap.setNodeCallback(info, 3);
+  //connectWithTUIServer(8998, 8999, "127.0.0.1:7999", &tuiClientWrap, false);
+  connectWithTUIServer(senderPort, receiverPort, ipAddressAndPort, &tuiClientWrap, false);
   info.GetReturnValue().Set(Nan::New("world").ToLocalChecked());
+}
+
+
+void disconnect(const Nan::FunctionCallbackInfo<v8::Value> & info) {
+  disconnectFromTUIServer();
 }
 
 
@@ -69,12 +89,6 @@ void getAttachedObjects(const Nan::FunctionCallbackInfo<v8::Value> & info) {
 
   v8::Local<v8::Object> wrappedObj = attachedObjectsWrap.getWrapped();
   info.GetReturnValue().Set(wrappedObj);
-}
-
-
-static std::string convertString(const v8::Local<v8::String> & str) {
-  v8::String::Utf8Value param1(str);
-  return std::string(*param1);
 }
 
 
@@ -111,7 +125,8 @@ void emitEvent(const Nan::FunctionCallbackInfo<v8::Value> & info) {
 
 
 void InitFunc(v8::Local<v8::Object> exports, v8::Local<v8::Object> module) {
-  exports->Set(Nan::New("tuiclient").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::connect)->GetFunction());
+  exports->Set(Nan::New("connect").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::connect)->GetFunction());
+  exports->Set(Nan::New("disconnect").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::disconnect)->GetFunction());
   exports->Set(Nan::New("processEvents").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::processEvents)->GetFunction());
   exports->Set(Nan::New("getAttachedObjects").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::getAttachedObjects)->GetFunction());
   exports->Set(Nan::New("registerEventCallback").ToLocalChecked(), Nan::New<v8::FunctionTemplate>(tfnode::registerEventCallback)->GetFunction());

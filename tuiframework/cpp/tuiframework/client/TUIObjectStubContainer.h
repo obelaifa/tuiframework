@@ -60,6 +60,8 @@ public:
     void createStubs(const std::vector<TUIObjectInstance> & instanceVector,
             const std::vector<TUIObjectType> & typeVector);
 
+    void deleteStubs();
+
         /// Returns a TUI object stub by its ID.
     TUIObjectStub * getStub(int id);
         /// Returns a TUI object stub by its name.

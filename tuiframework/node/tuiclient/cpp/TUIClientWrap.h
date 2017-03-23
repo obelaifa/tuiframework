@@ -11,7 +11,7 @@ public:
   TUIClientWrap();
   virtual ~TUIClientWrap();
 
-  void setNodeCallback(const Nan::FunctionCallbackInfo<v8::Value> & info);
+  void setNodeCallback(const Nan::FunctionCallbackInfo<v8::Value> & info, int index);
   void setInitCallback(void(*callback)());
 
   virtual void push(tuiframework::IEvent * e);
