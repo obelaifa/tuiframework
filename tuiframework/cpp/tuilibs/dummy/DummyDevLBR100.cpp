@@ -11,9 +11,13 @@
 
 #include <iostream>
 
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <sys/types.h>
 #include <sys/time.h>
 #include <unistd.h>
+#endif
 
 #include <cmath>
 
@@ -368,7 +372,7 @@ void DummyDevLBR100::executeInputLoop() {
 #endif
 
 #ifdef _WIN32
-        Sleep(1000);
+        Sleep(100);
 #endif
         this->engine.tick();
         if (this->engine.isOn()) {

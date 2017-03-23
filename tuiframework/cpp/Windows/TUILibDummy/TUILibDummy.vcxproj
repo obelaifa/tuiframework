@@ -80,12 +80,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\tuilibs\dummy\DummyDevDA.cpp" />
+    <ClCompile Include="..\..\tuilibs\dummy\DummyDevLBR100.cpp" />
     <ClCompile Include="..\..\tuilibs\dummy\DummyDevMatrix4.cpp" />
     <ClCompile Include="..\..\tuilibs\dummy\DummyDevPackedVector4.cpp" />
     <ClCompile Include="..\..\tuilibs\dummy\DummyDevTracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevDA.h" />
+    <ClInclude Include="..\..\tuilibs\dummy\DummyDevLBR100.h" />
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevMatrix4.h" />
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevPackedVector4.h" />
     <ClInclude Include="..\..\tuilibs\dummy\DummyDevTracker.h" />
