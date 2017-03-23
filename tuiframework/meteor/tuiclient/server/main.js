@@ -13,6 +13,9 @@ Meteor.methods({
   connectTUIServer(ipAddressAndPort) {
     tuiServerConnectionHandler.connect(ipAddressAndPort);
   },
+  disconnectTUIServer() {
+    tuiServerConnectionHandler.disconnect();
+  },
   sendPortValue(tuiObjectName, portName, value) {
     console.log("addon.emitEvent('" + tuiObjectName + "', '" + portName + "', " + JSON.stringify(value) + ")");
     addon.emitEvent(tuiObjectName, portName, value);

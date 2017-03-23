@@ -27,7 +27,6 @@ Template.DigitalChannel.onRendered(() => {
 Template.DigitalChannel.helpers({
   updater() {
     let instance = Template.instance();
-    console.log('!!!!!')
 
     if (instance.buttonState !== this.value) {
       instance.buttonState = this.value;

@@ -98,9 +98,7 @@ div#start > h1 {
 }
 
 #start > table > tbody   td:nth-child(1) {
-    height: 20px;
     width: 200px;
-
 }
 
 
@@ -113,27 +111,33 @@ input,textarea {
     margin: 0;
 }
 
+#start div.connectionState {
+    padding-top: 11px;
+}
+
 #start div.button {
     padding-top: 11px;
+    padding-bottom: 11px;
 }
 
 #start button {
     left: 0;
     position: relative;
-    //margin-top: 10px;
     padding-left: 16px;
     padding-right: 16px;
 
 }
 
-table {
+#start table {
     align-items:center;
     vertical-align: middle;
     valign: center;
-    padding: 40px;
+    padding: 20px;
     width: 100%;
 }
 
-#start > table > tbody > tr:nth-child(1) {
-    height: 44px;
+#initial-settings {
+    margin: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
 }

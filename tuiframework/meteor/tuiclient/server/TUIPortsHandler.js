@@ -10,11 +10,7 @@ class TUIPortsHandler {
 
   constructor() {
     this.tuiPortsCollection = new Mongo.Collection(tuiPortsCollectionName);
-    this.tuiPortsCollection.remove({}, (err) => {
-      if (err) {
-        console.log('MongoDB Error: Failed to initialize an empty Collection.')
-      }
-    });
+    this.clear();
   }
 
 
@@ -91,6 +87,14 @@ class TUIPortsHandler {
         }
       }
     );
+  }
+
+  clear() {
+    this.tuiPortsCollection.remove({}, (err) => {
+      if (err) {
+        console.log('MongoDB Error: Failed to initialize an empty Collection.')
+      }
+    });
   }
 
 };

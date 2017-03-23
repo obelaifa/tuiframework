@@ -29,6 +29,15 @@ class TUiServerConnectionHandler {
   setState(newState) {
     console.log('===> StateChange: ', this.state, ' -> ', newState);
     this.state = newState;
+    let doc = {
+      _id: 1,
+      state: this.state
+    };
+    this.connectionStateCollection.upsert({_id: 1}, doc, (err) => {
+      if (err) {
+        console.log('MongoDB Error: Failed to upsert a connectionState document.')
+      }
+    });
   }
 
 
@@ -52,6 +61,7 @@ class TUiServerConnectionHandler {
 
     var connectedCallback = (err, res) => {
       if (this.isCurrentStateEqualTo(connecting)) {
+        console.log('=================> connectedCallback')
         let attachedObjects = addon.getAttachedObjects();
         this.tuiPortsHandler.init(attachedObjects);
         this.setState(connected);
@@ -74,6 +84,7 @@ class TUiServerConnectionHandler {
   disconnect() {
     addon.disconnect();
     this.setState(disconnected);
+    this.tuiPortsHandler.clear();
   }
 
 }

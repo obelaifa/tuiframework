@@ -45,12 +45,12 @@ Template.main.helpers({
 
 
 Template.main.events({
-  'click button'(event, instance) {
+  'click #button-initial-settings'(event, instance) {
+    Router.go('/');
   },
   'click .mylabel .mycheckbox'(event, template) {
     //console.log(template.$('.mylabel .mycheckbox').prop( "checked" ));
     console.log(event.target.checked);
     Meteor.call('testMethod', event.target.checked)
   }
-
 });

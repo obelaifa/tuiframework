@@ -28,11 +28,13 @@
 
 
 <template name="main">
-  <p>
-    {{#each tuiObjectName in tuiObjectNameArray}}
-      {{> TUIObject tuiObjectName}}
-    {{/each}}
-  </p>
+  {{#each tuiObjectName in tuiObjectNameArray}}
+    {{> TUIObject tuiObjectName}}
+  {{/each}}
+
+  <div class="button">
+    <button type="button" id='button-initial-settings'>Back to initial settings page</button>
+  </div>
 </template>
 
 
