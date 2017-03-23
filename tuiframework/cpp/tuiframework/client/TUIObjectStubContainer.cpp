@@ -92,6 +92,17 @@ void TUIObjectStubContainer::createStubs(const std::vector<TUIObjectInstance> & 
 }
 
 
+void TUIObjectStubContainer::deleteStubs() {
+    map<int, TUIObjectStub *>::iterator i = this->stubMap.begin();
+    map<int, TUIObjectStub *>::iterator e = this->stubMap.end();
+    while (i != e) {
+      delete (*i).second;
+      ++i;
+    }
+    this->stubMap.clear();
+}
+
+
 TUIObjectStub * TUIObjectStubContainer::getStub(int id) {
     map<int, TUIObjectStub *>::iterator iter = this->stubMap.find(id);
     if (iter != this->stubMap.end()) {

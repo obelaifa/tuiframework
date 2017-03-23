@@ -212,6 +212,10 @@ bool TUIClientApp::connectWithTUIServer(
 
 bool TUIClientApp::disconnectFromTUIServer() {
     this->cancel();
+    this->connectedWithServer = false;
+
+    this->attachedObjects = AttachedObjects();
+    this->stubContainer.deleteStubs();
 
     return true;
 }
