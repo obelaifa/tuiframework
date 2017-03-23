@@ -91,6 +91,8 @@
     <ClCompile Include="..\..\tuilibs\tuitypes\common\TrackerData.cpp" />
     <ClCompile Include="..\..\tuilibs\tuitypes\common\Vector3d.cpp" />
     <ClCompile Include="..\..\tuilibs\tuitypes\common\VectorList3d.cpp" />
+    <ClCompile Include="..\..\tuilibs\tuitypes\common\WinModData.cpp" />
+    <ClCompile Include="..\..\tuilibs\tuitypes\common\XControllerData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\tuilibs\tuitypes\common\CommonTUITypesPlugin.h" />
@@ -110,6 +112,8 @@
     <ClInclude Include="..\..\tuilibs\tuitypes\common\Vector3d.h" />
     <ClInclude Include="..\..\tuilibs\tuitypes\common\Vector4.h" />
     <ClInclude Include="..\..\tuilibs\tuitypes\common\VectorList3d.h" />
+    <ClInclude Include="..\..\tuilibs\tuitypes\common\WinModData.h" />
+    <ClInclude Include="..\..\tuilibs\tuitypes\common\XControllerData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />

@@ -23,14 +23,20 @@
 
 
 
-#include "CommonTypeReg.h"
 
 #include <tuiframework/core/TypeRegistration.h>
+
+#include "CommonTypeReg.h"
 
 using namespace tuiframework;
 
 namespace CommonTypeReg {
 
+/*
+* Register the Types used in TUI-Framework. 
+* If defining a new Type its importan to set an unique "ChannelName". 
+* The "ChannelName" is used by the XML-ServerConfiguration to define the Datatypes being used by the TUI-Server.
+*/
 void registerTypes(IEventFactory * eventFactory, IEventChannelFactory * eventChannelFactory) {
     tuiframework::registerType<bool, 11>(eventFactory, eventChannelFactory, "DigitalChannel");
     tuiframework::registerType<float, 12>(eventFactory, eventChannelFactory, "AnalogChannel");
@@ -50,8 +56,47 @@ void registerTypes(IEventFactory * eventFactory, IEventChannelFactory * eventCha
     tuiframework::registerType<Matrix4<double>, 25>(eventFactory, eventChannelFactory, "Matrix4");
     tuiframework::registerType<PackedType<Matrix4<double> >, 26>(eventFactory, eventChannelFactory, "PackedMatrix4");
 
-    tuiframework::registerType<Text, 100>(eventFactory, eventChannelFactory, "TextChannel");
-    tuiframework::registerType<Text, 101>(eventFactory, eventChannelFactory, "TextVectorChannel");
+	// Not completly tested yet
+	/*
+	tuiframework::registerType<VectorList<unsigned char>, 27>(eventFactory, eventChannelFactory, "ByteChannel");
+	tuiframework::registerType<VectorList<unsigned short>, 28>(eventFactory,eventChannelFactory, "WordVectorChannel");
+	tuiframework::registerType<VectorList<unsigned long>, 29>(eventFactory,eventChannelFactory, "DWordVectorChannel");
+	tuiframework::registerType<VectorList<float>, 30>(eventFactory,eventChannelFactory, "AnalogVectorChannel");
+	tuiframework::registerType<VectorList<int>, 31>(eventFactory,eventChannelFactory, "IntegerVectorChannel");
+	*/
+
+#ifdef _WIN32
+	tuiframework::registerType<XControllerData, 32>(eventFactory,eventChannelFactory, "XControllerChannel");
+	tuiframework::registerType<WinModData,33>(eventFactory,eventChannelFactory,"WinModChannel");
+#endif
+
+	// OPC
+	/*
+	tuiframework::registerType<OPCType<bool>, 34>(eventFactory, eventChannelFactory, "DigitalOPCChannel");
+	tuiframework::registerType<OPCType<float>, 35>(eventFactory, eventChannelFactory, "AnalogOPCChannel");
+	tuiframework::registerType<OPCType<int>, 36>(eventFactory, eventChannelFactory,  "IntegerOPCChannel");
+	tuiframework::registerType<OPCType<string>, 37>(eventFactory, eventChannelFactory, "StringOPCChannel");
+
+	// SceneGraph
+	tuiframework::registerType<SceneObject, 38>(eventFactory, eventChannelFactory, "SceneChannel");
+	*/
+
+	// PackedTypes
+	tuiframework::registerType<PackedType<float >, 101>(eventFactory, eventChannelFactory, "PackedAnalog");
+	tuiframework::registerType<PackedType<int >, 102>(eventFactory, eventChannelFactory, "PackedInteger");
+
+#ifdef _WIN32
+	tuiframework::registerType<PackedType<WORD >, 103>(eventFactory, eventChannelFactory, "PackedWORD");
+	tuiframework::registerType<PackedType<DWORD >, 104>(eventFactory, eventChannelFactory, "PackedDWORD");
+
+	tuiframework::registerType<WORD, 105>(eventFactory, eventChannelFactory, "WordChannel");
+	tuiframework::registerType<DWORD, 106>(eventFactory, eventChannelFactory, "DWordChannel");
+#endif
+
+  tuiframework::registerType<Text, 110>(eventFactory, eventChannelFactory, "TextChannel");
+  tuiframework::registerType<Text, 111>(eventFactory, eventChannelFactory, "TextVectorChannel");
+
+
 }
 
 }

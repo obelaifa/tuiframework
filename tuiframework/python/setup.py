@@ -1,16 +1,26 @@
 # -*- coding: utf-8 -*-
-from distutils.core import setup, Extension
+from distutils.core import setup
+from distutils.extension import Extension
 
-import os
+module = Extension('tuiclient',
+                    libraries = ['TUIFrameworkClient', 'TUIFrameworkCore', 'pthreadVCE2','Ws2_32','TUILibTUITypes'],
+                    include_dirs = ['../cpp',
+                    '../cpp/tuilibs',
+                    '../cpp/Windows/netsrc/Pre-built.2/include'],
+                    library_dirs = ['../cpp/Windows/Debug',
+                    '../cpp/Windows/netsrc/Pre-built.2/lib'],
+					define_macros=[('HAVE_STRUCT_TIMESPEC', None),
+									('WIN32', None),
+									('NDEBUG',None),
+									('_WINDOWS', None),
+									('_MBCS', None)],
+                    sources = ['./src/TUIClientPythonModule.cpp',
+                    './src/TUIClient.cpp',
+                    './src/EventDelegationFactory.cpp',
+                    './src/eventDelegationRegistration.cpp'],
+                    language = "c++")
 
-module1 = Extension('tuiclient',
-                    libraries = ['CommonTUITypes', 'TUIFrameworkClient', 'TUIFrameworkCore'],
-                    include_dirs = ['/usr/local/include', os.environ['LOCALINST_DIR'] + '/include'],
-                    library_dirs = ['/usr/local/lib', os.environ['LOCALINST_DIR'] + '/lib'],
-                    sources = ['TUIClientPythonModule.cpp', 'TUIClient.cpp', 'EventDelegationFactory.cpp', 'eventDelegationRegistration.cpp'])
-
-setup (name = 'TUIClient',
+setup (name = 'tuiclient',
        version = '1.0',
        description = 'TUI Client',
-       ext_modules = [module1])
-       
+       ext_modules = [module])

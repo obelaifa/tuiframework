@@ -1,25 +1,25 @@
 /*
-    Copyright (C) 2010, 2011, 2012 The Fraunhofer Institute for Production Systems and
-    Design Technology IPK. All rights reserved.
+	Copyright (C) 2010, 2011, 2012 The Fraunhofer Institute for Production Systems and
+	Design Technology IPK. All rights reserved.
 
-    This file is part of the TUIFramework library.
-    It includes a software framework which contains common code
-    providing generic functionality for developing applications
-    with a tangible user interface (TUI).
-    designed for creating applications with a tangible user interface (TUI).
-    
-    The TUIFramework library is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+	This file is part of the TUIFramework library.
+	It includes a software framework which contains common code
+	providing generic functionality for developing applications
+	with a tangible user interface (TUI).
+	designed for creating applications with a tangible user interface (TUI).
 
-    The TUIFramework is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+	The TUIFramework library is free software: you can redistribute it and/or modify
+	it under the terms of the GNU Lesser General Public License as
+	published by the Free Software Foundation, either version 3 of the
+	License, or (at your option) any later version.
 
-    You should have received a copy of the GNU Lesser General Public License
-    along with the TUIFramework.  If not, see <http://www.gnu.org/licenses/>.
+	The TUIFramework is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU Lesser General Public License for more details.
+
+	You should have received a copy of the GNU Lesser General Public License
+	along with the TUIFramework.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
@@ -27,50 +27,84 @@
 #define _tuiframework_PackedType_h_
 
 #include <tuiframework/core/ISerializable.h>
- 
+
 #include <vector>
 
 template <class T>
-class PackedType : public tuiframework::ISerializable {
+class PackedType : public tuiframework::ISerializable
+{
 public:
-    PackedType() {
-    }
+	PackedType()
+	{
+
+	}
+
+
+
+	~PackedType()
+	{
+	}
+
+	void init(int Size)
+	{
+		this->items.resize(Size);
+	}
+
+	std::vector<T> getValues()
+	{
+		std::vector<T> valueVector;
+
+		for (typename std::vector<std::pair<int, T> >::iterator it = this->items.begin(); it != this->items.end(); ++it )
+		{
+			valueVector.push_back(it->second);
+		}
+
+		return valueVector;
+	}
     
-    ~PackedType() {
-    }
-    
-    
-    std::vector<std::pair<int, T> > & getItems() {
+	void setItems(std::vector<std::pair<int, T> > pItems)
+	{
+		this->items = pItems;
+	}
+
+    std::vector<std::pair<int, T> > & getItems() 
+	{
         return this->items;
     }
     
     
-    const std::vector<std::pair<int, T> > & getItems() const {
+    const std::vector<std::pair<int, T> > & getItems() const 
+	{
         return this->items;
     }
     
     
-    virtual std::ostream & serialize(std::ostream & os) const {
+    virtual std::ostream & serialize(std::ostream & os) const 
+	{
         os << this->items.size();
 
         typename std::vector<std::pair<int, T> >::const_iterator i = this->items.begin();
         typename std::vector<std::pair<int, T> >::const_iterator e = this->items.end();
-        while (i != e) {
-            os << " " << (*i).first;
-            os << " " << (*i).second;
-            ++i;
+
+        while (i != e) 
+		{
+           os << " " << (*i).first;
+           os << " " << (*i).second;
+           ++i;
         }
         
         return os;
     }
     
     
-    virtual std::istream & deSerialize(std::istream & is) {
-        this->items.clear();
+    virtual std::istream & deSerialize(std::istream & is) 
+	{
+		int count ;
+		this->items.clear();
         
-        int count;
         is >> count;
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < count; ++i) 
+		{
             int first;
             T second;
             is >> first;

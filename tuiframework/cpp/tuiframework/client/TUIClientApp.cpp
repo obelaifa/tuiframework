@@ -107,6 +107,18 @@ void TUIClientApp::handleAttachedObjectsMsg(AttachedObjectsMsg * event) {
   if ( ! this->connectedWithServer) {
     this->stubContainer.createStubs(event->getPayload().getTUIObjectInstanceVector(), event->getPayload().getTUIObjectTypeVector());
     this->attachedObjects = event->getPayload();
+
+			/*
+			for (int i = 0; i < this->attachedObjects.getTUIObjectInstanceVector().size(); ++i)
+			{
+			cout << "TUIObject Instance Vector ####" << this->attachedObjects.getTUIObjectInstanceVector().at(i).getName();
+			for (std::map<string, int>::const_iterator it = this->attachedObjects.getTUIObjectInstanceVector().at(i).getNameChannelNrMap().cbegin(); it != this->attachedObjects.getTUIObjectInstanceVector().at(i).getNameChannelNrMap().cend(); ++it)
+			{
+			cout << it->first << " => " << it->second << endl;
+			}
+
+			}
+			*/
     this->connectedWithServer = true;
     if (this->systemNotificationSink) {
       this->systemNotificationSink->push(new SystemMsg(CONNECTION_ESTABLISHED));
@@ -148,6 +160,21 @@ void TUIClientApp::processEvents() {
       if (event->getEventTypeID() == HostEvent::EventTypeID()) {
         HostEvent * ipEventMsg = static_cast<HostEvent *>(event);
         IEvent * event2 = ipEventMsg->getPayload();
+
+					/*
+					if(event2->getEventTypeID() == ByteChangedEvent::EventTypeID())
+					{
+					ByteChangedEvent* byteEvent = (ByteChangedEvent*)event2;
+					unsigned char byteTest = byteEvent->getPayload();
+					cout <<"Hex" << hex << (int)byteTest << endl;
+
+					for(int i = 0; i < 8; i++){
+					cout << ((byteTest >> i) & 1);
+					}
+					cout << endl;
+					}
+					*/
+
         if (event2->getEventTypeID() >= EPEventMsgTypeIDOffset) {
           this->stubContainer.handleEvent(static_cast<IEventMsg<EPAddress> *>(event2));
         } else if (event2->getEventTypeID() == AttachedObjectsMsg::EventTypeID()) {

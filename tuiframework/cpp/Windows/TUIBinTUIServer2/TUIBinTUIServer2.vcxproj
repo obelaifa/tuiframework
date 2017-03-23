@@ -78,7 +78,8 @@ copy "$(SolutionDir)\netsrc\xerces-c-3.1.1-x86-windows-vc-9.0\bin\xerces-c_3_1.d
 copy "$(SolutionDir)\..\tuibins\tuiserver2\testconfig.xml" "$(OutDir)"
 copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig.xml" "$(OutDir)"
 copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig2.xml" "$(OutDir)"
-copy "$(SolutionDir)\..\tuibins\tuiserver2\mousetestconfig.xml" "$(OutDir)"</Command>
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mousetestconfig.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\lbrtestconfig.xml" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +110,8 @@ copy "$(SolutionDir)\netsrc\xerces-c-3.1.1-x86-windows-vc-9.0\bin\xerces-c_3_1.d
 copy "$(SolutionDir)\..\tuibins\tuiserver2\testconfig.xml" "$(OutDir)"
 copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig.xml" "$(OutDir)"
 copy "$(SolutionDir)\..\tuibins\tuiserver2\mctestconfig2.xml" "$(OutDir)"
-copy "$(SolutionDir)\..\tuibins\tuiserver2\mousetestconfig.xml" "$(OutDir)"</Command>
+copy "$(SolutionDir)\..\tuibins\tuiserver2\mousetestconfig.xml" "$(OutDir)"
+copy "$(SolutionDir)\..\tuibins\tuiserver2\lbrtestconfig.xml" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
