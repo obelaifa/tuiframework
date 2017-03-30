@@ -2,5 +2,5 @@
 
 ::Reciever Port of the Server
 title Udp Client Test
-udpClient.py
+python udpClient.py
 pause

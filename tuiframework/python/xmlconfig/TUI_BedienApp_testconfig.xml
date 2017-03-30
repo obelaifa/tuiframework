@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--document xmlns:xi='http://www.w3.org/2001/XInclude'--><document xmlns:xi="http://www.w3.org/2001/XInclude">
+   <ServerConfig>
+      <ServerStartupConfig/>
+      <DeviceTypeSequence>
+         <Image path="images/TUI1.png"/>
+         <DeviceType name="DummyDevLBR100">
+            <PortTypeSequence>
+               <PortType name="LBR100.CTR.Soll_A3" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.GreiferIstAuf" sink="0" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.Soll_A2" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.Soll_A1" sink="1" source="0" typename="AnalogChannel">
+                   <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.ExternStart" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.M03.$A3" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.StateTrigger" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.GreiferAuf" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.AntriebeAn" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.M05.$A5" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.AntriebeSindAn" sink="0" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.M07.$A7" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.M02.$A2" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.M04.$A4" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.GreiferIstZu" sink="0" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.GR.$pos_r" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.M06.$A6" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.M01.$A1" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.GR.$pos_l" sink="1" source="1" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.Soll_A7" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.Soll_A6" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.Soll_A5" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="LBR100.CTR.Soll_A4" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+            </PortTypeSequence>
+            <ParameterTypeDefSequence/>
+            <ParameterTypeSequence/>
+         </DeviceType>
+      </DeviceTypeSequence>
+      <MSPTypeSequence>
+         <Image path="images/DefaultMSP.png"/>
+      </MSPTypeSequence>
+      <TUIObjectTypeSequence>
+         <Image path="images/TUI1.png"/>
+         <TUIObjectType name="LBR100-TUIObjectType">
+            <PortTypeSequence>
+               <PortType name="control.ExternStart" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="metacmd.Query" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="value.GreiferPosR" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="trans"/>
+                       <Parameter name="TrafoNo" value="1"/>
+                   </ParameterGroup>
+                   <Description>
+                       GR100_rechts
+                   </Description>
+               </PortType>
+               <PortType name="value.GreiferPosL" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="trans"/>
+                       <Parameter name="TrafoNo" value="1"/>
+                   </ParameterGroup>
+                   <Description>
+                       GR100_links
+                   </Description>
+               </PortType>
+               <PortType name="control.Highlight" sink="1" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="value.AntriebeSindAn" sink="0" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="value.A7" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="rot"/>
+                       <Parameter name="TrafoNo" value="3"/>
+                   </ParameterGroup>
+                   <Description>
+                       LBR100_A7
+                   </Description>
+               </PortType>
+               <PortType name="value.A6" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="rot"/>
+                       <Parameter name="TrafoNo" value="3"/>
+                   </ParameterGroup>
+                   <Description>
+                       LBR100_A6
+                   </Description>
+               </PortType>
+               <PortType name="value.GreiferIstAuf" sink="0" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.GreiferAuf" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="value.A5" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="rot"/>
+                       <Parameter name="TrafoNo" value="3"/>
+                   </ParameterGroup>
+                   <Description>
+                       LBR100_A5
+                   </Description>
+               </PortType>
+               <PortType name="value.A4" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="rot"/>
+                       <Parameter name="TrafoNo" value="3"/>
+                   </ParameterGroup>
+                   <Description>
+                       LBR100_A4
+                   </Description>
+               </PortType>
+               <PortType name="value.A3" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="rot"/>
+                       <Parameter name="TrafoNo" value="3"/>
+                   </ParameterGroup>
+                   <Description>
+                       LBR100_A3
+                   </Description>
+               </PortType>
+               <PortType name="value.A2" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="rot"/>
+                       <Parameter name="TrafoNo" value="3"/>
+                   </ParameterGroup>
+                   <Description>
+                       LBR100_A2
+                   </Description>
+               </PortType>
+               <PortType name="control.AntriebeAn" sink="1" source="0" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="value.A1" sink="1" source="1" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="rot"/>
+                       <Parameter name="TrafoNo" value="3"/>
+                   </ParameterGroup>
+                   <Description>
+                       LBR100_A1
+                   </Description>
+               </PortType>
+               <PortType name="control.SollA7" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.InfoPanel" sink="1" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.SollA6" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.SollA5" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.SollA4" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.SollA3" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.SollA2" sink="1" source="0" typename="AnalogChannel">
+                  <Description/>
+               </PortType>
+               <PortType name="control.SollA1" sink="1" source="0" typename="AnalogChannel">
+                   <ParameterGroup name="Constraint">
+                       <Parameter name="min" value="-170"/>
+                       <Parameter name="max" value="170"/>
+                   </ParameterGroup>
+                   <ParameterGroup name="Meta">
+                       <Parameter name="TrafoType" value="trans"/>
+                       <Parameter name="TrafoNo" value="1"/>
+                   </ParameterGroup>
+                   <Description>
+                       Constraint Test Soll_A1
+                   </Description>
+               </PortType>
+               <PortType name="value.GreiferIstZu" sink="0" source="1" typename="DigitalChannel">
+                  <Description/>
+               </PortType>
+            </PortTypeSequence>
+         </TUIObjectType>
+      </TUIObjectTypeSequence>
+      <DeviceInstanceSequence>
+         <DeviceInstance name="DumLBR100" typename="DummyDevLBR100"/>
+      </DeviceInstanceSequence>
+      <MSPInstanceSequence/>
+      <TUIObjectInstanceSequence>
+         <TUIObjectInstance name="LBR100" typename="LBR100-TUIObjectType"/>
+      </TUIObjectInstanceSequence>
+      <ConnectorSequence>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M02.$A2"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.A2"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M01.$A1"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.A1"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M03.$A3"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.A3"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M04.$A4"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.A4"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M05.$A5"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.A5"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M06.$A6"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.A6"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M07.$A7"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.A7"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.GR.$pos_r"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.GreiferPosR"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.GR.$pos_l"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.GreiferPosL"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA1"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.Soll_A1"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA2"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.Soll_A2"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA3"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.Soll_A3"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA4"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.Soll_A4"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA5"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.Soll_A5"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA6"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.Soll_A6"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA7"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.Soll_A7"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.A1"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M01.$A1"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.A2"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M02.$A2"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.A3"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M03.$A3"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.A4"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M04.$A4"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.A5"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M05.$A5"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.A6"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M06.$A6"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.A7"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.M07.$A7"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.GreiferPosL"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.GR.$pos_l"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="value.GreiferPosR"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.GR.$pos_r"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.AntriebeAn"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.AntriebeAn"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.ExternStart"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.ExternStart"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="control.GreiferAuf"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.GreiferAuf"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="LBR100" entityType="TUI" portName="metacmd.Query"/>
+            <DstAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.StateTrigger"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.AntriebeSindAn"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.AntriebeSindAn"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.GreiferIstAuf"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.GreiferIstAuf"/>
+         </Connector>
+         <Connector>
+            <SrcAddress entityName="DumLBR100" entityType="DEV" portName="LBR100.CTR.GreiferIstZu"/>
+            <DstAddress entityName="LBR100" entityType="TUI" portName="value.GreiferIstZu"/>
+         </Connector>
+      </ConnectorSequence>
+   </ServerConfig>
+</document>

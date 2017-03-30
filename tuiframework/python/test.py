@@ -6,7 +6,7 @@ import tuiclient
 def systemMsgSink(msg) :
     if msg == 1 :
         print('CONNECTION ESTABLISHED')
-        tuiclient.setEventCallback('MyTUIObjectInstance', 'Transf', dstmethod)
+        #tuiclient.setEventCallback('MyTUIObjectInstance', 'Transf', dstmethod)
 
 def dstmethod(name, portname, value) :
     print(name + ' ' + portname + ' ' + value)
@@ -14,6 +14,7 @@ def dstmethod(name, portname, value) :
     tuiclient.sendEvent('MyTUIObjectInstance', 'LED', '0');
 
 tuiclient.init()
+input()
 tuiclient.connectServer(8998, 8999, '127.0.0.1:7999', 0, systemMsgSink)
 
 

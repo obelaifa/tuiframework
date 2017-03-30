@@ -50,6 +50,29 @@ void TUIClient::setEventCallback(PyObject * callback) {
 					if (typeMapIt2->second.getDataFlowDirection() == 2)
 						continue;
 
+                    std::string constraintMin = "empty";
+                    std::string constraintMax = "empty";
+                    std::string trafoType = "empty";
+                    std::string trafoNo = "empty";
+
+                    if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
+                        constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
+                        constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
+                        trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
+                        trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
+                    }
+
+                    /*if(typeMapIt2->second.getName().compare("value.GreiferPosR") == 0  || typeMapIt2->second.getName().compare("value.GreiferPosL") == 0)
+                    {
+
+                            constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
+                            constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
+                            trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
+                            trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
+                   }*/
+
+                    //cout << it->getName() << " " << typeMapIt2->second.getName() << " " << constraintMin << " " << constraintMax << " " << trafoType << " " << trafoNo << endl;
+
 					TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
 					TUIObjectStub * t = tc.getStub(it->getName());
 
@@ -62,8 +85,8 @@ void TUIClient::setEventCallback(PyObject * callback) {
 
 					this->eventDelegationMap.erase(pair<int, int>(tuiObjectNr, portNr));
 					this->eventDelegationMap[pair<int, int>(tuiObjectNr, portNr)] = ied;
-					
-					ied->createConnection(it->getName(), typeMapIt2->second.getName(), callback, typeMapIt2->second.getDescription(), typeMapIt2->second.getConstraintMin(), typeMapIt2->second.getConstraintMax(), typeMapIt2->second.getTrafoType(), typeMapIt2->second.getTrafoNo());
+
+					ied->createConnection(it->getName(), typeMapIt2->second.getName(), callback, typeMapIt2->second.getDescription(), constraintMin, constraintMax, trafoType, trafoNo);
 				}
 }
 

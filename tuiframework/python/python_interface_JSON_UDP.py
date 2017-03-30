@@ -10,13 +10,12 @@ TUIdict = dict() #dictionary where we store all the values, and the meta datas
 JSONdict = dict() #dictionary used for the UDP connection, filled only with the values
 
 def systemMsgSink(msg):
-	if msg == 1:
-		print('CONNECTION ESTABLISHED')
+	print('CONNECTION ESTABLISHED')
 
-		tuiclient.setEventCallback(dstmethod) #we call only one time this function, all the connections between the TUI objects and the server are done, based on the XML file, in the C++ code
+	tuiclient.setEventCallback(dstmethod) #we call only one time this function, all the connections between the TUI objects and the server are done, based on the XML file, in the C++ code
 
-		print("EVENT CALLBACK SUCEEDED")
-		print("PYTHON INTERFACE READY")
+	print("EVENT CALLBACK SUCEEDED")
+	print("PYTHON INTERFACE READY")
 
 #This function is called automatically each time a value changes.
 #As this function also handles the initialization of the dictionnary, it is called for each TUI objects before any connection to make sure they are all stored into the dictionary (and so into the JSON file)
@@ -27,8 +26,11 @@ def dstmethod(name, portname, value, description, constraintMin, constraintMax, 
 
 	#print("TUI_Instance: " + name + " ; port: " + portname + " ; value: " + value + " ; trafoNo: " + trafoNo)
 	JSONdict[name][portname]['Value'] = float(value) #we update the value of the corresponding port in the dictionary we use for the UDP connection
-	
-	PortName = portname + "Out"
+
+	if description == "":
+		return
+
+	PortName = portname
 
 	tuiclient.sendEvent(name, PortName, value)
 
@@ -42,15 +44,6 @@ def initDict(name, portname, description, constraintMin, constraintMax, trafoTyp
 		Port = TUIdict[name]
 		if (portname in TUIdict[name]):
 			return
-
-	if description != "empty":
-		description = description.split('_')
-		if description[0] == "HT":
-			description = name + '_' + description[1] + '_' + description[2]
-		if description[0] == "LBR":
-			description = name + '_' + description[1]
-		if description[0] == "GR":
-			description = "GR100" + '_' + description[1]
 		
 	values['ConstraintMax'] = constraintMax
 	values['ConstraintMin'] = constraintMin
@@ -112,4 +105,5 @@ print('INITIALISATION FINISHED')
 
 input()
 th1 = _thread.start_new_thread(recv,("tmp",))
+
 tuiclient.connectServer(8998, 8999, '127.0.0.1:7999', 1, systemMsgSink)

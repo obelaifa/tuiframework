@@ -12,6 +12,6 @@ sock = socket.socket(socket.AF_INET, # Internet
 sock.bind((UDP_IP, UDP_PORT))
 
 while True:
-    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+    data, addr = sock.recvfrom(2048) # buffer size is 1024 bytes
     print(json.loads(data.decode()))
     print(sys.getsizeof(data))

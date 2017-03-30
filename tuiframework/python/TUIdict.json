@@ -5,7 +5,7 @@
             "ConstraintMin": "-300.0",
             "TrafoType": "trans",
             "TrafoNo": "1",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M01.C_rueck": {
@@ -13,7 +13,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M01.C_vor": {
@@ -21,7 +21,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M02.$pos_Ist": {
@@ -29,7 +29,7 @@
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "2",
-            "Description": "HT100_sub_59",
+            "Description": "HT_sub_59",
             "Value": 0.0
         },
         "M02.C_ab": {
@@ -37,7 +37,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M02.C_auf": {
@@ -45,7 +45,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         }
     },
@@ -55,7 +55,7 @@
             "ConstraintMin": "-300.0",
             "TrafoType": "trans",
             "TrafoNo": "1",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M01.C_rueck": {
@@ -63,7 +63,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M01.C_vor": {
@@ -71,7 +71,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M02.$pos_Ist": {
@@ -79,7 +79,7 @@
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "2",
-            "Description": "HT200_sub_59",
+            "Description": "HT_sub_59",
             "Value": 0.0
         },
         "M02.C_ab": {
@@ -87,7 +87,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M02.C_auf": {
@@ -95,7 +95,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         }
     },
@@ -105,7 +105,7 @@
             "ConstraintMin": "-300.0",
             "TrafoType": "trans",
             "TrafoNo": "1",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M01.C_rueck": {
@@ -113,7 +113,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M01.C_vor": {
@@ -121,7 +121,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M02.$pos_Ist": {
@@ -129,7 +129,7 @@
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "2",
-            "Description": "HT300_sub_59",
+            "Description": "HT_sub_59",
             "Value": 0.0
         },
         "M02.C_ab": {
@@ -137,7 +137,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "M02.C_auf": {
@@ -145,7 +145,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         }
     },
@@ -155,7 +155,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "CTR.GreiferIstAuf": {
@@ -163,7 +163,7 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "CTR.GreiferIstZu": {
@@ -171,11 +171,11 @@
             "ConstraintMin": "empty",
             "TrafoType": "empty",
             "TrafoNo": "empty",
-            "Description": "empty",
+            "Description": "",
             "Value": 0.0
         },
         "GR.$pos_l": {
-            "ConstraintMax": "25.0",
+            "ConstraintMax": "12.5",
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "1",
@@ -183,7 +183,7 @@
             "Value": 0.0
         },
         "GR.$pos_r": {
-            "ConstraintMax": "26.0",
+            "ConstraintMax": "12.5",
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "1",
