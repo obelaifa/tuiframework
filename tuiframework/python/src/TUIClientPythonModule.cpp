@@ -1,7 +1,7 @@
 #include "TUIClient.h"
 #include "eventDelegationRegistration.h"
 
-#include <tuitypes/common/CommonTypeReg.h>
+#include <tuilibs/tuitypes/common/CommonTypeReg.h>
 
 
 #include <Python.h>

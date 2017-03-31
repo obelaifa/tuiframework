@@ -19,17 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\extensions\tuiclientpyext\src\EventDelegation.h" />
-    <ClInclude Include="..\..\..\..\extensions\tuiclientpyext\src\EventDelegationFactory.h" />
-    <ClInclude Include="..\..\..\..\extensions\tuiclientpyext\src\eventDelegationRegistration.h" />
-    <ClInclude Include="..\..\..\..\extensions\tuiclientpyext\src\IEventDelegation.h" />
-    <ClInclude Include="..\..\..\..\extensions\tuiclientpyext\src\TUIClient.h" />
+    <ClInclude Include="..\..\..\python\src\EventDelegation.h" />
+    <ClInclude Include="..\..\..\python\src\EventDelegationFactory.h" />
+    <ClInclude Include="..\..\..\python\src\eventDelegationRegistration.h" />
+    <ClInclude Include="..\..\..\python\src\IEventDelegation.h" />
+    <ClInclude Include="..\..\..\python\src\TUIClient.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\extensions\tuiclientpyext\src\EventDelegationFactory.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\tuiclientpyext\src\eventDelegationRegistration.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\tuiclientpyext\src\TUIClient.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\tuiclientpyext\src\TUIClientPythonModule.cpp" />
+    <ClCompile Include="..\..\..\python\src\EventDelegationFactory.cpp" />
+    <ClCompile Include="..\..\..\python\src\eventDelegationRegistration.cpp" />
+    <ClCompile Include="..\..\..\python\src\TUIClient.cpp" />
+    <ClCompile Include="..\..\..\python\src\TUIClientPythonModule.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B04B6DD8-EFB5-47C0-B8AA-FA76D79042A4}</ProjectGuid>
@@ -89,6 +89,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\tuiexampleclients\$(TargetName)</OutDir>
     <IntDir>..\..\$(PlatformTarget)\$(Configuration)\$(MSBuildProjectName)</IntDir>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
+    <PreLinkEventUseInBuild>false</PreLinkEventUseInBuild>
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,11 +118,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <DebugInformationFormat>None</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../../../../include;..\..\..\..\3rdParty\Pre-built.2\include;C:\Program Files\Python35\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Solutiondir)\..;$(Solutiondir)\netsrc\Pre-built.2\include;C:\Users\micka\AppData\Local\Programs\Python\Python36-32\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -4,7 +4,7 @@
 #include "IEventDelegation.h"
 #include "EventDelegationFactory.h"
 
-#include <tuitypes/common/CommonTypeReg.h>
+#include <tuilibs/tuitypes/common/CommonTypeReg.h>
 
 
 namespace tuiframework {
