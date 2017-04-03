@@ -30,7 +30,7 @@
       </DeviceType>
     </DeviceTypeSequence>
     <MSPTypeSequence>
-      <MSPType name="Pa100ckedFloatToFloatMSP">
+      <MSPType name="PackedFloatToFloatMSP">
         <PortTypeSequence>
           <PortType name="in" sink="1" source="0" typename="PackedAnalog">
             <Description></Description>

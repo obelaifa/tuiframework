@@ -2,21 +2,29 @@
 <document xmlns:xi="http://www.w3.org/2001/XInclude">
   <ServerConfig>
     <ServerStartupConfig></ServerStartupConfig>
+    <MSPTypeSequence>
+      <MSPType name="PackedFloatToFloatMSP">
+        <PortTypeSequence>
+          <PortType name="in" sink="1" source="0" typename="PackedAnalog">
+            <Description></Description>
+          </PortType>
+          <PortType name="out" sink="0" source="1" typename="AnalogChannel">
+            <Description></Description>
+          </PortType>
+          <PortType name="outPacked" sink="0" source="1" typename="PackedAnalog">
+            <Description></Description>
+          </PortType>
+        </PortTypeSequence>
+        <ParameterTypeDefSequence></ParameterTypeDefSequence>
+        <ParameterTypeSequence></ParameterTypeSequence>
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="0"></Parameter>
+        </ParameterGroup>
+      </MSPType>
+    </MSPTypeSequence>
     <TUIObjectTypeSequence>
       <TUIObjectType name="HT">
         <PortTypeSequence>
-          <PortType name="M01.C_rueckOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
-          </PortType>
-          <PortType name="M02.C_aufOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
-          </PortType>
-          <PortType name="M02.C_abOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
-          </PortType>
-          <PortType name="M01.C_vorOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
-          </PortType>
 
           <PortType name="control.M02" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
@@ -69,15 +77,6 @@
 
       <TUIObjectType name="LBR">
         <PortTypeSequence>
-          <PortType name="CTR.GreiferIstAufOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
-          </PortType>
-          <PortType name="CTR.GreiferIstZuOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
-          </PortType>
-          <PortType name="CTR.AntriebeSindAnOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
-          </PortType>
 
           <PortType name="control.SollA1" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
@@ -281,6 +280,83 @@
         </PortTypeSequence>
       </TUIObjectType>
     </TUIObjectTypeSequence>
+    <MSPInstanceSequence>
+      <MSPInstance name="HT100.M01.$v_Ist" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="0"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="HT100.M02.$pos_Ist" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="1"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="HT200.M01.$v_Ist" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="2"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="HT200.M02.$pos_Ist" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="3"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="HT300.M01.$v_Ist" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="4"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="HT300.M02.$pos_Ist" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="5"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.M01.$A1" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="6"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.M02.$A2" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="7"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.M03.$A3" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="8"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.M04.$A4" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="9"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.M05.$A5" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="10"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.M06.$A6" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="11"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.M07.$A7" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="12"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.GR.$pos_r" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="13"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="LBR100.GR.$pos_l" typename="PackedFloatToFloatMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="14"></Parameter>
+        </ParameterGroup>
+      </MSPInstance>
+    </MSPInstanceSequence>
     <TUIObjectInstanceSequence>
       <TUIObjectInstance name="HT100" typename="HT"></TUIObjectInstance>
       <TUIObjectInstance name="HT200" typename="HT"></TUIObjectInstance>
@@ -288,6 +364,68 @@
       <TUIObjectInstance name="LBR100" typename="LBR"></TUIObjectInstance>
     </TUIObjectInstanceSequence>
     <ConnectorSequence>
+
+      <Connector>
+        <SrcAddress entityName="HT100.M01.$v_Ist" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT100.M02.$pos_Ist" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200.M01.$v_Ist" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200.M02.$pos_Ist" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300.M01.$v_Ist" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300.M02.$pos_Ist" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.M01.$A1" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M01.$A1"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.M02.$A2" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M02.$A2"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.M03.$A3" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M03.$A3"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.M04.$A4" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M04.$A4"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.M05.$A5" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M05.$A5"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.M06.$A6" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M06.$A6"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.M07.$A7" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M07.$A7"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.GR.$pos_r" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="GR.$pos_r"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100.GR.$pos_l" entityType="MSP" portName="out"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="GR.$pos_l"></DstAddress>
+      </Connector>
+
       <Connector>
         <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA1"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M01.$A1"></DstAddress>

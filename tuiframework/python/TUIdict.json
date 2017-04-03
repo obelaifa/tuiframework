@@ -8,44 +8,12 @@
             "Description": "",
             "Value": 0.0
         },
-        "M01.C_rueck": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "M01.C_vor": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
         "M02.$pos_Ist": {
             "ConstraintMax": "800.0",
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "2",
             "Description": "HT_sub_59",
-            "Value": 0.0
-        },
-        "M02.C_ab": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "M02.C_auf": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
             "Value": 0.0
         }
     },
@@ -58,44 +26,12 @@
             "Description": "",
             "Value": 0.0
         },
-        "M01.C_rueck": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "M01.C_vor": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
         "M02.$pos_Ist": {
             "ConstraintMax": "800.0",
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "2",
             "Description": "HT_sub_59",
-            "Value": 0.0
-        },
-        "M02.C_ab": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "M02.C_auf": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
             "Value": 0.0
         }
     },
@@ -108,22 +44,6 @@
             "Description": "",
             "Value": 0.0
         },
-        "M01.C_rueck": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "M01.C_vor": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
         "M02.$pos_Ist": {
             "ConstraintMax": "800.0",
             "ConstraintMin": "0.0",
@@ -131,49 +51,9 @@
             "TrafoNo": "2",
             "Description": "HT_sub_59",
             "Value": 0.0
-        },
-        "M02.C_ab": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "M02.C_auf": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
         }
     },
     "LBR100": {
-        "CTR.AntriebeSindAn": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "CTR.GreiferIstAuf": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
-        "CTR.GreiferIstZu": {
-            "ConstraintMax": "empty",
-            "ConstraintMin": "empty",
-            "TrafoType": "empty",
-            "TrafoNo": "empty",
-            "Description": "",
-            "Value": 0.0
-        },
         "GR.$pos_l": {
             "ConstraintMax": "12.5",
             "ConstraintMin": "0.0",

@@ -106,4 +106,4 @@ print('INITIALISATION FINISHED')
 input()
 th1 = _thread.start_new_thread(recv,("tmp",))
 
-tuiclient.connectServer(8998, 8999, '127.0.0.1:7999', 1, systemMsgSink)
+tuiclient.connectServer(8996, 8997, '127.0.0.1:7999', 1, systemMsgSink)

@@ -11,7 +11,7 @@ ECHO Press 0 to set the BedienApp only config, 1 to set the WinMOD config, other
 SET /P xmlchoice=
 
 IF %xmlchoice%==0 (
-	set xmlConfiguration=./xmlconfig/TUI_BedienApp_testconfig.xml
+	set xmlConfiguration=./xmlconfig/TUI_BedienApp.xml
 ) ELSE IF %xmlchoice%==1 (
 	set xmlConfiguration=./xmlconfig/TUI_WinMOD_config.xml
 ) ELSE (
@@ -25,4 +25,4 @@ set libPath=../cpp/Windows/Release
 start "TUI Server" ../cpp/Windows/Release/TUIBinTUIServer2.exe %recieverPort% %senderPort% %xmlConfiguration% %libPath%
 
 :: The Execution of the Python Interface
-start "Python Interface Output" python python_interface_JSON_UDP.py
+start "Python Interface Output" python3 python_interface_JSON_UDP.py
