@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <ServerConfig>
+    <ServerStartupConfig></ServerStartupConfig>
+    <TUIObjectTypeSequence>
+      <TUIObjectType name="HT">
+        <PortTypeSequence>
+          <PortType name="M01.C_rueckOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M02.C_aufOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M02.C_abOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M01.C_vorOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+
+          <PortType name="control.M02" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.M01" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-300.0"/>
+              <Parameter name="max" value="300.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="1"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+
+          <PortType name="M02.$pos_Ist" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
+          </PortType>
+          <PortType name="M01.$v_Ist" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-300.0"/>
+              <Parameter name="max" value="300.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="1"/>
+            </ParameterGroup>
+            <Description></Description>
+          </PortType>
+        </PortTypeSequence>
+      </TUIObjectType>
+
+
+      <TUIObjectType name="LBR">
+        <PortTypeSequence>
+          <PortType name="CTR.GreiferIstAufOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="CTR.GreiferIstZuOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="CTR.AntriebeSindAnOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+
+          <PortType name="control.SollA1" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-170.0"/>
+              <Parameter name="max" value="170.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.SollA2" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-120.0"/>
+              <Parameter name="max" value="120.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.SollA3" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-170.0"/>
+              <Parameter name="max" value="170.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.SollA4" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-120.0"/>
+              <Parameter name="max" value="120.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.SollA5" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-170.0"/>
+              <Parameter name="max" value="170.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.SollA6" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-120.0"/>
+              <Parameter name="max" value="120.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.SollA7" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-175.0"/>
+              <Parameter name="max" value="175.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.grPosR" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="12.5"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="1"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+          <PortType name="control.grPosL" sink="1" source="0" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="12.5"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="1"/>
+            </ParameterGroup>
+            <Description/>
+          </PortType>
+
+          <PortType name="M01.$A1" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-170.0"/>
+              <Parameter name="max" value="170.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description>LBR100_A1</Description>
+          </PortType>
+          <PortType name="M02.$A2" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-120.0"/>
+              <Parameter name="max" value="120.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description>LBR100_A2</Description>
+          </PortType>
+          <PortType name="M03.$A3" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-170.0"/>
+              <Parameter name="max" value="170.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description>LBR100_A3</Description>
+          </PortType>
+          <PortType name="M04.$A4" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-120.0"/>
+              <Parameter name="max" value="120.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description>LBR100_A4</Description>
+          </PortType>
+          <PortType name="M05.$A5" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-170.0"/>
+              <Parameter name="max" value="170.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description>LBR100_A5</Description>
+          </PortType>
+          <PortType name="M06.$A6" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-120.0"/>
+              <Parameter name="max" value="120.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description>LBR100_A6</Description>
+          </PortType>
+          <PortType name="M07.$A7" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="-175.0"/>
+              <Parameter name="max" value="175.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="rot"/>
+              <Parameter name="TrafoNo" value="3"/>
+            </ParameterGroup>
+            <Description>LBR100_A7</Description>
+          </PortType>
+          <PortType name="GR.$pos_r" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="12.5"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="1"/>
+            </ParameterGroup>
+            <Description>GR100_rechts</Description>
+          </PortType>
+          <PortType name="GR.$pos_l" sink="1" source="1" typename="AnalogChannel">
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="12.5"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="1"/>
+            </ParameterGroup>
+            <Description>GR100_links</Description>
+          </PortType>
+        </PortTypeSequence>
+      </TUIObjectType>
+    </TUIObjectTypeSequence>
+    <TUIObjectInstanceSequence>
+      <TUIObjectInstance name="HT100" typename="HT"></TUIObjectInstance>
+      <TUIObjectInstance name="HT200" typename="HT"></TUIObjectInstance>
+      <TUIObjectInstance name="HT300" typename="HT"></TUIObjectInstance>
+      <TUIObjectInstance name="LBR100" typename="LBR"></TUIObjectInstance>
+    </TUIObjectInstanceSequence>
+    <ConnectorSequence>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA1"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M01.$A1"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA2"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M02.$A2"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA3"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M03.$A3"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA4"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M04.$A4"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA5"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M05.$A5"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA6"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M06.$A6"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA7"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M07.$A7"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA7"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="M07.$A7"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.grPosL"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="GR.$pos_l"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.grPosR"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="GR.$pos_r"></DstAddress>
+      </Connector>
+
+      <Connector>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="control.M01"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="control.M02"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="control.M01"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="control.M02"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="control.M01"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="control.M02"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
+      </Connector>
+
+    </ConnectorSequence>
+  </ServerConfig>
+</document>

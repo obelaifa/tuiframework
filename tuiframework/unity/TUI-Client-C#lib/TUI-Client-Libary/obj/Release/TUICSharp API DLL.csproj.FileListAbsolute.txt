@@ -1,3 +1,4 @@
 C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\bin\Win32\14.0\x86\Release\extensions\C++_CSharp API\TUICSharp API DLL.dll
-C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\unity\TUI-Client-C#lib\TUI-Client-Libary\obj\Release\TUICSharp API DLL.csprojResolveAssemblyReference.cache
+C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\unity\TUI-Unity-Example\Assets\Plugin\TUICSharp API DLL.dll
+C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\unity\TUIUnity\Assets\Plugin\TUICSharp API DLL.dll
 C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\unity\TUI-Client-C#lib\TUI-Client-Libary\obj\Release\TUICSharp API DLL.dll
