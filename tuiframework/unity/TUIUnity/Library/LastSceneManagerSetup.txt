@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scene/TUIUnity_testScene.unity
-  isLoaded: 1
-  isActive: 1

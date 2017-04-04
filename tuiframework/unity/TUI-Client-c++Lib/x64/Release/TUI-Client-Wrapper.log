@@ -1,6 +1,0 @@
-﻿  TUIClientWrapper.cpp
-c:\users\micka\documents\fraunhofer_2016_2017\tuiframework_github\tuiframework\unity\tui-client-c++lib\TUIClientWrapper.h(3): fatal error C1083: Cannot open include file: 'TUIFramework/client/client.h': No such file or directory
-  TUICsharp.cpp
-c:\users\micka\documents\fraunhofer_2016_2017\tuiframework_github\tuiframework\unity\tui-client-c++lib\TUICsharp.h(3): fatal error C1083: Cannot open include file: 'tuiframework/client/client.h': No such file or directory
-  TUIInit.cpp
-c:\users\micka\documents\fraunhofer_2016_2017\tuiframework_github\tuiframework\unity\tui-client-c++lib\TUIInit.h(3): fatal error C1083: Cannot open include file: 'tuiframework/client/client.h': No such file or directory
