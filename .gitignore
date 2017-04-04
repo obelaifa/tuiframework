@@ -4,3 +4,7 @@ tuiframework/cpp/tuibins/tuipythonclient/
 tuiframework/cpp/tuilibs/opc/
 tuiframework/cpp/x86/
 tuiframework/python/build/
+tuiframework/unity3d/UnityProject/Library/
+tuiframework/unity3d/TUIUnityInterface/Debug/
+*.suo
+tuiframework/cpp/x64/Debug/
