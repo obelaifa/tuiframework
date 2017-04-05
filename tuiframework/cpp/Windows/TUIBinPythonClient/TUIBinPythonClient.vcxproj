@@ -87,8 +87,10 @@
     <IntDir>..\..\$(PlatformTarget)\$(Configuration)\$(MSBuildProjectName)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\..\..\bin\$(Platform)\$(VisualStudioVersion)\$(PlatformTarget)\$(Configuration)\tuiexampleclients\$(TargetName)</OutDir>
-    <IntDir>..\..\$(PlatformTarget)\$(Configuration)\$(MSBuildProjectName)</IntDir>
+    <OutDir>
+    </OutDir>
+    <IntDir>
+    </IntDir>
     <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
     <PreLinkEventUseInBuild>false</PreLinkEventUseInBuild>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>

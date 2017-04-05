@@ -1,7 +1,9 @@
-﻿  TUIClientWrapper.cpp
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  TUIClientWrapper.cpp
   TUICsharp.cpp
   TUIInit.cpp
-     Creating library C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\TUIUnityClient.lib and object C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\TUIUnityClient.exp
+     Creating library C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\x64\TUIUnityClient.lib and object C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\x64\TUIUnityClient.exp
   Generating code
   Finished generating code
-  TUI-Client-Wrapper.vcxproj -> C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\TUIUnityClient.dll
+  TUI-Client-Wrapper.vcxproj -> C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\x64\TUIUnityClient.dll
+          1 fichier(s) copié(s).
