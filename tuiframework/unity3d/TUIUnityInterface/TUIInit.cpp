@@ -21,7 +21,7 @@ void TUIInit::push(tuiframework::IEvent * event)
 		}
 		else if(msg->getPayload() == REMOVE_CONNECTION)
 		{
-			cout << "CONNECTION ESTABLISHED" << endl;
+			cout << "REMOVE CONNECTION" << endl;
 			this->tuiCSharp.disconnect();
 		}
 	}

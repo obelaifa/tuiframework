@@ -11,7 +11,7 @@ ECHO Press 0 to set the BedienApp only config, 1 to set the WinMOD config, other
 SET /P xmlchoice=
 
 IF %xmlchoice%==0 (
-	set xmlConfiguration=./xmlconfig/TUI_BedienApp.xml
+	set xmlConfiguration=./xmlconfig/TUI_BedienApp_testconfig.xml
 ) ELSE IF %xmlchoice%==1 (
 	set xmlConfiguration=./xmlconfig/TUI_WinMOD_config.xml
 ) ELSE (

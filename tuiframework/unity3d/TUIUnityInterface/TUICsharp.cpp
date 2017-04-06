@@ -1,5 +1,6 @@
 #include "TUICsharp.h"
 
+
 TUICsharp::TUICsharp()
 {
 }
@@ -11,8 +12,7 @@ TUICsharp::~TUICsharp()
 
 void TUICsharp::connect()
 {
-	try
-	{
+	try {
 		// Durchläuft den Vector mit gespeicherten Strukturen
 		for(std::vector<listValues>::iterator it = list.begin(); it != list.end(); ++it)
 		{
@@ -97,6 +97,12 @@ void TUICsharp::connecting(int TUIType, std::string TUIObjectName, std::string p
 	values.objectName = TUIObjectName;
 	values.channelName = portName;
 	values.floatCall = call;
+	std::ofstream fichier("debug.txt", ios::out | ios::trunc);
+	if (fichier)
+	{
+		fichier << "Float callback" << " " << TUIType << " " << TUIObjectName << " " << portName << endl;
+		fichier.close();
+	}
 
 	// Fügt die Struktur der Liste hinzu.
 	list.push_back(values);
@@ -154,9 +160,8 @@ void TUICsharp::SignalChanged(const AnalogChangedEvent * e)
 {
 	for (int i = 0; i < list.size(); ++i)
 	{
-		if (i == (e->getAddress().getPortNr() - 1))
+		if (13 + i == (e->getAddress().getPortNr() - 1))
 		{
-			// Ruft die Callback-Funktion auf
 			list.at(i).floatCall(e->getPayload());
 		}
 	}
@@ -170,6 +175,7 @@ void TUICsharp::SignalChanged(const MouseEvent * e)
 		{
 			// Ruft die Callback-Funktion auf
 			list.at(i).mouseCall(e->getPayload());
+
 		}
 	}
 }

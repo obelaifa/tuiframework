@@ -1,11 +1,5 @@
 #include "TUIClient.h"
 
-#include "EventDelegationFactory.h"
-#include <tuiframework/client/TUIObjectStub.h>
-#include <iostream>
-#include <sstream>
-#include <stdio.h>
-
 
 using namespace std;
 using namespace tuiframework;
@@ -61,17 +55,6 @@ void TUIClient::setEventCallback(PyObject * callback) {
                         trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
                         trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
                     }
-
-                    /*if(typeMapIt2->second.getName().compare("value.GreiferPosR") == 0  || typeMapIt2->second.getName().compare("value.GreiferPosL") == 0)
-                    {
-
-                            constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
-                            constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
-                            trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
-                            trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
-                   }*/
-
-                    //cout << it->getName() << " " << typeMapIt2->second.getName() << " " << constraintMin << " " << constraintMax << " " << trafoType << " " << trafoNo << endl;
 
 					TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
 					TUIObjectStub * t = tc.getStub(it->getName());

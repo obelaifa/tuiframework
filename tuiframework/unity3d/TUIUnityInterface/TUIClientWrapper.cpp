@@ -5,14 +5,14 @@ extern "C"
 
 	bool connectUnityWithTUIServer(int recievePort,int senderPort, const char* serverIPPort, void* tuiInit)
 	{
-		
 		TUIInit init = *(TUIInit*)tuiInit;
 		initTypeRegistration(getEventFactory());
 		CommonTypeReg::registerTypes(&getEventFactory(), &getEventChannelFactory());
 
 		getchar();
-
+		
 		connectWithTUIServer(recievePort, senderPort,std::string(serverIPPort),&init,true);
+
 		return true;
 	}
 

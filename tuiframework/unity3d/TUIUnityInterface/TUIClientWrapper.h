@@ -113,6 +113,5 @@ extern "C"
 	*/
 	TESTFUNCDLL_API void connectingParametersmouse(void* instance, int TUIType, const char* objectName, const char* channelName, mouseCallback call);
 
-
 	//TESTFUNCDLL_API void getMouseData(void* instance,const char* value);
 }

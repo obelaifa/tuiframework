@@ -2,11 +2,16 @@
 #define _TUIClient_h_
 
 #include <tuiframework/client/client.h>
+#include <tuiframework/client/TUIObjectStub.h>
+
+#include "EventDelegationFactory.h"
 
 #include <Python.h>
 
 #include <string>
 #include <iostream>
+#include <sstream>
+#include <stdio.h>
 
 namespace tuiframework {
 namespace python {

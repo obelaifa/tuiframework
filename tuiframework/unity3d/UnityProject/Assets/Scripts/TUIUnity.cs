@@ -17,13 +17,6 @@ public class TUIUnity : MonoBehaviour
     // Locker um Thread-Safe zu gewährleisten
     private static readonly object _locker = new object();
 
-    // Queues für die X und Y-Werte, müssen Static sein da sonst Exceptions geworfen werden
-    private static Queue<float> XValues;
-    private static Queue<float> YValues;
-
-    private static bool mouseLeft;
-    private static bool mouseRight;
-
     // Integer Pointer welche an die C#/C++ API vom TUI-Framework übergeben werden
     private IntPtr tuiUnityInit;
     private IntPtr tuiUnityTest;
@@ -34,16 +27,9 @@ public class TUIUnity : MonoBehaviour
 
     public void Start()
     {
-        // Initalisiert ein paar Werte für die Buttons
-
-        mouseLeft = false;
-        mouseRight = false;
-        XValues = new Queue<float>();
-        YValues = new Queue<float>();
-
         // Erstellt eine TUI C#-Instanz und speichert diese als IntPtr
         tuiUnityTest = TUIClientLibary.createTUICsharpInstance();
-        
+
         // Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
         connecting();
 
@@ -61,11 +47,9 @@ public class TUIUnity : MonoBehaviour
     */
     void OnApplicationQuit()
     {
-        /*
         TUIClientLibary.disconnectUnityWithTUIServer();
         receiveThread.Abort();
         Debug.Log("Disconnected");
-        */
     }
 
     /**
@@ -107,8 +91,8 @@ public class TUIUnity : MonoBehaviour
     */
     public void closeConnection()
     {
-        receiveThread.Abort();
         TUIClientLibary.disconnectUnityWithTUIServer();
+		receiveThread.Abort();
         Debug.Log("Disconnected");
     }
 
@@ -116,146 +100,9 @@ public class TUIUnity : MonoBehaviour
     {
         lock (_locker)
         {
-            // Es wird überprüft ob Daten für Delta-X in der Queue vorhanden sind.
-            if (XValues.Count > 0)
-            {
-                try
-                {
-                    Debug.Log("moved X");
-                    // Starten eines kritischen Bereichs, erforderlich für Thread-safe Operationen
-                    // Lässt den Würfel rotieren
-                    cube.transform.Rotate(0, XValues.Dequeue(), 0, Space.World);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("Error Output " + e);
-                }
-            }
-
-            // Es wird überprüft ob Daten für Delta-Y in der Queue vorhanden sind.
-            if (YValues.Count > 0)
-            {
-                try
-                {
-                    Debug.Log("moved Y");
-                    // Starten des Kritischen Bereichs, wird für Thread-safe benötigt.
-                
-                        // Lässt den Würfel rotieren.
-                        cube.transform.Rotate(YValues.Dequeue(), 0 , 0, Space.World);
-               
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("Error Output " + e);
-                }
-            }
-
-            if (mouseLeft)
-            {
-
-                cube.GetComponent<Renderer>().material.color = Color.white;
-            }
-
-            if (mouseRight)
-            {
-
-                cube.GetComponent<Renderer>().material.color = Color.black;
-            }
-        }
-
-
             
+        } 
     }
-
-
-    /**
-    * Diese Funktion wird ausgeführt sobald die Maus in X-Richtung verschoben wird.
-    * @param value Der Wert in welcher die Maus in X-Richtung verschoben wurde.
-    */
-    public void getMouseXValue(int value)
-    {
-            try
-            {
-                //Debug.Log("XValues " + value);
-                // Startet einen kritischen Bereich.
-                lock(_locker)
-                {
-                    // Fügt den Wert zur Instanzübergreifenden Queue hinzu.
-                    XValues.Enqueue(value);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("Error X-Input: " + e.ToString());
-        }
-    }
-
-    /**
-    * Diese Funktion wird ausgeführt sobald die Maus in Y-Richtung verschoben wird.
-    * @param value Der Wert in welcher die Maus in Y-Richtung verschoben wurde.
-    */
-    public void getMouseYValue(int value)
-    {
-        try
-        {
-            //Debug.Log("YValues " + value);
-            // Startet einen kritischen Bereich.
-            lock (_locker)
-            {
-                // Fügt den Wert zur Instanzübergreifenden Queue hinzu.
-                YValues.Enqueue(value);
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error Y-Input: " + e.ToString());
-        }
-    }
-
-    /**
-* Diese Funktion wird ausgeführt sobald die linke Maustaste gedrückt wurde.
-* @param value true falls linke Maustaste gedrückt wurde.
-*/
-    public void getMouseLeft(bool value)
-    {
-        try
-        {
-            //Debug.Log("YValues " + value);
-            // Startet einen kritischen Bereich.
-            lock (_locker)
-            {
-                Debug.Log("Left Mouse " + value);
-                mouseLeft = value;
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error Y-Input: " + e.ToString());
-        }
-    }
-
-    /**
-    * Diese Funktion wird ausgeführt sobald die rechte Maustaste gedrückt wird.
-    * @param value true falls rechte Maustaste gedrückt wurde.
-    */
-    public void getMouseRight(bool value)
-    {
-        try
-        {
-            //Debug.Log("YValues " + value);
-            // Startet einen kritischen Bereich.
-            lock (_locker)
-            {
-                Debug.Log("Right Mouse " + value);
-                mouseRight = value;
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error Y-Input: " + e.ToString());
-        }
-    }
-
 
     /**
     * Verbindet die Parameter.
@@ -267,31 +114,20 @@ public class TUIUnity : MonoBehaviour
 
         // Verbindet die Parameter für die Bewegungen der Maus in X-Richtung.
         TUIClientLibary.connectingParameters(tuiUnityTest,
-            (int)TUIClientLibary.TUITypes.IntegerChangedEvent,
-            "TUIUnity",
-            "DeltaX",
-            new TUIClientLibary.integerCallback(this.getMouseXValue));
-
-        // Verbindet die Parameter für die Bewegungen der Maus in Y-Richtung.
-        TUIClientLibary.connectingParameters(tuiUnityTest,
-            (int)TUIClientLibary.TUITypes.IntegerChangedEvent,
-            "TUIUnity",
-            "DeltaY",
-            new TUIClientLibary.integerCallback(this.getMouseYValue));
-
-        // Verbindet die Parameter für das drücken der linken Maustaste
-        TUIClientLibary.connectingParameters(tuiUnityTest,
-            (int)TUIClientLibary.TUITypes.DigitalChangedEvent,
-            "TUIUnity",
-            "leftMouse",
-            new TUIClientLibary.boolCallback(this.getMouseLeft));
-
-        // Verbindet die Parameter für das drücken der rechten Maustaste
-        TUIClientLibary.connectingParameters(tuiUnityTest,
-            (int)TUIClientLibary.TUITypes.DigitalChangedEvent,
-            "TUIUnity",
-            "rightMouse",
-            new TUIClientLibary.boolCallback(this.getMouseRight));
+			(int)TUIClientLibary.TUITypes.AnalogChangedEvent,
+            "LBR100",
+            "value.A1",
+			new TUIClientLibary.floatCallback(this.testChanged));
+		TUIClientLibary.connectingParameters(tuiUnityTest,
+			(int)TUIClientLibary.TUITypes.AnalogChangedEvent,
+			"LBR100",
+			"value.A2",
+			new TUIClientLibary.floatCallback(this.testChanged));
+		TUIClientLibary.connectingParameters(tuiUnityTest,
+			(int)TUIClientLibary.TUITypes.AnalogChangedEvent,
+			"LBR100",
+			"value.A3",
+			new TUIClientLibary.floatCallback(this.testChanged));
 
     }
 
@@ -319,5 +155,10 @@ public class TUIUnity : MonoBehaviour
 
         return true;
     }
+
+	private void testChanged (float value) {
+		Debug.Log ("Yé soui le pèle Noël !");
+		Debug.Log (value);
+	}
 }
 

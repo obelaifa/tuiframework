@@ -87,8 +87,7 @@
     <IntDir>..\..\$(PlatformTarget)\$(Configuration)\$(MSBuildProjectName)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>
-    </OutDir>
+    <OutDir>..\Release</OutDir>
     <IntDir>
     </IntDir>
     <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>

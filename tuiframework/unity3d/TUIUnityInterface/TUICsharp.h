@@ -2,6 +2,15 @@
 
 #include <tuiframework/client/client.h>
 #include <tuitypes/common/CommonTypeReg.h>
+#include <tuiframework/client/TUIObjectStub.h>
+
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <stdio.h>
+
+
+#include <fstream>
 
 using namespace tuiframework;
 
@@ -126,7 +135,6 @@ public:
 	* @param e Mouse Event
 	*/
 	void SignalChanged(const MouseEvent * e);
-
 private:
 
 	/**
@@ -137,6 +145,7 @@ private:
 	/**
 	* Vector der alle strukturen mit den Parametern enthält.
 	*/
+
 	std::vector<listValues> list;
 
 };
