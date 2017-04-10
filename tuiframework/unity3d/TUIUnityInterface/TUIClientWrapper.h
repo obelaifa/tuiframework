@@ -19,23 +19,13 @@ typedef void(*integerCallback)(int value); // Callback for Integer Values
 * Float Callback
 * @param value Gleitkomma-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*floatCallback)(float value); // Callback for float Values
+typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value); // Callback for float Values
 
 /**
 * Boolean Callback
 * @param value Boolean-Werte die an die TUI überwegeben werden sollen.
 */
 typedef void(*boolCallback)(bool value); // Callback for boolean Values
-
-//typedef void(*doubleCallback)(double value); // Callback for double Values
-
-/**
-* ### Experimentel ###
-* Mouse Callback
-* @param value Mouse-Werte die an die TUI überwegeben werden sollen.
-*/
-typedef void(*mouseCallback)(MouseData value); // Experimental Callback for MouseData
-
 
 extern "C" 
 {
@@ -81,7 +71,7 @@ extern "C"
 	* @param channelName Name des Channels mit dem sich verbunden werden soll.
 	* @param integerCallBack Funktions-Callback für Integer-Werte.
 	*/
-	TESTFUNCDLL_API void connectingParameters(void* instance, int TUIType, const char* objectName, const char* channelName, integerCallback call);
+	TESTFUNCDLL_API void connectingParameters(void* instance, int TUIType, const char* objectName, const char* description, integerCallback call);
 	/**
 	* Setzt die Parameter zum Verbinden mit dem TUI-Channel
 	* @param instance Die C# Instanz
@@ -90,7 +80,7 @@ extern "C"
 	* @param channelName Name des Channels mit dem sich verbunden werden soll.
 	* @param floatCallBack Funktions-Callback für Float-Werte.
 	*/
-	TESTFUNCDLL_API void connectingParametersfloat(void* instance, int TUIType, const char* objectName, const char* channelName, floatCallback call);
+	TESTFUNCDLL_API void connectingParametersfloat(void* instance, int TUIType, const char* objectName, const char* description, floatCallback call);
 
 	/**
 	* Setzt die Parameter zum Verbinden mit dem TUI-Channel
@@ -100,18 +90,7 @@ extern "C"
 	* @param channelName Name des Channels mit dem sich verbunden werden soll.
 	* @param integerCallBack Funktions-Callback für boolean-Werte.
 	*/
-	TESTFUNCDLL_API void connectingParametersbool(void* instance, int TUIType, const char* objectName, const char* channelName, boolCallback call);
-	
-	/**
-	* ### Experimentelle Funktion ###
-	* Setzt die Parameter zum Verbinden mit dem TUI-Channel
-	* @param instance Die C# Instanz
-	* @param TUIType ID des TUI-Types
-	* @param objectName Name des TUI-Object Types
-	* @param channelName Name des Channels mit dem sich verbunden werden soll.
-	* @param integerCallBack Funktions-Callback für MouseData.
-	*/
-	TESTFUNCDLL_API void connectingParametersmouse(void* instance, int TUIType, const char* objectName, const char* channelName, mouseCallback call);
+	TESTFUNCDLL_API void connectingParametersbool(void* instance, int TUIType, const char* objectName, const char* description, boolCallback call);
 
-	//TESTFUNCDLL_API void getMouseData(void* instance,const char* value);
+	TESTFUNCDLL_API void connectingParametersAll(void* instance, floatCallback call);
 }

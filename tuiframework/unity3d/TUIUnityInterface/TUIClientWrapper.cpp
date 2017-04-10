@@ -37,38 +37,28 @@ extern "C"
 		tuiInit->setTUICsharp(*(TUICsharp*)tuiCSharpInstance);
 	}
 
-	void connectingParameters(void* instance, int TUIType, const char* objectName, const char* channelName, integerCallback call)
+	void connectingParameters(void* instance, int TUIType, const char* objectName, const char* description, integerCallback call)
 	{
 		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connecting(TUIType, std::string(objectName), std::string(channelName), call);
+		tuiUnity->connecting(TUIType, std::string(objectName), std::string(description), call);
 	}
 
-	void connectingParametersfloat(void* instance, int TUIType, const char* objectName, const char* channelName, floatCallback call)
+	void connectingParametersfloat(void* instance, int TUIType, const char* objectName, const char* description, floatCallback call)
 	{
 		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connecting(TUIType, std::string(objectName), std::string(channelName), call);
+		tuiUnity->connecting(TUIType, std::string(objectName), std::string(description), call);
 	}
 
-	void connectingParametersbool(void* instance, int TUIType, const char* objectName, const char* channelName, boolCallback call)
+	void connectingParametersbool(void* instance, int TUIType, const char* objectName, const char* description, boolCallback call)
 	{
 		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connecting(TUIType, std::string(objectName), std::string(channelName), call);
+		tuiUnity->connecting(TUIType, std::string(objectName), std::string(description), call);
 	}
 
-	void connectingParametersmouse(void* instance, int TUIType, const char* objectName, const char* channelName, mouseCallback call)
+	void connectingParametersAll(void* instance, floatCallback call)
 	{
 		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connecting(TUIType, std::string(objectName), std::string(channelName), call);
-	}
-
-	void getMouseData(void* instance,const char* value)
-	{
-		//ToDo 
-		//Muss noch bearbeitet werden.
-		MouseData* mouseData = (MouseData*)instance;
-		stringstream ss;
-		ss << mouseData;
-		value = ss.str().c_str();
+		tuiUnity->connectAll(call);
 	}
 }
 

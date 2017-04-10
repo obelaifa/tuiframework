@@ -247,17 +247,7 @@
                   <Description/>
                </PortType>
                <PortType name="control.SollA1" sink="1" source="0" typename="AnalogChannel">
-                   <ParameterGroup name="Constraint">
-                       <Parameter name="min" value="-170"/>
-                       <Parameter name="max" value="170"/>
-                   </ParameterGroup>
-                   <ParameterGroup name="Meta">
-                       <Parameter name="TrafoType" value="trans"/>
-                       <Parameter name="TrafoNo" value="1"/>
-                   </ParameterGroup>
-                   <Description>
-                       Constraint Test Soll_A1
-                   </Description>
+                   <Description/>
                </PortType>
                <PortType name="value.GreiferIstZu" sink="0" source="1" typename="DigitalChannel">
                   <Description/>

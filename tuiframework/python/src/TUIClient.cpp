@@ -36,25 +36,25 @@ void TUIClient::setEventCallback(PyObject * callback) {
 	std::vector<TUIObjectInstance> objectInstances = getAttachedObjects().getTUIObjectInstanceVector();
 	std::vector<TUIObjectType> objectTypes = getAttachedObjects().getTUIObjectTypeVector();
 
-	for (vector<TUIObjectInstance>::iterator it = objectInstances.begin(); it != objectInstances.end(); it++)
-		for (vector<TUIObjectType>::iterator typeIt = objectTypes.begin(); typeIt != objectTypes.end(); typeIt++)
-			if (typeIt->getName() == it->getTypeName())
-				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin();typeMapIt2 != typeIt->getPortMap().end();typeMapIt2++)
+	for (vector<TUIObjectInstance>::iterator it = objectInstances.begin(); it != objectInstances.end(); it++) {
+		for (vector<TUIObjectType>::iterator typeIt = objectTypes.begin(); typeIt != objectTypes.end(); typeIt++) {
+			if (typeIt->getName() == it->getTypeName()) {
+				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin(); typeMapIt2 != typeIt->getPortMap().end(); typeMapIt2++)
 				{
 					if (typeMapIt2->second.getDataFlowDirection() == 2)
 						continue;
 
-                    std::string constraintMin = "empty";
-                    std::string constraintMax = "empty";
-                    std::string trafoType = "empty";
-                    std::string trafoNo = "empty";
+					std::string constraintMin = "empty";
+					std::string constraintMax = "empty";
+					std::string trafoType = "empty";
+					std::string trafoNo = "empty";
 
-                    if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
-                        constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
-                        constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
-                        trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
-                        trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
-                    }
+					if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
+						constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
+						constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
+						trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
+						trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
+					}
 
 					TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
 					TUIObjectStub * t = tc.getStub(it->getName());
@@ -71,6 +71,9 @@ void TUIClient::setEventCallback(PyObject * callback) {
 
 					ied->createConnection(it->getName(), typeMapIt2->second.getName(), callback, typeMapIt2->second.getDescription(), constraintMin, constraintMax, trafoType, trafoNo);
 				}
+			}
+		}
+	}
 }
 
 

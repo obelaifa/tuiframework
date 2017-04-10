@@ -8,9 +8,11 @@
 #include <iostream>
 #include <sstream>
 #include <stdio.h>
-
-
 #include <fstream>
+
+#define BOOLEAN 11
+#define ANALOG 12
+#define INTEGER 13
 
 using namespace tuiframework;
 
@@ -24,7 +26,7 @@ typedef void(*integerCallback)(int value); // Callback for Integer Values
 * Float Callback
 * @param value Gleitkomma-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*floatCallback)(float value); // Callback for float Values
+typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value); // Callback for float Values
 
 /**
 * Boolean Callback
@@ -32,27 +34,26 @@ typedef void(*floatCallback)(float value); // Callback for float Values
 */
 typedef void(*boolCallback)(bool value); // Callback for boolean Values
 
-//typedef void(*doubleCallback)(double value); // Callback for double Values
-
-/**
-* ### Experimentel ###
-* Mouse Callback
-* @param value Mouse-Werte die an die TUI überwegeben werden sollen.
-*/
-typedef void(*mouseCallback)(MouseData value); // Experimental Callback for MouseData
 
 /**
 * Struktur zum Zusammenfassen der Parameter zum Verbinden mit dem TUI-Channel
 */
 struct listValues 
 {
-	int tuiType;
 	std::string objectName;
-	std::string channelName;
+	std::string portName;
+	std::string description;
+	int tuiType;
+	int portAdress;
 	integerCallback intCall;
 	floatCallback floatCall;
 	boolCallback boolCall;
-	mouseCallback mouseCall;
+
+	listValues();
+	~listValues();
+	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, floatCallback floatCall);
+	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, integerCallback intCall);
+	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, boolCallback boolCall);
 };
 
 /**
@@ -71,7 +72,7 @@ public:
 	* @param channelName Name des TUI-Channels
 	* @param integerCallBack Callback für Integer-Werte.
 	*/
-	void connecting(int TUIType, std::string TUIObjectName, std::string channelName, integerCallback call);
+	void connecting(int TUIType, std::string TUIObjectName, std::string description, integerCallback call);
 
 	/**
 	* Fügt die Parameter zu einem Struct zusammen und speichert diese in einer Liste.
@@ -80,7 +81,7 @@ public:
 	* @param channelName Name des TUI-Channels
 	* @param integerCallBack Callback für Float-Werte.
 	*/
-	void connecting(int TUIType, std::string TUIObjectName, std::string channelName, floatCallback call);
+	void connecting(int TUIType, std::string TUIObjectName, std::string description, floatCallback call);
 
 	/**
 	* Fügt die Parameter zu einem Struct zusammen und speichert diese in einer Liste.
@@ -89,17 +90,7 @@ public:
 	* @param channelName Name des TUI-Channels
 	* @param integerCallBack Callback für Boolean-Werte.
 	*/
-	void connecting(int TUIType, std::string TUIObjectName, std::string channelName, boolCallback call);
-
-	/**
-	* ### Experimentel ###
-	* Fügt die Parameter zu einem Struct zusammen und speichert diese in einer Liste.
-	* @param TUIType ID des TUITypes
-	* @param TUIObjectname TUI-Object-Type Name
-	* @param channelName Name des TUI-Channels
-	* @param integerCallBack Callback für MouseData.
-	*/
-	void connecting(int TUIType, std::string TUIObjectName, std::string channelName, mouseCallback call);
+	void connecting(int TUIType, std::string TUIObjectName, std::string description, boolCallback call);
 
 	/*
 	* Verbindet die in der Liste enthaltenten Parameter mit dem TUI-Server
@@ -129,12 +120,8 @@ public:
 	*/
 	void SignalChanged(const AnalogChangedEvent * e);
 
-	/**
-	* ### Experimentel ###
-	* Funktion die ausgeführt wird sobald ein Event ausgelöst wird.
-	* @param e Mouse Event
-	*/
-	void SignalChanged(const MouseEvent * e);
+	void connectAll(floatCallback call);
+
 private:
 
 	/**

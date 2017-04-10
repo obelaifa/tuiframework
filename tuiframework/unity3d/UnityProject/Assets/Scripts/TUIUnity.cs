@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class TUIUnity : MonoBehaviour
 {
     // Unity Game Objects die mit dem Skript verbunden sind
-    public GameObject cube;
     public InputField IP;
     public InputField serverPort;
     public InputField clientReceiverPort;
     public InputField clientSenderPort;
+
+	private static Dictionary<string, TUIObject>  tuiOjectMap = new Dictionary<string, TUIObject>();
 
     // Locker um Thread-Safe zu gewährleisten
     private static readonly object _locker = new object();
@@ -23,7 +24,9 @@ public class TUIUnity : MonoBehaviour
 
     // Der Thread wird benötigt damit die Verbindung zum TUI-Server die Anwendung nicht blockiert
     private Thread receiveThread ;
-    
+
+	private static Vector3 movement;
+	private float d = 0f;
 
     public void Start()
     {
@@ -31,7 +34,7 @@ public class TUIUnity : MonoBehaviour
         tuiUnityTest = TUIClientLibary.createTUICsharpInstance();
 
         // Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
-        connecting();
+        //connecting();
 
         // Erstellt eine TUIInit-Instanz und speichert diese als IntPtr
         tuiUnityInit = TUIClientLibary.createTUIInitInstance();
@@ -47,8 +50,9 @@ public class TUIUnity : MonoBehaviour
     */
     void OnApplicationQuit()
     {
-        TUIClientLibary.disconnectUnityWithTUIServer();
-        receiveThread.Abort();
+        //TUIClientLibary.disconnectUnityWithTUIServer();
+        //receiveThread.Abort();
+
         Debug.Log("Disconnected");
     }
 
@@ -85,6 +89,11 @@ public class TUIUnity : MonoBehaviour
         }
     }
 
+	public void connected() {
+		// Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
+		connecting();
+	}
+
     /**
     * Soll die Verbindung zum TUI-Server schließen bei Button-Click.
     * Bisher aber nicht funktionsfähig da im TUI-Framework die Disconnect-Funktion bugged ist.
@@ -96,11 +105,21 @@ public class TUIUnity : MonoBehaviour
         Debug.Log("Disconnected");
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         lock (_locker)
         {
-            
+			foreach (var tuiObject in tuiOjectMap) {
+				tuiObject.Value.TUI = GameObject.Find (tuiObject.Value.description);
+				if (tuiObject.Value.TUI == null)
+					continue;
+				d = tuiObject.Value.received_value - tuiObject.Value.value;
+				tuiObject.Value.value = tuiObject.Value.received_value;
+				movement.Set (0f, 0f, d);
+
+				tuiObject.Value.TUI.transform.Rotate (movement);
+			}
+			Debug.Log ("Transform done");
         } 
     }
 
@@ -109,26 +128,7 @@ public class TUIUnity : MonoBehaviour
     */
     public void connecting()
     {
-        // Aufruf der C#/C++ API. Übergibt die C#-TUIinstanz, Clientname, Portname und die Funktion zu TUI.
-        // Die Namen müssen exakt übereinstimmen mit der TUI-Server Konfiguration.
-
-        // Verbindet die Parameter für die Bewegungen der Maus in X-Richtung.
-        TUIClientLibary.connectingParameters(tuiUnityTest,
-			(int)TUIClientLibary.TUITypes.AnalogChangedEvent,
-            "LBR100",
-            "value.A1",
-			new TUIClientLibary.floatCallback(this.testChanged));
-		TUIClientLibary.connectingParameters(tuiUnityTest,
-			(int)TUIClientLibary.TUITypes.AnalogChangedEvent,
-			"LBR100",
-			"value.A2",
-			new TUIClientLibary.floatCallback(this.testChanged));
-		TUIClientLibary.connectingParameters(tuiUnityTest,
-			(int)TUIClientLibary.TUITypes.AnalogChangedEvent,
-			"LBR100",
-			"value.A3",
-			new TUIClientLibary.floatCallback(this.testChanged));
-
+		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback));
     }
 
     /**
@@ -156,9 +156,26 @@ public class TUIUnity : MonoBehaviour
         return true;
     }
 
-	private void testChanged (float value) {
-		Debug.Log ("Yé soui le pèle Noël !");
+	private void floatCallback (string TUIObjectName, string description, float value) {
+		Debug.Log (TUIObjectName);
+		Debug.Log (description);
 		Debug.Log (value);
+
+		try
+		{
+			lock (_locker)
+			{
+				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + description)) {
+					tuiOjectMap.Add(TUIObjectName + " " + description, new TUIObject());
+					tuiOjectMap [TUIObjectName + " " + description].description = description;
+				}
+				tuiOjectMap [TUIObjectName + " " + description].received_value = value;
+			}
+		}
+		catch (Exception e)
+		{
+			Debug.LogError(e.ToString());
+		}
 	}
 }
 
