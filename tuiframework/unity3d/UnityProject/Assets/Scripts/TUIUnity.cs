@@ -28,13 +28,9 @@ public class TUIUnity : MonoBehaviour
 	private static Vector3 movement;
 	private float d = 0f;
 
-    public void Start()
-    {
+    public void Start() {
         // Erstellt eine TUI C#-Instanz und speichert diese als IntPtr
         tuiUnityTest = TUIClientLibary.createTUICsharpInstance();
-
-        // Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
-        //connecting();
 
         // Erstellt eine TUIInit-Instanz und speichert diese als IntPtr
         tuiUnityInit = TUIClientLibary.createTUIInitInstance();
@@ -48,19 +44,16 @@ public class TUIUnity : MonoBehaviour
     * Soll bei Beendigung der Anwendung im Unity-Editor die Verbindung zum TUI-Server schließen.
     * Bisher aber nicht funktionsfähig da im TUI-Framework die Disconnect-Funktion bugged ist.
     */
-    void OnApplicationQuit()
-    {
-        //TUIClientLibary.disconnectUnityWithTUIServer();
-        //receiveThread.Abort();
-
+    void OnApplicationQuit() {
+        TUIClientLibary.disconnectUnityWithTUIServer();
+		receiveThread.Abort();
         Debug.Log("Disconnected");
     }
 
     /**
     * Thread-Funktion welche die Verbindung zum TUI-Server aufbaut.
     */
-    private void ReceiveData()
-    {
+    private void ReceiveData() {
         int rPort = int.Parse(clientReceiverPort.text);
         int sPort = int.Parse(clientSenderPort.text);
         string serverIP =IP.text +":"+serverPort.text;
@@ -74,17 +67,14 @@ public class TUIUnity : MonoBehaviour
     /**
     * Wird ausgeführt sobald auf den Connect-Button im Interface gedrückt wird.
     */
-    public void buttomClick()
-    {
+    public void buttomClick() {
         // Überprüft ob die IP und Port des Servers valide sind und startet den Thread falls true.
-        if (validateIP(IP.text, serverPort.text))
-        {   
+        if (validateIP(IP.text, serverPort.text)) {   
             receiveThread = new Thread(new ThreadStart(ReceiveData));
             receiveThread.Start();
             Debug.Log("Connected");
         }
-        else
-        {
+        else {
 
         }
     }
@@ -98,36 +88,50 @@ public class TUIUnity : MonoBehaviour
     * Soll die Verbindung zum TUI-Server schließen bei Button-Click.
     * Bisher aber nicht funktionsfähig da im TUI-Framework die Disconnect-Funktion bugged ist.
     */
-    public void closeConnection()
-    {
+    public void closeConnection() {
         TUIClientLibary.disconnectUnityWithTUIServer();
 		receiveThread.Abort();
         Debug.Log("Disconnected");
     }
 
-    public void FixedUpdate()
-    {
-        lock (_locker)
-        {
+    public void FixedUpdate() {
+        lock (_locker) {
 			foreach (var tuiObject in tuiOjectMap) {
-				tuiObject.Value.TUI = GameObject.Find (tuiObject.Value.description);
+
+				if (!tuiObject.Value.nodeFound) {
+					tuiObject.Value.TUI = findNode (tuiObject.Value.TUIObjectName, tuiObject.Value.description);
+					tuiObject.Value.nodeFound = true;
+				}
+
 				if (tuiObject.Value.TUI == null)
 					continue;
+
 				d = tuiObject.Value.received_value - tuiObject.Value.value;
 				tuiObject.Value.value = tuiObject.Value.received_value;
-				movement.Set (0f, 0f, d);
 
-				tuiObject.Value.TUI.transform.Rotate (movement);
+				if (d <= 0.05f && d >= -0.5f)
+					d = 0f;
+
+				if (tuiObject.Value.trafoNo.CompareTo("1") == 0)
+					movement.Set (d, 0f, 0f);
+				else if (tuiObject.Value.trafoNo.CompareTo("2") == 0)
+					movement.Set (0f, d, 0f);
+				else if (tuiObject.Value.trafoNo.CompareTo("3") == 0)
+					movement.Set (0f, 0f, d);
+
+				if (tuiObject.Value.trafoType.CompareTo ("rot") == 0)
+					tuiObject.Value.TUI.transform.Rotate (movement);
+				else if (tuiObject.Value.trafoType.CompareTo ("trans") == 0)
+					tuiObject.Value.TUI.transform.Translate (movement/1000f);
+
 			}
-			Debug.Log ("Transform done");
         } 
     }
 
     /**
     * Verbindet die Parameter.
     */
-    public void connecting()
-    {
+    public void connecting() {
 		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback));
     }
 
@@ -137,45 +141,60 @@ public class TUIUnity : MonoBehaviour
     * @param port Der Port des TUI-Servers
     * @return true falls valide
     */
-    private bool validateIP(string IP, string port)
-    {
+    private bool validateIP(string IP, string port) {
         IPAddress address;
         int portValid;
 
         // Überprüft ob die IP valide ist
-        if (!IPAddress.TryParse(IP, out address))
-        {
+        if (!IPAddress.TryParse(IP, out address)) {
             return false;
         }
         // Überprüft ob der Port eine Zahl ist
-        if (!int.TryParse(port, out portValid))
-        {
+        if (!int.TryParse(port, out portValid)) {
             return false;
         }
-
         return true;
     }
 
-	private void floatCallback (string TUIObjectName, string description, float value) {
+	private void floatCallback (string TUIObjectName, string description, float value, string trafoType, string trafoNo) {
 		Debug.Log (TUIObjectName);
 		Debug.Log (description);
 		Debug.Log (value);
+		Debug.Log (trafoType);
+		Debug.Log (trafoNo);
 
-		try
-		{
-			lock (_locker)
-			{
+		try {
+			lock (_locker) {
 				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + description)) {
 					tuiOjectMap.Add(TUIObjectName + " " + description, new TUIObject());
+					tuiOjectMap [TUIObjectName + " " + description].TUIObjectName = TUIObjectName;
 					tuiOjectMap [TUIObjectName + " " + description].description = description;
+					tuiOjectMap [TUIObjectName + " " + description].trafoType = trafoType;
+					tuiOjectMap [TUIObjectName + " " + description].trafoNo = trafoNo;
 				}
 				tuiOjectMap [TUIObjectName + " " + description].received_value = value;
 			}
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			Debug.LogError(e.ToString());
 		}
+	}
+
+	private GameObject findNode(string TUIOjectName, string description) {
+		GameObject node = GameObject.Find (TUIOjectName);
+
+		if (node != null)
+			foreach (Transform child in node.transform) {
+				if (child.name.CompareTo (description) == 0)
+					return child.gameObject;
+				node = findNode (child.name, description);
+			}
+
+		if (node != null)
+			if (node.name.CompareTo (description) != 0)
+				node = null;
+		
+		return node;
 	}
 }
 

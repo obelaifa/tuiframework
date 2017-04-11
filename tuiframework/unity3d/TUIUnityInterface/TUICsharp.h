@@ -26,7 +26,7 @@ typedef void(*integerCallback)(int value); // Callback for Integer Values
 * Float Callback
 * @param value Gleitkomma-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value); // Callback for float Values
+typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value, std::string trafoType, std::string trafoNo); // Callback for float Values
 
 /**
 * Boolean Callback
@@ -44,16 +44,24 @@ struct listValues
 	std::string portName;
 	std::string description;
 	int tuiType;
+	int entityID;
 	int portAdress;
 	integerCallback intCall;
 	floatCallback floatCall;
 	boolCallback boolCall;
 
+	std::string constraintMin;
+	std::string constraintMax;
+	std::string trafoType;
+	std::string trafoNo;
+
 	listValues();
 	~listValues();
-	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, floatCallback floatCall);
-	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, integerCallback intCall);
-	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, boolCallback boolCall);
+	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, floatCallback floatCall);
+	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, integerCallback intCall);
+	listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, boolCallback boolCall);
+
+	void metaData(std::string constraintMin, std::string constraintMax, std::string trafoType, std::string trafoNo);
 };
 
 /**

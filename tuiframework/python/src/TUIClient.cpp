@@ -35,10 +35,12 @@ void TUIClient::setEventCallback(PyObject * callback) {
 
 	std::vector<TUIObjectInstance> objectInstances = getAttachedObjects().getTUIObjectInstanceVector();
 	std::vector<TUIObjectType> objectTypes = getAttachedObjects().getTUIObjectTypeVector();
+	int instanceID = 0;
 
 	for (vector<TUIObjectInstance>::iterator it = objectInstances.begin(); it != objectInstances.end(); it++) {
 		for (vector<TUIObjectType>::iterator typeIt = objectTypes.begin(); typeIt != objectTypes.end(); typeIt++) {
-			if (typeIt->getName() == it->getTypeName()) {
+			if (typeIt->getName() == it->getTypeName() && instanceID != it->getID()) {
+				instanceID = it->getID();
 				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin(); typeMapIt2 != typeIt->getPortMap().end(); typeMapIt2++)
 				{
 					if (typeMapIt2->second.getDataFlowDirection() == 2)

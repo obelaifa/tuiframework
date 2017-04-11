@@ -137,44 +137,48 @@ void TUICsharp::SignalChanged(const DigitalChangedEvent * e)
 
 void TUICsharp::SignalChanged(const AnalogChangedEvent * e)
 {
-	std::ofstream fichier("debug.txt", ios::out | ios::trunc);
-	fichier << "debug" << endl;
 	for (int i = 0; i < list.size(); ++i)
 	{
-		fichier << "Event Adress " << e->getAddress().getPortNr() << endl << "PortAdress: " << list.at(i).portAdress << endl << list.at(i).objectName << " " << list.at(i).description << endl;
-		if (list.at(i).portAdress == e->getAddress().getPortNr())
+		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			list.at(i).floatCall(list.at(i).objectName, list.at(i).description, e->getPayload());
+			list.at(i).floatCall(list.at(i).objectName, list.at(i).description, e->getPayload(), list.at(i).trafoType, list.at(i).trafoNo);
 		}
 	}
-	fichier.close();
 }
 
 void TUICsharp::connectAll(floatCallback call)
 {
 	std::vector<TUIObjectInstance> objectInstances = getAttachedObjects().getTUIObjectInstanceVector();
 	std::vector<TUIObjectType> objectTypes = getAttachedObjects().getTUIObjectTypeVector();
-	//std::ofstream fichier("debug.txt", ios::out | ios::trunc);
-	int portAdress = 1;
+	
+	int portAdress = 0;
+	int instanceID = 0;
 
 	for (vector<TUIObjectInstance>::iterator it = objectInstances.begin(); it != objectInstances.end(); it++) {
 		for (vector<TUIObjectType>::iterator typeIt = objectTypes.begin(); typeIt != objectTypes.end(); typeIt++) {
-			if (typeIt->getName() == it->getTypeName()) {
-				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin(); typeMapIt2 != typeIt->getPortMap().end(); typeMapIt2++, portAdress++)
+			if (typeIt->getName() == it->getTypeName() && instanceID != it->getID()) {
+				instanceID = it->getID();
+				portAdress = 0;
+				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin(); typeMapIt2 != typeIt->getPortMap().end(); typeMapIt2++)
 				{
-					//fichier << "PortAdress: " << portAdress << endl << it->getName() << " " << typeMapIt2->second.getName() << " " << typeMapIt2->second.getDescription() << endl;
+					portAdress++;
 					if (typeMapIt2->second.getDataFlowDirection() == 2)
 						continue;
 
 					if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
-						listValues values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), ANALOG, portAdress, call);
+						std::string constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
+						std::string constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
+						std::string trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
+						std::string trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
+
+						listValues values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), ANALOG, instanceID, portAdress, call);
+						values.metaData(constraintMin, constraintMax, trafoType, trafoNo);
 						list.push_back(values);
 					}
 				}
 			}
 		}
 	}
-	//fichier.close();
 	this->connect();
 }
 
@@ -186,17 +190,25 @@ listValues::~listValues()
 {
 }
 
-listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, floatCallback floatCall)
-	:objectName(objectName), portName(portName), description(description), tuiType(tuiType), portAdress(portAdress), floatCall(floatCall)
+listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, floatCallback floatCall)
+	:objectName(objectName), portName(portName), description(description), tuiType(tuiType), entityID(entityID), portAdress(portAdress), floatCall(floatCall)
 {
 }
 
-listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, integerCallback intCall)
-	: objectName(objectName), portName(portName), description(description), tuiType(tuiType), portAdress(portAdress), intCall(intCall)
+listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, integerCallback intCall)
+	: objectName(objectName), portName(portName), description(description), tuiType(tuiType), entityID(entityID), portAdress(portAdress), intCall(intCall)
 {
 }
 
-listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int portAdress, boolCallback boolCall)
-	: objectName(objectName), portName(portName), description(description), tuiType(tuiType), portAdress(portAdress), boolCall(boolCall)
+listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, boolCallback boolCall)
+	: objectName(objectName), portName(portName), description(description), tuiType(tuiType), entityID(entityID), portAdress(portAdress), boolCall(boolCall)
 {
+}
+
+void listValues::metaData(std::string constraintMin, std::string constraintMax, std::string trafoType, std::string trafoNo)
+{
+	this->constraintMin = constraintMin;
+	this->constraintMax = constraintMax;
+	this->trafoType = trafoType;
+	this->trafoNo = trafoNo;
 }

@@ -19,7 +19,7 @@ typedef void(*integerCallback)(int value); // Callback for Integer Values
 * Float Callback
 * @param value Gleitkomma-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value); // Callback for float Values
+typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value, std::string trafoType, std::string trafoNo); // Callback for float Values
 
 /**
 * Boolean Callback

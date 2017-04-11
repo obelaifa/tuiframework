@@ -96,7 +96,7 @@ public class TUIClientLibary
     * Delegat für das Callback für Float-Werte
     * @param value Float-Werte.
     */
-	public delegate void floatCallback(string TUIObjectName, string description, float value);
+	public delegate void floatCallback (string TUIObjectName, string description, float value, string trafoType, string trafoNo);
 
     /**
     * ### Nicht implementiert bisher ###

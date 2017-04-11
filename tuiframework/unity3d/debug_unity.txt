@@ -1,0 +1,7 @@
+debug Unity:
+std::ofstream fichier("debug.txt", ios::out | ios::trunc);
+fichier << "Instance: " << it->getName() << " " << it->getID() << endl;
+fichier << "/---------------------------------------------------\\" << endl;
+fichier << "PortAdress: " << portAdress << endl << it->getName() << " " << typeMapIt2->second.getName() << " " << typeMapIt2->second.getDescription() << endl;
+fichier << "/---------------------------------------------------\\" << endl;
+fichier.close();
