@@ -103,14 +103,16 @@ public class TUIUnity : MonoBehaviour
 					tuiObject.Value.nodeFound = true;
 				}
 
-				if (tuiObject.Value.TUI == null)
-					continue;
-
 				d = tuiObject.Value.received_value - tuiObject.Value.value;
 				tuiObject.Value.value = tuiObject.Value.received_value;
 
 				if (d <= 0.05f && d >= -0.5f)
-					d = 0f;
+					continue;
+
+				TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, tuiObject.Value.received_value.ToString());
+
+				if (tuiObject.Value.TUI == null)
+					continue;
 
 				if (tuiObject.Value.trafoNo.CompareTo("1") == 0)
 					movement.Set (d, 0f, 0f);
@@ -123,7 +125,6 @@ public class TUIUnity : MonoBehaviour
 					tuiObject.Value.TUI.transform.Rotate (movement);
 				else if (tuiObject.Value.trafoType.CompareTo ("trans") == 0)
 					tuiObject.Value.TUI.transform.Translate (movement/1000f);
-
 			}
         } 
     }
@@ -132,7 +133,7 @@ public class TUIUnity : MonoBehaviour
     * Verbindet die Parameter.
     */
     public void connecting() {
-		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback));
+		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback), new TUIClientLibary.boolCallback(this.boolCalback));
     }
 
     /**
@@ -156,14 +157,30 @@ public class TUIUnity : MonoBehaviour
         return true;
     }
 
-	private void floatCallback (string TUIObjectName, string description, float value, string trafoType, string trafoNo) {
-		Debug.Log (TUIObjectName);
-		Debug.Log (description);
-		Debug.Log (value);
-		Debug.Log (trafoType);
-		Debug.Log (trafoNo);
-
+	private void floatCallback (string TUIObjectName, string portName, string description, float value, string trafoType, string trafoNo) {
 		try {
+			lock (_locker) {
+				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + description)) {
+					tuiOjectMap.Add(TUIObjectName + " " + description, new TUIObject());
+					tuiOjectMap [TUIObjectName + " " + description].TUIObjectName = TUIObjectName;
+					tuiOjectMap [TUIObjectName + " " + description].portName = portName;
+					tuiOjectMap [TUIObjectName + " " + description].description = description;
+					tuiOjectMap [TUIObjectName + " " + description].trafoType = trafoType;
+					tuiOjectMap [TUIObjectName + " " + description].trafoNo = trafoNo;
+				}
+				tuiOjectMap [TUIObjectName + " " + description].received_value = value;
+			}
+		}
+		catch (Exception e) {
+			Debug.LogError(e.ToString());
+		}
+	}
+
+
+	private void boolCalback (string TUIObjectName, string description, bool value) {
+		Debug.Log(TUIObjectName + " " + description);
+		Debug.Log (value);
+		/*try {
 			lock (_locker) {
 				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + description)) {
 					tuiOjectMap.Add(TUIObjectName + " " + description, new TUIObject());
@@ -177,7 +194,7 @@ public class TUIUnity : MonoBehaviour
 		}
 		catch (Exception e) {
 			Debug.LogError(e.ToString());
-		}
+		}*/
 	}
 
 	private GameObject findNode(string TUIOjectName, string description) {
@@ -191,10 +208,11 @@ public class TUIUnity : MonoBehaviour
 			}
 
 		if (node != null)
-			if (node.name.CompareTo (description) != 0)
-				node = null;
-		
+		if (node.name.CompareTo (description) != 0)
+			node = null;
+
 		return node;
 	}
 }
+
 

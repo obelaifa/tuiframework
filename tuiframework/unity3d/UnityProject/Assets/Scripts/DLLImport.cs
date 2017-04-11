@@ -50,41 +50,19 @@ public class TUIClientLibary
     [DllImport("TUIUnityClient")]
     public static extern IntPtr createTUICsharpInstance();
 
-    /**
+	/**
     * Übergibt die Channel-Parameter zur Verbindung auf dem TUI-Server.
     * @param instance Die TUI C#-Instanz.
     * @param TUIType ID des TUITypes.
     * @param objectName Name des TUI-Object-Types.
     * @param channelName Name des Channels.
-    * @param Callback für Integer-Werte.
+    * @param Callback für Boolean-Werte und Float-Werte.
     */
-    [DllImport("TUIUnityClient")]
-    public static extern void connectingParameters(IntPtr instance, int TUIType, string objectName, string channelName, integerCallback call);
-
-    /**
-    * Übergibt die Channel-Parameter zur Verbindung auf dem TUI-Server.
-    * @param instance Die TUI C#-Instanz.
-    * @param TUIType ID des TUITypes.
-    * @param objectName Name des TUI-Object-Types.
-    * @param channelName Name des Channels.
-    * @param Callback für Float-Werte.
-    */
-    [DllImport("TUIUnityClient", EntryPoint="connectingParametersfloat")]
-	public static extern void connectingParameters(IntPtr instance, int TUIType, string objectName, string channelName, floatCallback call);
-
-    /**
-    * Übergibt die Channel-Parameter zur Verbindung auf dem TUI-Server.
-    * @param instance Die TUI C#-Instanz.
-    * @param TUIType ID des TUITypes.
-    * @param objectName Name des TUI-Object-Types.
-    * @param channelName Name des Channels.
-    * @param Callback für Boolean-Werte.
-    */
-    [DllImport("TUIUnityClient", EntryPoint = "connectingParametersbool")]
-	public static extern void connectingParameters(IntPtr instance, int TUIType, string objectName, string channelName, boolCallback call);
-
 	[DllImport("TUIUnityClient", EntryPoint = "connectingParametersAll")]
-	public static extern void connectingParametersAll(IntPtr instance, floatCallback call);
+	public static extern void connectingParametersAll(IntPtr instance, floatCallback call, boolCallback callb);
+
+	[DllImport("TUIUnityClient")]
+	public static extern void sendUnityEvent (IntPtr instance, string tuiObject, string portName, string serializedPayload);
 
     /**
     * Delegat für das Callback für Integer-Werte
@@ -96,7 +74,7 @@ public class TUIClientLibary
     * Delegat für das Callback für Float-Werte
     * @param value Float-Werte.
     */
-	public delegate void floatCallback (string TUIObjectName, string description, float value, string trafoType, string trafoNo);
+	public delegate void floatCallback (string TUIObjectName, string portName, string description, float value, string trafoType, string trafoNo);
 
     /**
     * ### Nicht implementiert bisher ###
@@ -105,12 +83,11 @@ public class TUIClientLibary
     */
     public delegate void byteCallback(byte value);
 
-
     /**
     * Delegat für das Callback für bool-Werte
     * @param value bool-Werte.
     */
-    public delegate void boolCallback(bool value);
+	public delegate void boolCallback(string TUIObjectName, string description, bool value);
 
     /**
     * ### Nicht implementiert bisher ###
@@ -118,7 +95,6 @@ public class TUIClientLibary
     * @param value String-Werte.
     */
     public delegate void stringCallback(string value);
-
 
     /**
     * Enumeration zum mappen der TUI-Type IDs

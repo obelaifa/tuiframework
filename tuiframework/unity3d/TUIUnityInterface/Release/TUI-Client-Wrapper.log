@@ -1,4 +1,6 @@
-﻿  TUICsharp.cpp
+﻿  TUIClientWrapper.cpp
+  TUICsharp.cpp
+  TUIInit.cpp
      Creating library C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\x64\TUIUnityClient.lib and object C:\Users\micka\Documents\Fraunhofer_2016_2017\TUIFramework_Github\tuiframework\cpp\Windows\Release\x64\TUIUnityClient.exp
   Generating code
   Finished generating code

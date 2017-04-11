@@ -17,12 +17,11 @@ void TUIInit::push(tuiframework::IEvent * event)
 		tuiframework::SystemMsg * msg = static_cast<tuiframework::SystemMsg *>(event);
 		if (msg->getPayload() == CONNECTION_ESTABLISHED) {
 			cout << "CONNECTION ESTABLISHED" << endl;
-			//this->tuiCSharp.connect();
 		}
 		else if(msg->getPayload() == REMOVE_CONNECTION)
 		{
 			cout << "REMOVE CONNECTION" << endl;
-			//this->tuiCSharp.disconnect();
+			this->tuiCSharp.disconnect();
 		}
 	}
 }

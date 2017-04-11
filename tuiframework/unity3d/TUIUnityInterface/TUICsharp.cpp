@@ -19,13 +19,13 @@ void TUICsharp::connect()
 			// Verbindet sich je nach TUITypeID
 			switch (it->tuiType)
 			{
-			case 11:
+			case DIGITAL:
 				CONNECT(DigitalChangedEvent, it->objectName, it->portName, TUICsharp, this, &TUICsharp::SignalChanged);
 				break;
-			case 12:
+			case ANALOG:
 				CONNECT(AnalogChangedEvent, it->objectName, it->portName, TUICsharp, this, &TUICsharp::SignalChanged);
 				break;
-			case 13:
+			case INTEGER:
 				CONNECT(IntegerChangedEvent, it->objectName, it->portName, TUICsharp, this, &TUICsharp::SignalChanged);
 				break;
 			default:
@@ -51,13 +51,13 @@ void TUICsharp::disconnect()
 			// Verbindet sich je nach TUITypeID
 			switch (it->tuiType)
 			{
-			case 11:
+			case DIGITAL:
 				DISCONNECT(DigitalChangedEvent, it->objectName, it->portName, TUICsharp, this, &TUICsharp::SignalChanged);
 				break;
-			case 12:
+			case ANALOG:
 				DISCONNECT(AnalogChangedEvent, it->objectName, it->portName, TUICsharp, this, &TUICsharp::SignalChanged);
 				break;
-			case 13:
+			case INTEGER:
 				DISCONNECT(IntegerChangedEvent, it->objectName, it->portName, TUICsharp, this, &TUICsharp::SignalChanged);
 				break;
 			default:
@@ -70,45 +70,6 @@ void TUICsharp::disconnect()
 		cerr << "Exception" << endl;
 		cerr << e.getFormattedString() << endl;
 	}
-}
-
-void TUICsharp::connecting(int TUIType, std::string TUIObjectName, std::string description, integerCallback call)
-{
-	listValues values;
-	values.tuiType = TUIType;
-	values.objectName = TUIObjectName;
-	values.portName = description;
-	values.description = description;
-	values.intCall = call;
-
-	// Fügt die Struktur der Liste hinzu.
-	list.push_back(values);
-}
-
-void TUICsharp::connecting(int TUIType, std::string TUIObjectName, std::string description, floatCallback call)
-{
-	listValues values;
-	values.tuiType = TUIType;
-	values.objectName = TUIObjectName;
-	values.portName = description;
-	values.description = description;
-	values.floatCall = call;
-
-	// Fügt die Struktur der Liste hinzu.
-	list.push_back(values);
-}
-
-void TUICsharp::connecting(int TUIType, std::string TUIObjectName, std::string description, boolCallback call)
-{
-	listValues values;
-	values.tuiType = TUIType;
-	values.objectName = TUIObjectName;
-	values.portName = description;
-	values.description = description;
-	values.boolCall = call;
-
-	// Fügt die Struktur der Liste hinzu.
-	list.push_back(values);
 }
 
 void TUICsharp::SignalChanged(const IntegerChangedEvent * e)
@@ -127,10 +88,9 @@ void TUICsharp::SignalChanged(const DigitalChangedEvent * e)
 {
 	for (int i = 0; i < list.size(); ++i)
 	{
-		if (i == (e->getAddress().getPortNr() - 1))
+		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			// Ruft die Callback-Funktion auf
-			list.at(i).boolCall(e->getPayload());
+			list.at(i).boolCall(list.at(i).objectName, list.at(i).description, e->getPayload());
 		}
 	}
 }
@@ -141,12 +101,12 @@ void TUICsharp::SignalChanged(const AnalogChangedEvent * e)
 	{
 		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			list.at(i).floatCall(list.at(i).objectName, list.at(i).description, e->getPayload(), list.at(i).trafoType, list.at(i).trafoNo);
+			list.at(i).floatCall(list.at(i).objectName, list.at(i).portName, list.at(i).description, e->getPayload(), list.at(i).trafoType, list.at(i).trafoNo);
 		}
 	}
 }
 
-void TUICsharp::connectAll(floatCallback call)
+void TUICsharp::connectAll(floatCallback call, boolCallback callb)
 {
 	std::vector<TUIObjectInstance> objectInstances = getAttachedObjects().getTUIObjectInstanceVector();
 	std::vector<TUIObjectType> objectTypes = getAttachedObjects().getTUIObjectTypeVector();
@@ -173,6 +133,10 @@ void TUICsharp::connectAll(floatCallback call)
 
 						listValues values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), ANALOG, instanceID, portAdress, call);
 						values.metaData(constraintMin, constraintMax, trafoType, trafoNo);
+						list.push_back(values);
+					}
+					else if (typeMapIt2->second.getTypeName().compare("DigitalChannel") == 0) {
+						listValues values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), DIGITAL, instanceID, portAdress, callb);
 						list.push_back(values);
 					}
 				}
@@ -211,4 +175,22 @@ void listValues::metaData(std::string constraintMin, std::string constraintMax, 
 	this->constraintMax = constraintMax;
 	this->trafoType = trafoType;
 	this->trafoNo = trafoNo;
+}
+
+void TUICsharp::sendEvent(const std::string & tuiObjectName, const std::string & portName, const std::string & serializedPayload) {
+
+	TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
+	TUIObjectStub * t = tc.getStub(tuiObjectName);
+	IEventChannel * iec = t->getSinkChannel(portName);
+
+	IEvent * event = TUIClientAppProvider::getInstance()->getEventFactory().createInstance(iec->getChannelTypeID());
+	// IEvent * event = EventFactorySingleton::getInstance()->createInstance(iec->getChannelTypeID());
+	if (event) {
+		stringstream ss;
+		ss << "-1 -1 " << serializedPayload;
+		//ss.str(serializedPayload);
+		ss >> event;
+		//cout << "payload: " << serializedPayload << "Event: " <<  event << endl;
+		iec->push(event);
+	}
 }

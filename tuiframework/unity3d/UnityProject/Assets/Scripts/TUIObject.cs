@@ -6,6 +6,7 @@ public class TUIObject {
 
 	public GameObject TUI;
 	public string TUIObjectName;
+	public string portName;
 	public string description;
 	public string trafoType;
 	public string trafoNo;

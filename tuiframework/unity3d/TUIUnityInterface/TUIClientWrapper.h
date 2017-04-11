@@ -19,13 +19,13 @@ typedef void(*integerCallback)(int value); // Callback for Integer Values
 * Float Callback
 * @param value Gleitkomma-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value, std::string trafoType, std::string trafoNo); // Callback for float Values
+typedef void(*floatCallback)(std::string TUIObjectName, std::string portName, std::string description, float value, std::string trafoType, std::string trafoNo); // Callback for float Values
 
 /**
 * Boolean Callback
 * @param value Boolean-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*boolCallback)(bool value); // Callback for boolean Values
+typedef void(*boolCallback)(std::string TUIObjectName, std::string description, bool value); // Callback for boolean Values
 
 extern "C" 
 {
@@ -69,28 +69,9 @@ extern "C"
 	* @param TUIType ID des TUI-Types
 	* @param objectName Name des TUI-Object Types
 	* @param channelName Name des Channels mit dem sich verbunden werden soll.
-	* @param integerCallBack Funktions-Callback für Integer-Werte.
+	* @param floatCallBack Funktions-Callback für Float-Werte und boolean-Werte.
 	*/
-	TESTFUNCDLL_API void connectingParameters(void* instance, int TUIType, const char* objectName, const char* description, integerCallback call);
-	/**
-	* Setzt die Parameter zum Verbinden mit dem TUI-Channel
-	* @param instance Die C# Instanz
-	* @param TUIType ID des TUI-Types
-	* @param objectName Name des TUI-Object Types
-	* @param channelName Name des Channels mit dem sich verbunden werden soll.
-	* @param floatCallBack Funktions-Callback für Float-Werte.
-	*/
-	TESTFUNCDLL_API void connectingParametersfloat(void* instance, int TUIType, const char* objectName, const char* description, floatCallback call);
+	TESTFUNCDLL_API void connectingParametersAll(void* instance, floatCallback call, boolCallback callb);
 
-	/**
-	* Setzt die Parameter zum Verbinden mit dem TUI-Channel
-	* @param instance Die C# Instanz
-	* @param TUIType ID des TUI-Types
-	* @param objectName Name des TUI-Object Types
-	* @param channelName Name des Channels mit dem sich verbunden werden soll.
-	* @param integerCallBack Funktions-Callback für boolean-Werte.
-	*/
-	TESTFUNCDLL_API void connectingParametersbool(void* instance, int TUIType, const char* objectName, const char* description, boolCallback call);
-
-	TESTFUNCDLL_API void connectingParametersAll(void* instance, floatCallback call);
+	TESTFUNCDLL_API void sendUnityEvent(void* instance, const char* tuiObjectName, const char* portName, const char* serializedPayload);
 }

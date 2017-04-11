@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <fstream>
 
-#define BOOLEAN 11
+#define DIGITAL 11
 #define ANALOG 12
 #define INTEGER 13
 
@@ -26,13 +26,13 @@ typedef void(*integerCallback)(int value); // Callback for Integer Values
 * Float Callback
 * @param value Gleitkomma-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*floatCallback)(std::string TUIObjectName, std::string description, float value, std::string trafoType, std::string trafoNo); // Callback for float Values
+typedef void(*floatCallback)(std::string TUIObjectName, std::string portName, std::string description, float value, std::string trafoType, std::string trafoNo); // Callback for float Values
 
 /**
 * Boolean Callback
 * @param value Boolean-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*boolCallback)(bool value); // Callback for boolean Values
+typedef void(*boolCallback)(std::string TUIObjectName, std::string description, bool value); // Callback for boolean Values
 
 
 /**
@@ -73,33 +73,6 @@ public:
 	TUICsharp();
 	~TUICsharp();
 
-	/**
-	* Fügt die Parameter zu einem Struct zusammen und speichert diese in einer Liste.
-	* @param TUIType ID des TUITypes
-	* @param TUIObjectname TUI-Object-Type Name
-	* @param channelName Name des TUI-Channels
-	* @param integerCallBack Callback für Integer-Werte.
-	*/
-	void connecting(int TUIType, std::string TUIObjectName, std::string description, integerCallback call);
-
-	/**
-	* Fügt die Parameter zu einem Struct zusammen und speichert diese in einer Liste.
-	* @param TUIType ID des TUITypes
-	* @param TUIObjectname TUI-Object-Type Name
-	* @param channelName Name des TUI-Channels
-	* @param integerCallBack Callback für Float-Werte.
-	*/
-	void connecting(int TUIType, std::string TUIObjectName, std::string description, floatCallback call);
-
-	/**
-	* Fügt die Parameter zu einem Struct zusammen und speichert diese in einer Liste.
-	* @param TUIType ID des TUITypes
-	* @param TUIObjectname TUI-Object-Type Name
-	* @param channelName Name des TUI-Channels
-	* @param integerCallBack Callback für Boolean-Werte.
-	*/
-	void connecting(int TUIType, std::string TUIObjectName, std::string description, boolCallback call);
-
 	/*
 	* Verbindet die in der Liste enthaltenten Parameter mit dem TUI-Server
 	*/
@@ -128,7 +101,16 @@ public:
 	*/
 	void SignalChanged(const AnalogChangedEvent * e);
 
-	void connectAll(floatCallback call);
+	/**
+	* Fügt die Parameter zu einem Struct zusammen und speichert diese in einer Liste.
+	* @param TUIType ID des TUITypes
+	* @param TUIObjectname TUI-Object-Type Name
+	* @param channelName Name des TUI-Channels
+	* @param integerCallBack Callback für Boolean-Werte und Float-Werte.
+	*/
+	void connectAll(floatCallback call, boolCallback callb);
+
+	void sendEvent(const std::string & tuiObjectName, const std::string & portName, const std::string & serializedPayload);
 
 private:
 

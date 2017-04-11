@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns:xi="http://www.w3.org/2001/XInclude">
+  <ServerConfig>
+    <ServerStartupConfig></ServerStartupConfig>
+    <MSPTypeSequence>
+      <MSPType name="PackedByteToByteMSP">
+        <PortTypeSequence>
+          <PortType name="in" sink="1" source="0" typename="PackedInteger">
+            <Description/>
+          </PortType>
+          <PortType name="bit0" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="bit1" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="bit2" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="bit3" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="bit4" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="bit5" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="bit6" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="bit7" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="outPacked" sink="0" source="1" typename="PackedInteger">
+            <Description/>
+          </PortType>
+        </PortTypeSequence>
+        <ParameterTypeDefSequence/>
+        <ParameterTypeSequence/>
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="0"/>
+        </ParameterGroup>
+      </MSPType>
+    </MSPTypeSequence>
+    <TUIObjectTypeSequence>
+      <TUIObjectType name="HT">
+        <PortTypeSequence>
+          <PortType name="M01.C_rueck" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M02.C_auf" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M02.C_ab" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M01.C_vor" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+
+          <PortType name="M01.C_rueckOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M02.C_aufOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M02.C_abOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="M01.C_vorOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+        </PortTypeSequence>
+      </TUIObjectType>
+
+
+      <TUIObjectType name="LBR">
+        <PortTypeSequence>
+          <PortType name="CTR.GreiferIstAuf" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="CTR.GreiferIstZu" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="CTR.AntriebeSindAn" sink="0" source="1" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+
+          <PortType name="CTR.GreiferIstAufOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="CTR.GreiferIstZuOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+          <PortType name="CTR.AntriebeSindAnOut" sink="1" source="0" typename="DigitalChannel">
+            <Description/>
+          </PortType>
+        </PortTypeSequence>
+      </TUIObjectType>
+    </TUIObjectTypeSequence>
+    <MSPInstanceSequence>
+      <MSPInstance name="PackedByteToByte0" typename="PackedByteToByteMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="0"/>
+        </ParameterGroup>
+      </MSPInstance>
+      <MSPInstance name="PackedByteToByte1" typename="PackedByteToByteMSP">
+        <ParameterGroup name="Convert">
+          <Parameter name="id" value="1"/>
+        </ParameterGroup>
+      </MSPInstance>
+    </MSPInstanceSequence>
+    <TUIObjectInstanceSequence>
+      <TUIObjectInstance name="HT100" typename="HT"></TUIObjectInstance>
+      <TUIObjectInstance name="HT200" typename="HT"></TUIObjectInstance>
+      <TUIObjectInstance name="HT300" typename="HT"></TUIObjectInstance>
+      <TUIObjectInstance name="LBR100" typename="LBR"></TUIObjectInstance>
+    </TUIObjectInstanceSequence>
+    <ConnectorSequence>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit0"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M01.C_rueck"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit1"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M01.C_vor"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit2"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M02.C_ab"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit3"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M02.C_auf"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit4"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M01.C_rueck"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit5"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M01.C_vor"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit6"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M02.C_ab"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte0" entityType="MSP" portName="bit7"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M02.C_auf"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte1" entityType="MSP" portName="bit0"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M01.C_rueck"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte1" entityType="MSP" portName="bit1"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M01.C_vor"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte1" entityType="MSP" portName="bit2"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M02.C_ab"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte1" entityType="MSP" portName="bit3"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M02.C_auf"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte1" entityType="MSP" portName="bit4"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.AntriebeSindAn"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte1" entityType="MSP" portName="bit5"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstAuf"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="PackedByteToByte1" entityType="MSP" portName="bit6"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstZu"></DstAddress>
+      </Connector>
+
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstAufOut"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstAuf"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="CTR.AntriebeSindAnOut"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.AntriebeSindAn"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstZuOut"></SrcAddress>
+        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstZu"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="M01.C_rueckOut"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M01.C_rueck"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="M01.C_vorOut"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M01.C_vor"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="M02.C_abOut"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M02.C_ab"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="M02.C_aufOut"></SrcAddress>
+        <DstAddress entityName="HT100" entityType="TUI" portName="M02.C_auf"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="M01.C_rueckOut"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M01.C_rueck"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="M01.C_vorOut"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M01.C_vor"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="M02.C_abOut"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M02.C_ab"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="M02.C_aufOut"></SrcAddress>
+        <DstAddress entityName="HT200" entityType="TUI" portName="M02.C_auf"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="M01.C_rueckOut"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M01.C_rueck"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="M01.C_vorOut"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M01.C_vor"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="M02.C_abOut"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M02.C_ab"></DstAddress>
+      </Connector>
+      <Connector>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="M02.C_aufOut"></SrcAddress>
+        <DstAddress entityName="HT300" entityType="TUI" portName="M02.C_auf"></DstAddress>
+      </Connector>
+
+    </ConnectorSequence>
+  </ServerConfig>
+</document>

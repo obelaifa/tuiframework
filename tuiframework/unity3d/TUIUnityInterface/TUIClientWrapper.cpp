@@ -37,28 +37,16 @@ extern "C"
 		tuiInit->setTUICsharp(*(TUICsharp*)tuiCSharpInstance);
 	}
 
-	void connectingParameters(void* instance, int TUIType, const char* objectName, const char* description, integerCallback call)
+	void connectingParametersAll(void* instance, floatCallback call, boolCallback callb)
 	{
 		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connecting(TUIType, std::string(objectName), std::string(description), call);
+		tuiUnity->connectAll(call, callb);
 	}
 
-	void connectingParametersfloat(void* instance, int TUIType, const char* objectName, const char* description, floatCallback call)
+	void sendUnityEvent(void* instance, const char* tuiObjectName, const char* portName, const char* serializedPayload)
 	{
 		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connecting(TUIType, std::string(objectName), std::string(description), call);
-	}
-
-	void connectingParametersbool(void* instance, int TUIType, const char* objectName, const char* description, boolCallback call)
-	{
-		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connecting(TUIType, std::string(objectName), std::string(description), call);
-	}
-
-	void connectingParametersAll(void* instance, floatCallback call)
-	{
-		TUICsharp* tuiUnity = (TUICsharp*)instance;
-		tuiUnity->connectAll(call);
+		tuiUnity->sendEvent(tuiObjectName, portName, serializedPayload);
 	}
 }
 

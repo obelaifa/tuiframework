@@ -27,12 +27,12 @@ def dstmethod(name, portname, value, description, constraintMin, constraintMax, 
 	#print("TUI_Instance: " + name + " ; port: " + portname + " ; value: " + value + " ; trafoNo: " + trafoNo)
 	JSONdict[name][portname]['Value'] = float(value) #we update the value of the corresponding port in the dictionary we use for the UDP connection
 
-	if description == "":
-		return
+	#if description == "":
+	#	return
 
-	PortName = portname
+	#PortName = portname
 
-	tuiclient.sendEvent(name, PortName, value)
+	#tuiclient.sendEvent(name, PortName, value)
 
 #initialize the dictionary if it is not already done
 def initDict(name, portname, description, constraintMin, constraintMax, trafoType, trafoNo):
