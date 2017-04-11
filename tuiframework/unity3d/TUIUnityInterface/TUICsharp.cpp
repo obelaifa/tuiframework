@@ -90,7 +90,7 @@ void TUICsharp::SignalChanged(const DigitalChangedEvent * e)
 	{
 		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			list.at(i).boolCall(list.at(i).objectName, list.at(i).description, e->getPayload());
+			list.at(i).boolCall(list.at(i).objectName, list.at(i).portName, list.at(i).description, e->getPayload());
 		}
 	}
 }

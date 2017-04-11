@@ -87,7 +87,7 @@ public class TUIClientLibary
     * Delegat für das Callback für bool-Werte
     * @param value bool-Werte.
     */
-	public delegate void boolCallback(string TUIObjectName, string description, bool value);
+	public delegate void boolCallback(string TUIObjectName, string portName, string description, bool value);
 
     /**
     * ### Nicht implementiert bisher ###

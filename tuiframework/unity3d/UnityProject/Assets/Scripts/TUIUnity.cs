@@ -45,8 +45,8 @@ public class TUIUnity : MonoBehaviour
     * Bisher aber nicht funktionsfähig da im TUI-Framework die Disconnect-Funktion bugged ist.
     */
     void OnApplicationQuit() {
-        TUIClientLibary.disconnectUnityWithTUIServer();
-		receiveThread.Abort();
+        //TUIClientLibary.disconnectUnityWithTUIServer();
+		//receiveThread.Abort();
         Debug.Log("Disconnected");
     }
 
@@ -177,24 +177,23 @@ public class TUIUnity : MonoBehaviour
 	}
 
 
-	private void boolCalback (string TUIObjectName, string description, bool value) {
+	private void boolCalback (string TUIObjectName, string portName, string description, bool value) {
 		Debug.Log(TUIObjectName + " " + description);
 		Debug.Log (value);
-		/*try {
+		try {
 			lock (_locker) {
 				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + description)) {
 					tuiOjectMap.Add(TUIObjectName + " " + description, new TUIObject());
 					tuiOjectMap [TUIObjectName + " " + description].TUIObjectName = TUIObjectName;
+					tuiOjectMap [TUIObjectName + " " + description].portName = portName;
 					tuiOjectMap [TUIObjectName + " " + description].description = description;
-					tuiOjectMap [TUIObjectName + " " + description].trafoType = trafoType;
-					tuiOjectMap [TUIObjectName + " " + description].trafoNo = trafoNo;
 				}
-				tuiOjectMap [TUIObjectName + " " + description].received_value = value;
+				tuiOjectMap [TUIObjectName + " " + description].received_value = System.Convert.ToSingle(value);
 			}
 		}
 		catch (Exception e) {
 			Debug.LogError(e.ToString());
-		}*/
+		}
 	}
 
 	private GameObject findNode(string TUIOjectName, string description) {

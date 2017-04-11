@@ -32,7 +32,7 @@ typedef void(*floatCallback)(std::string TUIObjectName, std::string portName, st
 * Boolean Callback
 * @param value Boolean-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*boolCallback)(std::string TUIObjectName, std::string description, bool value); // Callback for boolean Values
+typedef void(*boolCallback)(std::string TUIObjectName, std::string portName, std::string description, bool value); // Callback for boolean Values
 
 
 /**
