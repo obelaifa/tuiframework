@@ -116,7 +116,6 @@ namespace tuiframework {
 			PackedIntegerEvent* event = new PackedIntegerEvent(-1, -1, packedInt);
 
 			this->out->push(event);
-
 		}
 
 	}

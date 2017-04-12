@@ -106,10 +106,13 @@ public class TUIUnity : MonoBehaviour
 				d = tuiObject.Value.received_value - tuiObject.Value.value;
 				tuiObject.Value.value = tuiObject.Value.received_value;
 
-				if (d <= 0.05f && d >= -0.5f)
+				if (d <= 0.05f && d >= -0.5f && tuiObject.Value.TUIType == 12)
 					continue;
-
-				TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, tuiObject.Value.received_value.ToString());
+				
+				if (tuiObject.Value.TUIType == 12)
+					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, tuiObject.Value.received_value.ToString ());
+				else if (tuiObject.Value.TUIType == 13)
+					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName + "Out", tuiObject.Value.bool_value.ToString ());
 
 				if (tuiObject.Value.TUI == null)
 					continue;
@@ -160,15 +163,16 @@ public class TUIUnity : MonoBehaviour
 	private void floatCallback (string TUIObjectName, string portName, string description, float value, string trafoType, string trafoNo) {
 		try {
 			lock (_locker) {
-				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + description)) {
-					tuiOjectMap.Add(TUIObjectName + " " + description, new TUIObject());
-					tuiOjectMap [TUIObjectName + " " + description].TUIObjectName = TUIObjectName;
-					tuiOjectMap [TUIObjectName + " " + description].portName = portName;
-					tuiOjectMap [TUIObjectName + " " + description].description = description;
-					tuiOjectMap [TUIObjectName + " " + description].trafoType = trafoType;
-					tuiOjectMap [TUIObjectName + " " + description].trafoNo = trafoNo;
+				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + portName)) {
+					tuiOjectMap.Add(TUIObjectName + " " + portName, new TUIObject());
+					tuiOjectMap [TUIObjectName + " " + portName].TUIObjectName = TUIObjectName;
+					tuiOjectMap [TUIObjectName + " " + portName].portName = portName;
+					tuiOjectMap [TUIObjectName + " " + portName].description = description;
+					tuiOjectMap [TUIObjectName + " " + portName].TUIType = 12;
+					tuiOjectMap [TUIObjectName + " " + portName].trafoType = trafoType;
+					tuiOjectMap [TUIObjectName + " " + portName].trafoNo = trafoNo;
 				}
-				tuiOjectMap [TUIObjectName + " " + description].received_value = value;
+				tuiOjectMap [TUIObjectName + " " + portName].received_value = value;
 			}
 		}
 		catch (Exception e) {
@@ -178,17 +182,16 @@ public class TUIUnity : MonoBehaviour
 
 
 	private void boolCalback (string TUIObjectName, string portName, string description, bool value) {
-		Debug.Log(TUIObjectName + " " + description);
-		Debug.Log (value);
 		try {
 			lock (_locker) {
-				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + description)) {
-					tuiOjectMap.Add(TUIObjectName + " " + description, new TUIObject());
-					tuiOjectMap [TUIObjectName + " " + description].TUIObjectName = TUIObjectName;
-					tuiOjectMap [TUIObjectName + " " + description].portName = portName;
-					tuiOjectMap [TUIObjectName + " " + description].description = description;
+				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + portName)) {
+					tuiOjectMap.Add(TUIObjectName + " " + portName, new TUIObject());
+					tuiOjectMap [TUIObjectName + " " + portName].TUIObjectName = TUIObjectName;
+					tuiOjectMap [TUIObjectName + " " + portName].portName = portName;
+					tuiOjectMap [TUIObjectName + " " + portName].description = description;
+					tuiOjectMap [TUIObjectName + " " + portName].TUIType = 13;
 				}
-				tuiOjectMap [TUIObjectName + " " + description].received_value = System.Convert.ToSingle(value);
+				tuiOjectMap [TUIObjectName + " " + portName].bool_value = value;
 			}
 		}
 		catch (Exception e) {

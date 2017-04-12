@@ -90,7 +90,7 @@ void TUICsharp::SignalChanged(const DigitalChangedEvent * e)
 	{
 		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			list.at(i).boolCall(list.at(i).objectName, list.at(i).portName, list.at(i).description, e->getPayload());
+			list.at(i).boolCall(list.at(i).objectName.c_str(), list.at(i).portName.c_str(), list.at(i).description.c_str(), e->getPayload());
 		}
 	}
 }
@@ -101,7 +101,7 @@ void TUICsharp::SignalChanged(const AnalogChangedEvent * e)
 	{
 		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			list.at(i).floatCall(list.at(i).objectName, list.at(i).portName, list.at(i).description, e->getPayload(), list.at(i).trafoType, list.at(i).trafoNo);
+			list.at(i).floatCall(list.at(i).objectName.c_str(), list.at(i).portName.c_str(), list.at(i).description.c_str(), e->getPayload(), list.at(i).trafoType.c_str(), list.at(i).trafoNo.c_str());
 		}
 	}
 }
@@ -110,7 +110,7 @@ void TUICsharp::connectAll(floatCallback call, boolCallback callb)
 {
 	std::vector<TUIObjectInstance> objectInstances = getAttachedObjects().getTUIObjectInstanceVector();
 	std::vector<TUIObjectType> objectTypes = getAttachedObjects().getTUIObjectTypeVector();
-	
+
 	int portAdress = 0;
 	int instanceID = 0;
 
@@ -119,6 +119,7 @@ void TUICsharp::connectAll(floatCallback call, boolCallback callb)
 			if (typeIt->getName() == it->getTypeName() && instanceID != it->getID()) {
 				instanceID = it->getID();
 				portAdress = 0;
+
 				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin(); typeMapIt2 != typeIt->getPortMap().end(); typeMapIt2++)
 				{
 					portAdress++;
@@ -178,19 +179,16 @@ void listValues::metaData(std::string constraintMin, std::string constraintMax, 
 }
 
 void TUICsharp::sendEvent(const std::string & tuiObjectName, const std::string & portName, const std::string & serializedPayload) {
-
 	TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
 	TUIObjectStub * t = tc.getStub(tuiObjectName);
 	IEventChannel * iec = t->getSinkChannel(portName);
 
 	IEvent * event = TUIClientAppProvider::getInstance()->getEventFactory().createInstance(iec->getChannelTypeID());
-	// IEvent * event = EventFactorySingleton::getInstance()->createInstance(iec->getChannelTypeID());
+
 	if (event) {
 		stringstream ss;
 		ss << "-1 -1 " << serializedPayload;
-		//ss.str(serializedPayload);
 		ss >> event;
-		//cout << "payload: " << serializedPayload << "Event: " <<  event << endl;
 		iec->push(event);
 	}
 }

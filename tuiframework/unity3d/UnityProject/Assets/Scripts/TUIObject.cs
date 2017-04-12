@@ -13,6 +13,8 @@ public class TUIObject {
 
 	public float received_value = 0f;
 	public float value = 0f;
+	public bool bool_value;
+	public int TUIType;
 
 	public bool nodeFound = false;
 

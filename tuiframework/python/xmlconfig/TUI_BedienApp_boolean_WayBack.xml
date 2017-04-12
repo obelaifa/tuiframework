@@ -290,67 +290,6 @@
       </Connector>
 
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstAufOut"></SrcAddress>
-        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstAuf"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="CTR.AntriebeSindAnOut"></SrcAddress>
-        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.AntriebeSindAn"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstZuOut"></SrcAddress>
-        <DstAddress entityName="LBR100" entityType="TUI" portName="CTR.GreiferIstZu"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT100" entityType="TUI" portName="M01.C_rueckOut"></SrcAddress>
-        <DstAddress entityName="HT100" entityType="TUI" portName="M01.C_rueck"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT100" entityType="TUI" portName="M01.C_vorOut"></SrcAddress>
-        <DstAddress entityName="HT100" entityType="TUI" portName="M01.C_vor"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT100" entityType="TUI" portName="M02.C_abOut"></SrcAddress>
-        <DstAddress entityName="HT100" entityType="TUI" portName="M02.C_ab"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT100" entityType="TUI" portName="M02.C_aufOut"></SrcAddress>
-        <DstAddress entityName="HT100" entityType="TUI" portName="M02.C_auf"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT200" entityType="TUI" portName="M01.C_rueckOut"></SrcAddress>
-        <DstAddress entityName="HT200" entityType="TUI" portName="M01.C_rueck"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT200" entityType="TUI" portName="M01.C_vorOut"></SrcAddress>
-        <DstAddress entityName="HT200" entityType="TUI" portName="M01.C_vor"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT200" entityType="TUI" portName="M02.C_abOut"></SrcAddress>
-        <DstAddress entityName="HT200" entityType="TUI" portName="M02.C_ab"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT200" entityType="TUI" portName="M02.C_aufOut"></SrcAddress>
-        <DstAddress entityName="HT200" entityType="TUI" portName="M02.C_auf"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT300" entityType="TUI" portName="M01.C_rueckOut"></SrcAddress>
-        <DstAddress entityName="HT300" entityType="TUI" portName="M01.C_rueck"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT300" entityType="TUI" portName="M01.C_vorOut"></SrcAddress>
-        <DstAddress entityName="HT300" entityType="TUI" portName="M01.C_vor"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT300" entityType="TUI" portName="M02.C_abOut"></SrcAddress>
-        <DstAddress entityName="HT300" entityType="TUI" portName="M02.C_ab"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="HT300" entityType="TUI" portName="M02.C_aufOut"></SrcAddress>
-        <DstAddress entityName="HT300" entityType="TUI" portName="M02.C_auf"></DstAddress>
-      </Connector>
-
-      <Connector>
         <SrcAddress entityName="HT100.M01.C_rueckOut" entityType="MSP" portName="outPacked"></SrcAddress>
         <DstAddress entityName="HT100.M01.C_vorOut" entityType="MSP" portName="inPacked"></DstAddress>
       </Connector>
