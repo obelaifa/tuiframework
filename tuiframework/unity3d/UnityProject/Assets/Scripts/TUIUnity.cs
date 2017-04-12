@@ -106,13 +106,13 @@ public class TUIUnity : MonoBehaviour
 				d = tuiObject.Value.received_value - tuiObject.Value.value;
 				tuiObject.Value.value = tuiObject.Value.received_value;
 
-				if (d <= 0.05f && d >= -0.5f && tuiObject.Value.TUIType == 12)
+				if (d <= 0.05f && d >= -0.05f)
 					continue;
-				
+				Debug.Log ("YOLO");
 				if (tuiObject.Value.TUIType == 12)
 					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, tuiObject.Value.received_value.ToString ());
 				else if (tuiObject.Value.TUIType == 13)
-					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName + "Out", tuiObject.Value.bool_value.ToString ());
+					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName + "Out", System.Convert.ToInt16(tuiObject.Value.bool_value).ToString());
 
 				if (tuiObject.Value.TUI == null)
 					continue;
@@ -191,7 +191,11 @@ public class TUIUnity : MonoBehaviour
 					tuiOjectMap [TUIObjectName + " " + portName].description = description;
 					tuiOjectMap [TUIObjectName + " " + portName].TUIType = 13;
 				}
-				tuiOjectMap [TUIObjectName + " " + portName].bool_value = value;
+				if (tuiOjectMap [TUIObjectName + " " + portName].bool_value != value) {
+					tuiOjectMap [TUIObjectName + " " + portName].bool_value = value;
+					tuiOjectMap [TUIObjectName + " " + portName].received_value += 1;
+					tuiOjectMap [TUIObjectName + " " + portName].received_value %= 10;
+				}
 			}
 		}
 		catch (Exception e) {
@@ -209,9 +213,10 @@ public class TUIUnity : MonoBehaviour
 				node = findNode (child.name, description);
 			}
 
-		if (node != null)
-		if (node.name.CompareTo (description) != 0)
-			node = null;
+		if (node != null) {
+			if (node.name.CompareTo (description) != 0)
+				node = null;
+		}
 
 		return node;
 	}
