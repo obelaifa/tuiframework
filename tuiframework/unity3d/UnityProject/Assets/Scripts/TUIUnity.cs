@@ -5,8 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TUIUnity : MonoBehaviour
-{
+public class TUIUnity : MonoBehaviour {
     // Unity Game Objects die mit dem Skript verbunden sind
     public InputField IP;
     public InputField serverPort;
@@ -24,6 +23,7 @@ public class TUIUnity : MonoBehaviour
 
     // Der Thread wird benötigt damit die Verbindung zum TUI-Server die Anwendung nicht blockiert
     private Thread receiveThread ;
+	private bool threadStarted = false;
 
 	private static Vector3 movement;
 	private float d = 0f;
@@ -37,7 +37,6 @@ public class TUIUnity : MonoBehaviour
 
         // Setzt TUI C#-Instanz als Member für TUIInit-Instanz
         TUIClientLibary.setTUIInitParameter(tuiUnityInit, tuiUnityTest);
-
     }
 
     /**
@@ -45,8 +44,10 @@ public class TUIUnity : MonoBehaviour
     * Bisher aber nicht funktionsfähig da im TUI-Framework die Disconnect-Funktion bugged ist.
     */
     void OnApplicationQuit() {
-        //TUIClientLibary.disconnectUnityWithTUIServer();
-		//receiveThread.Abort();
+		if (threadStarted) {
+			TUIClientLibary.disconnectUnityWithTUIServer ();
+			receiveThread.Abort ();
+		}
         Debug.Log("Disconnected");
     }
 
@@ -72,6 +73,7 @@ public class TUIUnity : MonoBehaviour
         if (validateIP(IP.text, serverPort.text)) {   
             receiveThread = new Thread(new ThreadStart(ReceiveData));
             receiveThread.Start();
+			threadStarted = true;
             Debug.Log("Connected");
         }
         else {
@@ -79,28 +81,30 @@ public class TUIUnity : MonoBehaviour
         }
     }
 
-	public void connected() {
-		// Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
-		connecting();
-	}
-
     /**
     * Soll die Verbindung zum TUI-Server schließen bei Button-Click.
     * Bisher aber nicht funktionsfähig da im TUI-Framework die Disconnect-Funktion bugged ist.
     */
     public void closeConnection() {
-        TUIClientLibary.disconnectUnityWithTUIServer();
-		receiveThread.Abort();
+		if (threadStarted) {
+			TUIClientLibary.disconnectUnityWithTUIServer ();
+			receiveThread.Abort ();
+		}
         Debug.Log("Disconnected");
     }
 
+	/**
+	 * Appelle la fonction de recherche de node une fois par tuiobject de la map.
+	 * Procede ensuite aux transformations si la valeur reçue est suffisamment differente de la valeur precedente,
+	 * et si l'on a trouve un gameobject correspondant au tuiobject.
+	 */
     public void FixedUpdate() {
         lock (_locker) {
 			foreach (var tuiObject in tuiOjectMap) {
 
 				if (!tuiObject.Value.nodeFound) {
 					tuiObject.Value.TUI = findNode (tuiObject.Value.TUIObjectName, tuiObject.Value.description);
-					tuiObject.Value.nodeFound = true;
+					tuiObject.Value.nodeFound = true; //permet d'appeler une seule fois la fonction findNode
 				}
 
 				d = tuiObject.Value.received_value - tuiObject.Value.value;
@@ -108,12 +112,12 @@ public class TUIUnity : MonoBehaviour
 
 				if (d <= 0.05f && d >= -0.05f)
 					continue;
-				Debug.Log ("YOLO");
-				if (tuiObject.Value.TUIType == 12)
-					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, tuiObject.Value.received_value.ToString ());
-				else if (tuiObject.Value.TUIType == 13)
-					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName + "Out", System.Convert.ToInt16(tuiObject.Value.bool_value).ToString());
 
+				if (tuiObject.Value.TUIType == 12) //pour les analog
+					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, tuiObject.Value.received_value.ToString ());
+				else if (tuiObject.Value.TUIType == 13) //pour les digital
+					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName + "Out", System.Convert.ToInt16(tuiObject.Value.bool_value).ToString());
+				//on est oblige de convertir le booleen en int correspondant, sinon ça marche pas
 				if (tuiObject.Value.TUI == null)
 					continue;
 
@@ -127,15 +131,17 @@ public class TUIUnity : MonoBehaviour
 				if (tuiObject.Value.trafoType.CompareTo ("rot") == 0)
 					tuiObject.Value.TUI.transform.Rotate (movement);
 				else if (tuiObject.Value.trafoType.CompareTo ("trans") == 0)
-					tuiObject.Value.TUI.transform.Translate (movement/1000f);
+					tuiObject.Value.TUI.transform.Translate (movement/1000f); //les translate sont en metre, on divise donc le vector par 1000f
 			}
         } 
     }
 
     /**
     * Verbindet die Parameter.
+    * 
     */
     public void connecting() {
+		// Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
 		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback), new TUIClientLibary.boolCallback(this.boolCalback));
     }
 
@@ -160,19 +166,23 @@ public class TUIUnity : MonoBehaviour
         return true;
     }
 
+	/**
+	 * Recoit les informations des ports analog de TUI, creer ou met à jour les informations dans la map
+	 */
 	private void floatCallback (string TUIObjectName, string portName, string description, float value, string trafoType, string trafoNo) {
 		try {
 			lock (_locker) {
-				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + portName)) {
-					tuiOjectMap.Add(TUIObjectName + " " + portName, new TUIObject());
-					tuiOjectMap [TUIObjectName + " " + portName].TUIObjectName = TUIObjectName;
-					tuiOjectMap [TUIObjectName + " " + portName].portName = portName;
-					tuiOjectMap [TUIObjectName + " " + portName].description = description;
-					tuiOjectMap [TUIObjectName + " " + portName].TUIType = 12;
-					tuiOjectMap [TUIObjectName + " " + portName].trafoType = trafoType;
-					tuiOjectMap [TUIObjectName + " " + portName].trafoNo = trafoNo;
+				string key = TUIObjectName + " " + portName;
+				if (!tuiOjectMap.ContainsKey(key)) {
+					tuiOjectMap.Add(key, new TUIObject());
+					tuiOjectMap [key].TUIObjectName = TUIObjectName;
+					tuiOjectMap [key].portName = portName;
+					tuiOjectMap [key].description = description;
+					tuiOjectMap [key].TUIType = 12;
+					tuiOjectMap [key].trafoType = trafoType;
+					tuiOjectMap [key].trafoNo = trafoNo;
 				}
-				tuiOjectMap [TUIObjectName + " " + portName].received_value = value;
+				tuiOjectMap [key].received_value = value;
 			}
 		}
 		catch (Exception e) {
@@ -180,37 +190,47 @@ public class TUIUnity : MonoBehaviour
 		}
 	}
 
-
+	/**
+	 * Recoit les informations des ports digital de TUI, creer ou met à jour les informations dans la map
+	 */
 	private void boolCalback (string TUIObjectName, string portName, string description, bool value) {
 		try {
 			lock (_locker) {
-				if (!tuiOjectMap.ContainsKey(TUIObjectName + " " + portName)) {
-					tuiOjectMap.Add(TUIObjectName + " " + portName, new TUIObject());
-					tuiOjectMap [TUIObjectName + " " + portName].TUIObjectName = TUIObjectName;
-					tuiOjectMap [TUIObjectName + " " + portName].portName = portName;
-					tuiOjectMap [TUIObjectName + " " + portName].description = description;
-					tuiOjectMap [TUIObjectName + " " + portName].TUIType = 13;
+				string key = TUIObjectName + " " + portName;
+				if (!tuiOjectMap.ContainsKey(key)) {
+					tuiOjectMap.Add(key, new TUIObject());
+					tuiOjectMap [key].TUIObjectName = TUIObjectName;
+					tuiOjectMap [key].portName = portName;
+					tuiOjectMap [key].description = description;
+					tuiOjectMap [key].TUIType = 13;
 				}
-				if (tuiOjectMap [TUIObjectName + " " + portName].bool_value != value) {
-					tuiOjectMap [TUIObjectName + " " + portName].bool_value = value;
-					tuiOjectMap [TUIObjectName + " " + portName].received_value += 1;
-					tuiOjectMap [TUIObjectName + " " + portName].received_value %= 10;
+				if (tuiOjectMap [key].bool_value != value) {
+					tuiOjectMap [key].bool_value = value;
+					tuiOjectMap [key].received_value += 1;	//permet de ne pas changer la condition de sortie dans la fonction Fixed Update
+					tuiOjectMap [key].received_value %= 10;	//on pourrait même mettre un %2 mais bon, ça marche comme ça et 10 c'est rond
 				}
 			}
 		}
 		catch (Exception e) {
-			Debug.LogError(e.ToString());
+			Debug.LogError (e.ToString());
 		}
 	}
 
+	/**
+	 * Fonction recursive qui recherche le gameobject description, sous l'instance TUIObjectName.
+	 * Les nodes que l'on veut bouger portant tous les memes noms, cette fonction est obligatoire.
+	 * Au pire, même s'il ne porte pas les mêmes noms, ça marche quand même. (mais normalement dans le futur si)
+	 * 
+	 * Sortie : null si l'on n'a pas trouve, le bon gameobject sinon
+	 */
 	private GameObject findNode(string TUIOjectName, string description) {
 		GameObject node = GameObject.Find (TUIOjectName);
 
 		if (node != null)
-			foreach (Transform child in node.transform) {
+			foreach (Transform child in node.transform) {	//node.transform renvoi la liste des enfants d'un gameobject, mais des enfants d'un seul niveau
 				if (child.name.CompareTo (description) == 0)
-					return child.gameObject;
-				node = findNode (child.name, description);
+					return child.gameObject;				//si on n'a trouver le node, on le retourne
+				node = findNode (child.name, description);	//on appelle a nouveau pour l'enfant
 			}
 
 		if (node != null) {

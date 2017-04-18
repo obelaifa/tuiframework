@@ -21,18 +21,16 @@ def systemMsgSink(msg):
 #As this function also handles the initialization of the dictionnary, it is called for each TUI objects before any connection to make sure they are all stored into the dictionary (and so into the JSON file)
 def dstmethod(name, portname, value, description, constraintMin, constraintMax, trafoType, trafoNo):
 	global JSONdict
-
 	initDict(name, portname, description, constraintMin, constraintMax, trafoType, trafoNo)
 
 	#print("TUI_Instance: " + name + " ; port: " + portname + " ; value: " + value + " ; trafoNo: " + trafoNo)
 	JSONdict[name][portname]['Value'] = float(value) #we update the value of the corresponding port in the dictionary we use for the UDP connection
 
-	#if description == "":
-	#	return
+	if description != "":
+		PortName = portname
+		tuiclient.sendEvent(name, PortName, value)
 
-	#PortName = portname
-
-	#tuiclient.sendEvent(name, PortName, value)
+	sleep(0.01)
 
 #initialize the dictionary if it is not already done
 def initDict(name, portname, description, constraintMin, constraintMax, trafoType, trafoNo):
@@ -87,7 +85,6 @@ def initJSON():
 #UDP server
 def recv(tmp):
 	global JSONdict
-
 	UDP_IP = "127.0.0.1"
 	UDP_PORT = 5005
 

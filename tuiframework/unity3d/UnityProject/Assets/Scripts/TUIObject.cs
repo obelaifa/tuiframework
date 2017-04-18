@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TUIObject {
+	// Classe contenant toutes les informations necessaires d'un tuiobject
 
 	public GameObject TUI;
 	public string TUIObjectName;
