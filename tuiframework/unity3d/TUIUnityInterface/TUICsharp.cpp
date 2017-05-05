@@ -14,7 +14,7 @@ void TUICsharp::connect()
 {
 	try {
 		// Durchläuft den Vector mit gespeicherten Strukturen
-		for (std::vector<listValues>::iterator it = list.begin(); it != list.end(); ++it)
+		for (std::vector<TUIUObject>::iterator it = list.begin(); it != list.end(); ++it)
 		{
 			// Verbindet sich je nach TUITypeID
 			switch (it->tuiType)
@@ -46,7 +46,7 @@ void TUICsharp::disconnect()
 	try
 	{
 		// Durchläuft den Vector mit gespeicherten Strukturen
-		for (std::vector<listValues>::iterator it = list.begin(); it != list.end(); ++it)
+		for (std::vector<TUIUObject>::iterator it = list.begin(); it != list.end(); ++it)
 		{
 			// Verbindet sich je nach TUITypeID
 			switch (it->tuiType)
@@ -132,12 +132,12 @@ void TUICsharp::connectAll(floatCallback call, boolCallback callb)
 						std::string trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
 						std::string trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
 
-						listValues values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), ANALOG, instanceID, portAdress, call);
+						TUIUObject values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), ANALOG, instanceID, portAdress, call);
 						values.metaData(constraintMin, constraintMax, trafoType, trafoNo);
 						list.push_back(values);
 					}
 					else if (typeMapIt2->second.getTypeName().compare("DigitalChannel") == 0) {
-						listValues values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), DIGITAL, instanceID, portAdress, callb);
+						TUIUObject values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), DIGITAL, instanceID, portAdress, callb);
 						list.push_back(values);
 					}
 				}
@@ -145,37 +145,6 @@ void TUICsharp::connectAll(floatCallback call, boolCallback callb)
 		}
 	}
 	this->connect();
-}
-
-listValues::listValues()
-{
-}
-
-listValues::~listValues()
-{
-}
-
-listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, floatCallback floatCall)
-	:objectName(objectName), portName(portName), description(description), tuiType(tuiType), entityID(entityID), portAdress(portAdress), floatCall(floatCall)
-{
-}
-
-listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, integerCallback intCall)
-	: objectName(objectName), portName(portName), description(description), tuiType(tuiType), entityID(entityID), portAdress(portAdress), intCall(intCall)
-{
-}
-
-listValues::listValues(std::string objectName, std::string portName, std::string description, int tuiType, int entityID, int portAdress, boolCallback boolCall)
-	: objectName(objectName), portName(portName), description(description), tuiType(tuiType), entityID(entityID), portAdress(portAdress), boolCall(boolCall)
-{
-}
-
-void listValues::metaData(std::string constraintMin, std::string constraintMax, std::string trafoType, std::string trafoNo)
-{
-	this->constraintMin = constraintMin;
-	this->constraintMax = constraintMax;
-	this->trafoType = trafoType;
-	this->trafoNo = trafoNo;
 }
 
 void TUICsharp::sendEvent(const std::string & tuiObjectName, const std::string & portName, const std::string & serializedPayload) {

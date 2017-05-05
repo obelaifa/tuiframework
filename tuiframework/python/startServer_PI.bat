@@ -25,4 +25,4 @@ set libPath=../cpp/Windows/Release
 start "TUI Server" ../cpp/Windows/Release/TUIBinTUIServer2.exe %recieverPort% %senderPort% %xmlConfiguration% %libPath%
 
 :: The Execution of the Python Interface
-start "Python Interface Output" python3 python_interface_JSON_UDP.py
+start "Python Interface Output" python3 python_interface.py

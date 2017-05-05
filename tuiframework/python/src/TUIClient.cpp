@@ -94,19 +94,16 @@ void TUIClient::removeEventCallback(const std::string & tuiObjectName, const std
 
 
 void TUIClient::sendEvent(const std::string & tuiObjectName, const std::string & portName, const std::string & serializedPayload) {
-
     TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
     TUIObjectStub * t = tc.getStub(tuiObjectName);
     IEventChannel * iec = t->getSinkChannel(portName);
    
     IEvent * event = TUIClientAppProvider::getInstance()->getEventFactory().createInstance(iec->getChannelTypeID());
-    // IEvent * event = EventFactorySingleton::getInstance()->createInstance(iec->getChannelTypeID());
+
     if (event) {
         stringstream ss;
         ss << "-1 -1 " << serializedPayload;
-        //ss.str(serializedPayload);
         ss >> event;
-        //cout << "payload: " << serializedPayload << "Event: " <<  event << endl;
         iec->push(event);
     }
 }
