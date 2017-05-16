@@ -26,7 +26,7 @@ public class TUIClientLibary
     * @return true falls Verbindung erfolgreich
     */
     [DllImport("TUIUnityClient.dll")]
-    public static extern bool disconnectUnityWithTUIServer();
+	public static extern bool disconnectUnityWithTUIServer();
 
     /**
     * Erstellt eine TUIInit-Instanz.

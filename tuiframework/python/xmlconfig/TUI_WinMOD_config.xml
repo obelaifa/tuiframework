@@ -130,29 +130,93 @@
       <TUIObjectType name="HT">
         <PortTypeSequence>
           <PortType name="M01.C_rueck" sink="0" source="1" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="M02.C_auf" sink="0" source="1" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="M02.C_ab" sink="0" source="1" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="M01.C_vor" sink="0" source="1" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
 
           <PortType name="M01.C_rueckOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="M02.C_aufOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="M02.C_abOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="M01.C_vorOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
 
           <PortType name="M02.$pos_Ist" sink="1" source="1" typename="AnalogChannel">
@@ -184,23 +248,71 @@
       <TUIObjectType name="LBR">
         <PortTypeSequence>
           <PortType name="CTR.GreiferIstAuf" sink="0" source="1" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="CTR.GreiferIstZu" sink="0" source="1" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="CTR.AntriebeSindAn" sink="0" source="1" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
 
           <PortType name="CTR.GreiferIstAufOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="CTR.GreiferIstZuOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
           <PortType name="CTR.AntriebeSindAnOut" sink="1" source="0" typename="DigitalChannel">
-            <Description/>
+            <ParameterGroup name="Constraint">
+              <Parameter name="min" value="0.0"/>
+              <Parameter name="max" value="800.0"/>
+            </ParameterGroup>
+            <ParameterGroup name="Meta">
+              <Parameter name="TrafoType" value="trans"/>
+              <Parameter name="TrafoNo" value="2"/>
+            </ParameterGroup>
+            <Description>HT_sub_59</Description>
           </PortType>
 
           <PortType name="M01.$A1" sink="1" source="1" typename="AnalogChannel">

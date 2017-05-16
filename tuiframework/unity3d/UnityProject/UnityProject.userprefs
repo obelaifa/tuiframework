@@ -1,11 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TUIUnity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\OutputText.cs">
     <Files>
-      <File FileName="Assets\Scripts\CameraSwitcher.cs" Line="6" Column="46" />
-      <File FileName="Assets\Scripts\TUIObject.cs" Line="13" Column="24" />
-      <File FileName="Assets\Scripts\TUIUnity.cs" Line="91" Column="22" />
-      <File FileName="Assets\Scripts\DLLImport.cs" Line="38" Column="8" />
+      <File FileName="Assets\Scripts\CameraSwitcher.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TUIObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TUIUnity.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DLLImport.cs" Line="1" Column="1" />
+      <File FileName="Assets\Editor\AssignMaterial.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\OutputText.cs" Line="4" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

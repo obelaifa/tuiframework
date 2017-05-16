@@ -32,7 +32,6 @@ void TUICsharp::connect()
 				break;
 			}
 		}
-
 	}
 	catch (const Exception & e) {
 		cerr << "Exception" << endl;
@@ -64,7 +63,6 @@ void TUICsharp::disconnect()
 				break;
 			}
 		}
-
 	}
 	catch (const Exception & e) {
 		cerr << "Exception" << endl;

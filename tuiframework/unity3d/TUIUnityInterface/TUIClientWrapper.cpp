@@ -9,15 +9,13 @@ extern "C"
 		initTypeRegistration(getEventFactory());
 		CommonTypeReg::registerTypes(&getEventFactory(), &getEventChannelFactory());
 
-		getchar();
-		
 		connectWithTUIServer(recievePort, senderPort,std::string(serverIPPort),&init,true);
 
 		return true;
 	}
 
 	void disconnectUnityWithTUIServer()
-	{
+	{	
 		disconnectFromTUIServer();
 	}
 
@@ -34,7 +32,7 @@ extern "C"
 	void setTUIInitParameter(void* tuiInitInstance, void* tuiCSharpInstance)
 	{
 		TUIInit* tuiInit = (TUIInit*)tuiInitInstance;
-		tuiInit->setTUICsharp(*(TUICsharp*)tuiCSharpInstance);
+		tuiInit->setTUICsharp((TUICsharp*)tuiCSharpInstance);
 	}
 
 	void connectingParametersAll(void* instance, floatCallback call, boolCallback callb)

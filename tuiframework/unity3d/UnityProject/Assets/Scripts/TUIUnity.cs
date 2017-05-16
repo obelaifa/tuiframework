@@ -11,6 +11,7 @@ public class TUIUnity : MonoBehaviour {
     public InputField serverPort;
     public InputField clientReceiverPort;
     public InputField clientSenderPort;
+	public OutputText outText;
 
 	private static Dictionary<string, TUIObject>  tuiOjectMap = new Dictionary<string, TUIObject>();
 
@@ -47,8 +48,10 @@ public class TUIUnity : MonoBehaviour {
 		if (threadStarted) {
 			TUIClientLibary.disconnectUnityWithTUIServer ();
 			receiveThread.Abort ();
+			threadStarted = false;
+			Debug.Log ("Disconnected");
+			outText.printOut ("Disconnected");
 		}
-        Debug.Log("Disconnected");
     }
 
     /**
@@ -58,11 +61,11 @@ public class TUIUnity : MonoBehaviour {
         int rPort = int.Parse(clientReceiverPort.text);
         int sPort = int.Parse(clientSenderPort.text);
         string serverIP =IP.text +":"+serverPort.text;
- 
-        // Aufruf der API-Funktion zum Verbinden mit dem TUI-Server.
-        TUIClientLibary.connectUnityWithTUIServer(rPort, sPort, serverIP, tuiUnityInit);
 
-        Debug.Log("Thread finished");
+        // Aufruf der API-Funktion zum Verbinden mit dem TUI-Server.
+		TUIClientLibary.connectUnityWithTUIServer(rPort, sPort, serverIP, tuiUnityInit);
+
+        Debug.Log ("Thread finished");
     }
 
     /**
@@ -73,8 +76,10 @@ public class TUIUnity : MonoBehaviour {
         if (validateIP(IP.text, serverPort.text)) {   
             receiveThread = new Thread(new ThreadStart(ReceiveData));
             receiveThread.Start();
+			receiveThread.IsBackground = true;
 			threadStarted = true;
             Debug.Log("Connected");
+			outText.printOut ("Connected");
         }
         else {
 
@@ -89,8 +94,10 @@ public class TUIUnity : MonoBehaviour {
 		if (threadStarted) {
 			TUIClientLibary.disconnectUnityWithTUIServer ();
 			receiveThread.Abort ();
+			threadStarted = false;
+			Debug.Log ("Disconnected");
+			outText.printOut ("Disconnected");
 		}
-        Debug.Log("Disconnected");
     }
 
 	/**
@@ -121,15 +128,15 @@ public class TUIUnity : MonoBehaviour {
 				if (tuiObject.Value.TUI == null)
 					continue;
 
-				if (tuiObject.Value.trafoNo.CompareTo("1") == 0)
-					movement.Set (d, 0f, 0f);
+				if (tuiObject.Value.trafoNo.CompareTo ("1") == 0)
+					movement.Set (-d, 0f, 0f);
 				else if (tuiObject.Value.trafoNo.CompareTo("2") == 0)
 					movement.Set (0f, d, 0f);
 				else if (tuiObject.Value.trafoNo.CompareTo("3") == 0)
 					movement.Set (0f, 0f, d);
 
 				if (tuiObject.Value.trafoType.CompareTo ("rot") == 0)
-					tuiObject.Value.TUI.transform.Rotate (movement);
+					tuiObject.Value.TUI.transform.Rotate ((-1) * movement);
 				else if (tuiObject.Value.trafoType.CompareTo ("trans") == 0)
 					tuiObject.Value.TUI.transform.Translate (movement/1000f); //les translate sont en metre, on divise donc le vector par 1000f
 			}
@@ -143,6 +150,7 @@ public class TUIUnity : MonoBehaviour {
     public void connecting() {
 		// Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
 		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback), new TUIClientLibary.boolCallback(this.boolCalback));
+		outText.printOut ("Connection proceeded");
     }
 
     /**

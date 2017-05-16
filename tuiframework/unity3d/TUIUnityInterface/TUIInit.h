@@ -12,9 +12,9 @@ public:
 	~TUIInit();
 	virtual void push(tuiframework::IEvent * e);
 
-	void setTUICsharp(TUICsharp tuicSharp);
+	void setTUICsharp(TUICsharp* tuicSharp);
 
 protected:
-	TUICsharp tuiCSharp;
+	TUICsharp* tuiCSharp;
 };
 

@@ -50,6 +50,7 @@
      <Compile Include="Assets\Prefab\FPSCounter\FPSDisplay.cs" />
      <Compile Include="Assets\Scripts\CameraSwitcher.cs" />
      <Compile Include="Assets\Scripts\DLLImport.cs" />
+     <Compile Include="Assets\Scripts\OutputText.cs" />
      <Compile Include="Assets\Scripts\TUIObject.cs" />
      <Compile Include="Assets\Scripts\TUIUnity.cs" />
  <Reference Include="UnityEngine.UI">
