@@ -54,7 +54,7 @@ public:
         /// Forwards an event message as a function of its address
         /// to a destination which is determined by the routing table.
     virtual void push(IEvent * event) {
-        TFINFO(*event)
+        //TFINFO(*event)
         IEventMsg<A> * e = static_cast<IEventMsg<A> *>(event);
         typename std::map<A, T *, Compare>::iterator iter;
         iter = this->routingTable.find(e->getAddress());

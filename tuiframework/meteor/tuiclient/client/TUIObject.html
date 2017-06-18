@@ -1,24 +1,42 @@
 <template name="TUIObject">
-
-  <div class="TUIObject-Box">
-    <div class="TUIObject-Name">
+  <div class="TUIObject-Header{{#if isContentVisible}} TUIObject-Selected{{/if}}">
+    <table>
+      <tr>
+        <td><h2>{{tuiObjectName}}</h2></td>
+        <td><h2>{{tuiObjectType}}</h2></td>
+        <td><div><img src="icons/ArrowRight1.png"></div></td>
+        <td>
+          <div class="AnalogChannelFilter">
+            {{#if isContentVisible "AnalogChannel"}}
+              <img src="icons/Wheel2.png">
+            {{else}}
+              <img src="icons/Wheel1.png">
+            {{/if}}
+          </div>
+        </td>
+        <td>
+          <div class="DigitalChannelFilter">
+            {{#if isContentVisible "DigitalChannel"}}
+              <img src="icons/101.png">
+            {{else}}
+              <img src="icons/102.png">
+            {{/if}}
+          </div>
+        </td>
+        <td><div><img src="icons/info1.png"></div></td>
+      </tr>
+    </table>
+  </div>
+    <div class="TUIObject-Content{{#if isContentVisible}} TUIObject-Selected{{/if}}">
       <table>
-        <th><h2>{{tuiObjectName}}</h2></th>
-        <th><h2>({{tuiObjectType}})</h2></th>
-      </table>
-    </div>
-    <div class="TUIObject-Content">
-      <table>
-        <th><h3>Port</h3></th>
-        <th><h3>Value</h3></th>
-        <th><h3>Description</h3></th>
         {{#each entry in entryArray}}
-          <tr>
-            <!-- {{entry.tuiObject.name}}.{{entry.port.name}}: {{entry.value}} -->
-            {{> Template.dynamic template=entry.port.type data=entry}}
-          </tr>
+          {{#if isContentVisible entry.port.type}}
+            <tr>
+              <!-- {{entry.tuiObject.name}}.{{entry.port.name}}: {{entry.value}} -->
+              {{> Template.dynamic template=entry.port.type data=entry}}
+            </tr>
+          {{/if}}
         {{/each}}
       </table>
     </div>
-  </div>
 </template>

@@ -22,17 +22,23 @@
 </head>
 
 <body>
-
-
 </body>
 
 
 <template name="main">
-  {{#each tuiObjectName in tuiObjectNameArray}}
-    {{> TUIObject tuiObjectName}}
-  {{/each}}
-
-  <div class="button">
+  <div id="navbar">
+    <!--img src="icons/testicon2.png"-->
+      <table>
+          <td><div id="vrsession-title">Demonstrator VIB-SHB</div></td>
+      </table>
+  </div>
+  <div id="offsetheader"></div>
+  <div id="tuiObjectArray">
+    {{#each tuiObjectName in tuiObjectNameArray}}
+      {{> TUIObject tuiObjectName}}
+    {{/each}}
+  </div>
+  <div id="footer" class="button">
     <button type="button" id='button-initial-settings'>Back to initial settings page</button>
   </div>
 </template>

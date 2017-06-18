@@ -2,8 +2,6 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 
-
-
 Template.main.onCreated(function helloOnCreated() {
   // counter starts at 0
   this.counter = new ReactiveVar(0);
@@ -11,7 +9,6 @@ Template.main.onCreated(function helloOnCreated() {
   instance.tuiObjects = null;
   console.log('==>', instance);
 });
-
 
 
 Template.main.helpers({

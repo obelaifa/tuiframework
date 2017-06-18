@@ -1,23 +1,113 @@
 /* CSS declarations go here */
 
-.TUIObject-Box{
-    border-color: #000000;
-    border: 1px solid black;
-    margin: 5px;
-    border-radius: 10px;
+body {
+    margin: 0px;
+}
+
+#navbar {
+    font-family: 'Maven Pro';
+    background: #0099FF;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    height: 200px;
+    width: 1000px;
+    #width: 100%;
+    #max-width: 1000px;
+    z-index: 3;
+}
+
+#navbar table {
+    width:100%;
+    height:100%;
+}
+
+#vrsession-title {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 20px;
+    color: white;
+
+    font-size: 50pt;
+}
+
+#offsetheader {
+    left: 0px;
+    top: 0px;
+    height: 200px;
+}
+
+#tuiObjectArray {
+    font-family: 'Maven Pro';
+    top: 200px;
+}
+
+.TUIObject-Header {
+    width: 1000px;
 }
 
 .TUIObject-Content {
-    margin: 10px;
+    width: 1000px;
+}
+
+.TUIObject-Header > table {
+    border-spacing: 0px;
+}
+
+.TUIObject-Header > table > tr {
+    height: 100px;
+}
+
+.TUIObject-Header > table > tr > td:nth-child(1) {
+    width: 320px;
+    vertical-align: middle;
+    padding: 0px;
+}
+
+.TUIObject-Header > table > tr > td:nth-child(2) {
+    width: 400px;
+    vertical-align: middle;
+    padding: 0px;
+}
+
+.TUIObject-Header > table > tr > td:nth-child(3) {
+    width: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.TUIObject-Header > table > tr > td:nth-child(4) {
+    width: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.TUIObject-Header > table > tr > td:nth-child(5) {
+    width: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.TUIObject-Header > table > tr > td:nth-child(6) {
+    width: 70px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.TUIObject-Selected {
+    background: black;
+    color: white;
+}
+
+
+.TUIObject-Content {
+    margin: 0px;
 }
 
 .TUIObject-Content table {
     width: 100%
-}
-
-.TUIObject-Name {
-    margin-top: 5px;
-    padding: 0px;
 }
 
 
@@ -70,6 +160,7 @@ h3 {
     //margin-left: -1.5em;
     margin-top: 0.1em;
     border-radius: 50px;
+    font-size: 1.0em;
     z-index: 1;
 }
 

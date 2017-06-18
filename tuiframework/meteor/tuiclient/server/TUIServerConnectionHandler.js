@@ -27,7 +27,7 @@ class TUiServerConnectionHandler {
 
 
   setState(newState) {
-    console.log('===> StateChange: ', this.state, ' -> ', newState);
+    // console.log('===> StateChange: ', this.state, ' -> ', newState);
     this.state = newState;
     let doc = {
       _id: 1,
