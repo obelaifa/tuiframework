@@ -7,15 +7,15 @@ set recieverPort=7998
 set senderPort=7999
 
 ::XML-Configuration-file
-ECHO Press 0 to set the BedienApp only config, 1 to set the WinMOD config, other to set the BedienApp and WinMOD config
+ECHO Press 0 to set the BedienApp only config, 1 to set the WinMOD config, other to set test config
 SET /P xmlchoice=
 
 IF %xmlchoice%==0 (
-	set xmlConfiguration=./xmlconfig/TUI_BedienApp_noSpeed_HUGE.xml
+	set xmlConfiguration=./xmlconfig/TUI_BedienApp_ButtonTest.xml
 ) ELSE IF %xmlchoice%==1 (
-	set xmlConfiguration=./xmlconfig/TUI_WinMOD_config.xml
+	set xmlConfiguration=./xmlconfig/TUI_WinMOD_button_test.xml
 ) ELSE (
-	set xmlConfiguration=./xmlconfig/TUI_BedienApp_WinMOD_config.xml
+	set xmlConfiguration=./xmlconfig/TUI_BedienApp_ButtonTest.xml
 )
 
 ::Path to DLL-Libaries

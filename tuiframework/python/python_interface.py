@@ -41,10 +41,9 @@ def dstmethod(name, portname, value, description, constraintMin, constraintMax, 
 
 	TUIdict[name][portname]['Value'] = float(value) # We update the value of the corresponding port in the dictionary we use for the UDP connection.
 
-	if description != "":
-		PortName = portname
-		#tuiclient.sendEvent(name, PortName, value)
-
+	
+	PortName = portname
+	tuiclient.sendEvent(name, PortName, value)
 	sleep(0.01)
 
 ##

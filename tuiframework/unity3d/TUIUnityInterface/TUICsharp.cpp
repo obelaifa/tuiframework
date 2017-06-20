@@ -88,7 +88,15 @@ void TUICsharp::SignalChanged(const DigitalChangedEvent * e)
 	{
 		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			list.at(i).boolCall(list.at(i).objectName.c_str(), list.at(i).portName.c_str(), list.at(i).description.c_str(), e->getPayload());
+			const char* TUIObjectName = list.at(i).objectName.c_str();
+			const char* portName = list.at(i).portName.c_str();
+			const char* description = list.at(i).description.c_str();
+			const char* trafoType = list.at(i).trafoType.c_str();
+			const char* trafoNo = list.at(i).trafoNo.c_str();
+			const char* constraintMin = list.at(i).constraintMin.c_str();
+			const char* constraintMax = list.at(i).constraintMax.c_str();
+
+			list.at(i).boolCall(TUIObjectName, portName, description, e->getPayload(), trafoType, trafoNo, constraintMin, constraintMax);
 		}
 	}
 }
@@ -99,7 +107,15 @@ void TUICsharp::SignalChanged(const AnalogChangedEvent * e)
 	{
 		if (list.at(i).portAdress == e->getAddress().getPortNr() && list.at(i).entityID == e->getAddress().getEntityID())
 		{
-			list.at(i).floatCall(list.at(i).objectName.c_str(), list.at(i).portName.c_str(), list.at(i).description.c_str(), e->getPayload(), list.at(i).trafoType.c_str(), list.at(i).trafoNo.c_str());
+			const char* TUIObjectName = list.at(i).objectName.c_str();
+			const char* portName = list.at(i).portName.c_str();
+			const char* description = list.at(i).description.c_str();
+			const char* trafoType = list.at(i).trafoType.c_str();
+			const char* trafoNo = list.at(i).trafoNo.c_str();
+			const char* constraintMin = list.at(i).constraintMin.c_str();
+			const char* constraintMax = list.at(i).constraintMax.c_str();
+
+			list.at(i).floatCall(TUIObjectName, portName, description, e->getPayload(), trafoType, trafoNo, constraintMin, constraintMax);
 		}
 	}
 }
@@ -124,20 +140,28 @@ void TUICsharp::connectAll(floatCallback call, boolCallback callb)
 					if (typeMapIt2->second.getDataFlowDirection() == 2)
 						continue;
 
-					if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
-						std::string constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
-						std::string constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
-						std::string trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
-						std::string trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
+					std::string constraintMin = "empty";
+					std::string constraintMax = "empty";
+					std::string trafoType = "empty";
+					std::string trafoNo = "empty";
 
+					if (!typeMapIt2->second.getParameterGroup().getParameterGroupMap().empty()) {
+						constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
+						constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
+						trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
+						trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
+					}
+
+					if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
 						TUIUObject values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), ANALOG, instanceID, portAdress, call);
 						values.metaData(constraintMin, constraintMax, trafoType, trafoNo);
 						list.push_back(values);
 					}
 					else if (typeMapIt2->second.getTypeName().compare("DigitalChannel") == 0) {
 						TUIUObject values(it->getName(), typeMapIt2->second.getName(), typeMapIt2->second.getDescription(), DIGITAL, instanceID, portAdress, callb);
+						values.metaData(constraintMin, constraintMax, trafoType, trafoNo);
 						list.push_back(values);
-					}
+					}					
 				}
 			}
 		}

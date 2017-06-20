@@ -19,13 +19,13 @@ typedef void(*integerCallback)(int value); // Callback for Integer Values
 * Float Callback
 * @param value Gleitkomma-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*floatCallback)(const char* TUIObjectName, const char* portName, const char* description, float value, const char* trafoType, const char* trafoNo); // Callback for float Values
+typedef void(*floatCallback)(const char* TUIObjectName, const char* portName, const char* description, float value, const char* trafoType, const char* trafoNo, const char* constraintMin, const char* constraintMax); // Callback for float Values
 
 /**
 * Boolean Callback
 * @param value Boolean-Werte die an die TUI überwegeben werden sollen.
 */
-typedef void(*boolCallback)(const char* TUIObjectName, const char* portName, const char* description, bool value); // Callback for boolean Values
+typedef void(*boolCallback)(const char* TUIObjectName, const char* portName, const char* description, bool value, const char* trafoType, const char* trafoNo, const char* constraintMin, const char* constraintMax); // Callback for boolean Values
 
 extern "C" 
 {

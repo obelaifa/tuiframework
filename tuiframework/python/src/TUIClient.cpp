@@ -50,8 +50,8 @@ void TUIClient::setEventCallback(PyObject * callback) {
 					std::string constraintMax = "empty";
 					std::string trafoType = "empty";
 					std::string trafoNo = "empty";
-
-					if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
+					
+					if (!typeMapIt2->second.getParameterGroup().getParameterGroupMap().empty()) {
 						constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
 						constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
 						trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");

@@ -26,7 +26,7 @@
       <TUIObjectType name="HT">
         <PortTypeSequence>
 
-          <PortType name="control.M02" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M02.$pos_Ist" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="0.0"/>
               <Parameter name="max" value="800.0"/>
@@ -37,7 +37,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.M01" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M01.$v_Ist" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-300.0"/>
               <Parameter name="max" value="300.0"/>
@@ -78,7 +78,7 @@
       <TUIObjectType name="LBR">
         <PortTypeSequence>
 
-          <PortType name="control.SollA1" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M01.$A1" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-170.0"/>
               <Parameter name="max" value="170.0"/>
@@ -89,7 +89,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.SollA2" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M02.$A2" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-120.0"/>
               <Parameter name="max" value="120.0"/>
@@ -100,7 +100,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.SollA3" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M03.$A3" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-170.0"/>
               <Parameter name="max" value="170.0"/>
@@ -111,7 +111,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.SollA4" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M04.$A4" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-120.0"/>
               <Parameter name="max" value="120.0"/>
@@ -122,7 +122,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.SollA5" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M05.$A5" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-170.0"/>
               <Parameter name="max" value="170.0"/>
@@ -133,7 +133,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.SollA6" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M06.$A6" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-120.0"/>
               <Parameter name="max" value="120.0"/>
@@ -144,7 +144,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.SollA7" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.M07.$A7" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="-175.0"/>
               <Parameter name="max" value="175.0"/>
@@ -155,7 +155,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.grPosR" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.GR.$pos_r" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="0.0"/>
               <Parameter name="max" value="12.5"/>
@@ -166,7 +166,7 @@
             </ParameterGroup>
             <Description/>
           </PortType>
-          <PortType name="control.grPosL" sink="1" source="0" typename="AnalogChannel">
+          <PortType name="control.GR.$pos_l" sink="1" source="0" typename="AnalogChannel">
             <ParameterGroup name="Constraint">
               <Parameter name="min" value="0.0"/>
               <Parameter name="max" value="12.5"/>
@@ -427,68 +427,64 @@
       </Connector>
 
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA1"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.M01.$A1"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M01.$A1"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA2"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.M02.$A2"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M02.$A2"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA3"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.M03.$A3"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M03.$A3"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA4"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.M04.$A4"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M04.$A4"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA5"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.M05.$A5"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M05.$A5"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA6"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.M06.$A6"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M06.$A6"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA7"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.M07.$A7"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="M07.$A7"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.SollA7"></SrcAddress>
-        <DstAddress entityName="LBR100" entityType="TUI" portName="M07.$A7"></DstAddress>
-      </Connector>
-      <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.grPosL"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.GR.$pos_l"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="GR.$pos_l"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.grPosR"></SrcAddress>
+        <SrcAddress entityName="LBR100" entityType="TUI" portName="control.GR.$pos_r"></SrcAddress>
         <DstAddress entityName="LBR100" entityType="TUI" portName="GR.$pos_r"></DstAddress>
       </Connector>
 
       <Connector>
-        <SrcAddress entityName="HT100" entityType="TUI" portName="control.M01"></SrcAddress>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="control.M01.$v_Ist"></SrcAddress>
         <DstAddress entityName="HT100" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="HT100" entityType="TUI" portName="control.M02"></SrcAddress>
+        <SrcAddress entityName="HT100" entityType="TUI" portName="control.M02.$pos_Ist"></SrcAddress>
         <DstAddress entityName="HT100" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="HT200" entityType="TUI" portName="control.M01"></SrcAddress>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="control.M01.$v_Ist"></SrcAddress>
         <DstAddress entityName="HT200" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="HT200" entityType="TUI" portName="control.M02"></SrcAddress>
+        <SrcAddress entityName="HT200" entityType="TUI" portName="control.M02.$pos_Ist"></SrcAddress>
         <DstAddress entityName="HT200" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="HT300" entityType="TUI" portName="control.M01"></SrcAddress>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="control.M01.$v_Ist"></SrcAddress>
         <DstAddress entityName="HT300" entityType="TUI" portName="M01.$v_Ist"></DstAddress>
       </Connector>
       <Connector>
-        <SrcAddress entityName="HT300" entityType="TUI" portName="control.M02"></SrcAddress>
+        <SrcAddress entityName="HT300" entityType="TUI" portName="control.M02.$pos_Ist"></SrcAddress>
         <DstAddress entityName="HT300" entityType="TUI" portName="M02.$pos_Ist"></DstAddress>
       </Connector>
 
