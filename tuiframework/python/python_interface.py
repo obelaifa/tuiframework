@@ -79,7 +79,7 @@ def initDict(name, portname, description, constraintMin, constraintMax, trafoTyp
 
 	# The JSON file is created and filled only in the beginning of the programm, it contains all the informations.
 	try:
-		with open('JSONdict.json', 'w') as outfile:
+		with open('../python/JSONdict.json', 'w') as outfile:
 			json.dump(JSONdict, outfile, ensure_ascii=False, indent=4, separators=(',', ': '))
 		print("TUI_Instance: " + name + ", port: " + portname + " added to JSON")
 	except:

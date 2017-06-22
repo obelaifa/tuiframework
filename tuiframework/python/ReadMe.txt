@@ -11,8 +11,7 @@ If the build is correctly done, go to the "Automatic test" section.
 
 ### Automatic test ###
 
-To start the python interface, you have to click on startServer_PI.bat, which is going to start both the server and the python interface.
-But first, you need to choose which xml configuration you want to load. For that, youjust have to follow the instructions in the dialog box which normally popped up.
+To start the python interface, you have to click on startPI.bat in the "starters" folder, which is going to start the python interface, and probably follow the instruction contained in the ReadMe.txt of this folder.
 
 ### Build manually ###
 
@@ -27,6 +26,6 @@ If you do not add "install" to the execution line, then you have to copy the pyd
 
 ### Test manually ###
 
-Execute following comment in the console:
+Execute following command in the console:
 	
 	python3 python_interface.py
