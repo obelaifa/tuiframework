@@ -177,261 +177,261 @@
       </DeviceInstanceSequence>
       <MSPInstanceSequence/>
       <TUIObjectInstanceSequence>
-         <TUIObjectInstance name="RobortArm_X2" typename="LBR100-TUIObjectType"/>
-         <TUIObjectInstance name="RobortArm_X1" typename="LBR100-TUIObjectType"/>
+         <TUIObjectInstance name="RobotArm_X2" typename="LBR100-TUIObjectType"/>
+         <TUIObjectInstance name="RobotArm_X1" typename="LBR100-TUIObjectType"/>
       </TUIObjectInstanceSequence>
       <ConnectorSequence>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M02.$A2"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A2"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A2"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M01.$A1"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A1"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A1"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M03.$A3"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A3"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A3"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M04.$A4"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A4"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A4"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M05.$A5"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A5"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A5"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M06.$A6"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A6"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A6"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M07.$A7"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A7"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A7"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.GR.$pos_r"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.GreiferPosR"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.GreiferPosR"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.GR.$pos_l"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.GreiferPosL"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.GreiferPosL"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.SollA1"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.SollA1"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.Soll_A1"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.SollA2"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.SollA2"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.Soll_A2"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.SollA3"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.SollA3"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.Soll_A3"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.SollA4"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.SollA4"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.Soll_A4"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.SollA5"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.SollA5"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.Soll_A5"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.SollA6"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.SollA6"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.Soll_A6"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.SollA7"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.SollA7"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.Soll_A7"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A1"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A1"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M01.$A1"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A2"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A2"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M02.$A2"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A3"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A3"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M03.$A3"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A4"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A4"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M04.$A4"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A5"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A5"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M05.$A5"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A6"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A6"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M06.$A6"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.A7"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.A7"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.M07.$A7"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.GreiferPosL"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.GreiferPosL"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.GR.$pos_l"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="value.GreiferPosR"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="value.GreiferPosR"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.GR.$pos_r"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.AntriebeAn"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.AntriebeAn"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.AntriebeAn"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.ExternStart"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.ExternStart"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.ExternStart"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="control.GreiferAuf"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="control.GreiferAuf"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.GreiferAuf"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X1" entityType="TUI" portName="metacmd.Query"/>
+            <SrcAddress entityName="RobotArm_X1" entityType="TUI" portName="metacmd.Query"/>
             <DstAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.StateTrigger"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.AntriebeSindAn"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.AntriebeSindAn"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.AntriebeSindAn"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.GreiferIstAuf"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.GreiferIstAuf"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.GreiferIstAuf"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-1" entityType="DEV" portName="LBR100.CTR.GreiferIstZu"/>
-            <DstAddress entityName="RobortArm_X1" entityType="TUI" portName="value.GreiferIstZu"/>
+            <DstAddress entityName="RobotArm_X1" entityType="TUI" portName="value.GreiferIstZu"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M01.$A1"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A1"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A1"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M02.$A2"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A2"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A2"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M03.$A3"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A3"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A3"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M04.$A4"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A4"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A4"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M05.$A5"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A5"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A5"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M06.$A6"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A6"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A6"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M07.$A7"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A7"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A7"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.GR.$pos_r"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.GreiferPosR"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.GreiferPosR"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.GR.$pos_l"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.GreiferPosL"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.GreiferPosL"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.SollA1"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.SollA1"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.Soll_A1"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.SollA2"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.SollA2"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.Soll_A2"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.SollA3"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.SollA3"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.Soll_A3"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.SollA4"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.SollA4"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.Soll_A4"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.SollA5"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.SollA5"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.Soll_A5"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.SollA6"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.SollA6"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.Soll_A6"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.SollA7"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.SollA7"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.Soll_A7"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.GreiferPosL"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.GreiferPosL"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.GR.$pos_l"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.GreiferPosR"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.GreiferPosR"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.GR.$pos_r"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A1"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A1"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M01.$A1"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A2"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A2"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M02.$A2"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A3"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A3"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M03.$A3"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A4"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A4"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M04.$A4"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A5"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A5"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M05.$A5"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A6"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A6"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M06.$A6"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="value.A7"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="value.A7"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.M07.$A7"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.AntriebeAn"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.AntriebeAn"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.AntriebeAn"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.ExternStart"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.ExternStart"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.ExternStart"/>
          </Connector>
          <Connector>
-            <SrcAddress entityName="RobortArm_X2" entityType="TUI" portName="control.GreiferAuf"/>
+            <SrcAddress entityName="RobotArm_X2" entityType="TUI" portName="control.GreiferAuf"/>
             <DstAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.GreiferAuf"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.AntriebeSindAn"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.AntriebeSindAn"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.AntriebeSindAn"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.GreiferIstAuf"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.GreiferIstAuf"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.GreiferIstAuf"/>
          </Connector>
          <Connector>
             <SrcAddress entityName="LBR100-2" entityType="DEV" portName="LBR100.CTR.GreiferIstZu"/>
-            <DstAddress entityName="RobortArm_X2" entityType="TUI" portName="value.GreiferIstZu"/>
+            <DstAddress entityName="RobotArm_X2" entityType="TUI" portName="value.GreiferIstZu"/>
          </Connector>
       </ConnectorSequence>
    </ServerConfig>

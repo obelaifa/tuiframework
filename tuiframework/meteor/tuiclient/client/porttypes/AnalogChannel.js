@@ -1,7 +1,6 @@
 
 
 Template.AnalogChannel.onCreated(function AnalogChannelOnCreated() {
-  console.log('AnalogChannelOnCreated')
   this.updateSlider = true;
 
 });
@@ -20,7 +19,6 @@ Template.AnalogChannel.onRendered(() => {
     if (instance.data.port.parameterGroupSet.Constraint) {
       min = Number(instance.data.port.parameterGroupSet.Constraint.parameterSet.min);
       max = Number(instance.data.port.parameterGroupSet.Constraint.parameterSet.max);
-      console.log('=========> ', min, max);
     }
 
     if ((instance.data.port.flowDirection & 2) == 0) {

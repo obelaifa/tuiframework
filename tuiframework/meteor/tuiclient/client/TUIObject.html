@@ -27,7 +27,8 @@
       </tr>
     </table>
   </div>
-    <div class="TUIObject-Content{{#if isContentVisible}} TUIObject-Selected{{/if}}">
+    {{#if isContentVisible}}
+    <div class="TUIObject-Content TUIObject-Selected">
       <table>
         {{#each entry in entryArray}}
           {{#if isContentVisible entry.port.type}}
@@ -39,4 +40,5 @@
         {{/each}}
       </table>
     </div>
+    {{/if}}
 </template>

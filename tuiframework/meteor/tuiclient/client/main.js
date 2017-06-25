@@ -7,7 +7,7 @@ Template.main.onCreated(function helloOnCreated() {
   this.counter = new ReactiveVar(0);
   let instance = Template.instance();
   instance.tuiObjects = null;
-  console.log('==>', instance);
+  this.filter = new ReactiveVar("")
 });
 
 
@@ -22,7 +22,7 @@ Template.main.helpers({
     }
     return 0;
   },
-  tuiObjectNameArray() {
+  tuiObjectHeaderArray() {
     let instance = Template.instance();
     instance.tuiObjectNames = [];
     instance.tuiObjects = [];
@@ -34,6 +34,10 @@ Template.main.helpers({
       }
     }
     return instance.tuiObjects;
+  },
+  isTUIObjectVisible(name) {
+    let instance = Template.instance();
+    return instance.filter.get() == "" || name.indexOf(instance.filter.get()) !== -1;
   },
   entryArray(name) {
     return collection.tuiPorts.find({"tuiObject.name":name}).fetch()
@@ -49,5 +53,9 @@ Template.main.events({
     //console.log(template.$('.mylabel .mycheckbox').prop( "checked" ));
     console.log(event.target.checked);
     Meteor.call('testMethod', event.target.checked)
+  },
+  'keyup #tuiobject-search'(event, template) {
+    let instance = Template.instance();
+    instance.filter.set($('#tuiobject-search')[0].value);
   }
 });

@@ -5,22 +5,34 @@ body {
 }
 
 #navbar {
-    font-family: 'Maven Pro';
-    background: #0099FF;
+    width: 100%;
     position: fixed;
+    background: #0099FF;
     top: 0px;
     left: 0px;
     margin: 0px;
     height: 200px;
-    width: 1000px;
-    #width: 100%;
-    #max-width: 1000px;
     z-index: 3;
 }
 
-#navbar table {
-    width:100%;
-    height:100%;
+#navbar > table {
+    font-family: 'Maven Pro';
+    width: 1000px;
+    height: 200px;
+    position: fixed;
+    margin-left: 40px;
+    #width: 100%;
+    #max-width: 1000px;
+}
+
+input[type=text]#tuiobject-search {
+    width: 260px;
+    padding: 5px;
+    padding-left: 12px;
+    border: 2px solid #60B9FF;
+    border-radius: 50px;
+    font-family: 'Maven Pro';
+    font-size: 20px;
 }
 
 #vrsession-title {
@@ -29,7 +41,6 @@ body {
     right: 0;
     padding: 20px;
     color: white;
-
     font-size: 50pt;
 }
 
@@ -45,18 +56,13 @@ body {
 }
 
 .TUIObject-Header {
-    width: 1000px;
-}
-
-.TUIObject-Content {
-    width: 1000px;
+    width: 100%;
 }
 
 .TUIObject-Header > table {
     border-spacing: 0px;
-}
-
-.TUIObject-Header > table > tr {
+    width: 1000px;
+    margin-left: 40px;
     height: 100px;
 }
 
@@ -96,59 +102,43 @@ body {
     text-align: center;
 }
 
+.TUIObject-Content {
+    width: 100%;
+}
+
+.TUIObject-Content > table {
+    border-spacing: 0px;
+    width: 1000px;
+    margin-left: 40px;
+}
+
+div.TUIObject-Content > table > tr {
+    height: 80px;
+}
+
+div.TUIObject-Content > table > tr > td:nth-child(1) {
+    width: 320px;
+}
+
+div.TUIObject-Content > table > tr > td:nth-child(2) {
+    width: 680px;
+}
+
 .TUIObject-Selected {
     background: black;
     color: white;
 }
 
-
-.TUIObject-Content {
-    margin: 0px;
-}
-
-.TUIObject-Content table {
-    width: 100%
-}
-
-
-.TUIObject-Content th, .TUIObject-Content td {
-    text-align: left;
-    padding-right: 20px;
-    padding-top: 15px;
-}
-
-h2 {
-    margin: 5px;
-}
-
-h3 {
-    margin: 5px;
-}
-
-/*
-.outerbox {
-    border: 1px gray solid;
-    border-radius: 50px;
-    padding: 1px;
-    border-color: #000000;
-}
-*/
-
-.ui-slider.ui-slider-handle {
-    margin: 5px;
-    border-radius: 50px;
-    font-size: 1em;
-}
-
-
 .ui-state-focus:focus {
     outline:none
 }
 
-
 .ui-slider, .ui-slider-range {
     border-radius: 50px;
+}
 
+div.ui-slider {
+    background: black;
 }
 
 .ui-widget.ui-widget-content {
@@ -158,27 +148,50 @@ h3 {
 
 .ui-slider-horizontal .ui-slider-handle {
     //margin-left: -1.5em;
-    margin-top: 0.1em;
+    margin-top: 0.25em;
     border-radius: 50px;
-    font-size: 1.0em;
+    font-size: 0.65em;
     z-index: 1;
 }
 
 
 .AnalogChannelSlider .ui-widget-header {
-    background-color: #FC9804;
+    background-color: lawngreen;
+
 }
 
 label.ui-button.ui-widget.ui-state-default.ui-button-text-only {
     border-radius: 50px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: lightgray;
+    background-color: black;
+    border-color: lightgray;
+}
+
+
+label.ui-button.ui-widget.ui-state-default.ui-button-text-only[aria-pressed="true"] {
+    background-color: #0099FF;
+    border-color: gray;
+    color: black;
+}
+
+
+label.ui-button.ui-widget.ui-state-default.ui-button-text-only.ui-button-disabled.ui-state-disabled {
+    opacity: 0.8;
+}
+
+label.ui-button.ui-widget.ui-state-default.ui-button-text-only.ui-button-disabled.ui-state-disabled.ui-state-active {
+    background-color: #0099FF;
+    border-color: gray;
+    color: black;
 }
 
 label.ui-button.ui-widget.ui-state-default.ui-button-text-only > span {
     font-size: 0.8em;
 }
-
-
-
 
 div#start {
     width: 100%;
@@ -191,7 +204,6 @@ div#start > h1 {
 #start > table > tbody   td:nth-child(1) {
     width: 200px;
 }
-
 
 input,textarea {
     width: 100%;

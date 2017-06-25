@@ -19,8 +19,6 @@ Template.DigitalChannel.onRendered(() => {
 
   let a = $("input[name='radio-" + instance.data.tuiObject.name + '-' + instance.data.port.id + "']").attr('disabled', disabled);
   $("input[name='radio-" + instance.data.tuiObject.name + '-' + instance.data.port.id + "']").button('option', 'disabled', disabled);
-
-  console.log(a);
 });
 
 
@@ -56,7 +54,6 @@ Template.DigitalChannel.events({
     let radio2 = "radio-2-" + instance.data.tuiObject.name + '-' + instance.data.port.id;
     let id = event.currentTarget.control.id;
     if (id === radio1) {
-      console.log('radio1');
       Meteor.call('sendPortValue', instance.data.tuiObject.name, instance.data.port.name, true);
     }
     if (id === radio2) {

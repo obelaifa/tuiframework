@@ -2,11 +2,10 @@ import { ReactiveVar } from 'meteor/reactive-var'
 
 
 Template.TUIObject.onCreated(function helloOnCreated() {
-  let instance = Template.instance();
-  instance.tuiObjects = null;
   this.contentVisible = {};
   this.contentVisible.AnalogChannel = new ReactiveVar(false);
   this.contentVisible.DigitalChannel = new ReactiveVar(false);
+  console.log('========>', this)
 });
 
 
@@ -26,7 +25,7 @@ Template.TUIObject.helpers({
   },
   isContentVisible(portType) {
     let instance = Template.instance();
-    console.log("===> isContentVisible", portType, instance.contentVisible);
+
     if (!portType) {
       const keyArray = Object.keys(instance.contentVisible);
       let result = false;
@@ -38,20 +37,20 @@ Template.TUIObject.helpers({
       }
       return result;
     }
-    return instance.contentVisible[portType].get();
+    if (instance.contentVisible[portType]) {
+      return instance.contentVisible[portType].get();
+    }
+    return false;
   }
-  },
-);
+});
 
 
 Template.TUIObject.events({
   'click .AnalogChannelFilter'(event, instance) {
     instance.contentVisible.AnalogChannel.set(!instance.contentVisible.AnalogChannel.get());
-    console.log('====> click tuiObject-Box')
   },
   'click .DigitalChannelFilter'(event, instance) {
     instance.contentVisible.DigitalChannel.set(!instance.contentVisible.DigitalChannel.get());
-    console.log('====> click tuiObject-Box')
   },
 });
 

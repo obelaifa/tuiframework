@@ -67,7 +67,6 @@ class TUIPortsHandler {
           if ((port.flowDirection & 1) && (port.type == 'AnalogChannel' || port.type == 'DigitalChannel')) {
             addon.registerEventCallback(tuiObjectInstance.name, port.name, eventHandler.update, eventHandler);
           }
-
         }
       }
     }).run();
