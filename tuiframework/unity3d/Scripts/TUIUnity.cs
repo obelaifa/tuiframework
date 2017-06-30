@@ -26,12 +26,18 @@ public class TUIUnity : MonoBehaviour {
     private Thread receiveThread ;
 	private static bool threadStarted = false;
 
+	// Movement vector and coefficient
 	private static Vector3 movement;
 	private float d = 0f;
 
+	/**
+	 * Function called when there is a collision with the robot or with the button
+	 * Send the Boolean value to TUI server using the port "Button_result" of the TUIObject "ButtonTest"
+	 * @param value Value sent to the server
+	 */
 	public static void buttonManip (bool value) {
 		if (threadStarted)
-			TUIClientLibary.sendUnityEvent (tuiUnityTest, "ButtonTest", "control.button", System.Convert.ToInt16(value).ToString());
+			TUIClientLibary.sendUnityEvent (tuiUnityTest, "ButtonTest", "Button_result", System.Convert.ToInt16(value).ToString());
 	}
 
     public void Start() {
@@ -106,16 +112,16 @@ public class TUIUnity : MonoBehaviour {
     }
 
 	/**
-	 * Appelle la fonction de recherche de node une fois par tuiobject de la map.
-	 * Procede ensuite aux transformations si la valeur reçue est suffisamment differente de la valeur precedente,
-	 * et si l'on a trouve un gameobject correspondant au tuiobject.
+	 * Call first the research function, one time per object in the map if it has not already been found.
+	 * Then proceed to the transformations if the received value is different enough from the previous value,
+	 * and if we have found a gameobject to move.
 	 */
     public void FixedUpdate() {
         lock (_locker) {
 			foreach (var tuiObject in tuiOjectMap) {
 				if (!tuiObject.Value.nodeFound) {
 					tuiObject.Value.TUI = findNode (tuiObject.Value.TUIObjectName, tuiObject.Value.description);
-					tuiObject.Value.nodeFound = true; //permet d'appeler une seule fois la fonction findNode
+					tuiObject.Value.nodeFound = true; //allow to call only once the findNode function
 				}
 
 				d = tuiObject.Value.received_value - tuiObject.Value.value;
@@ -125,11 +131,12 @@ public class TUIUnity : MonoBehaviour {
 					continue;
 
 
-				if (tuiObject.Value.TUIType == 12) //pour les analog
+				if (tuiObject.Value.TUIType == (int)TUIClientLibary.TUITypes.AnalogChangedEvent) //for the analogs
 					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, tuiObject.Value.received_value.ToString ());
-				else if (tuiObject.Value.TUIType == 11) //pour les digital
+				else if (tuiObject.Value.TUIType == (int)TUIClientLibary.TUITypes.DigitalChangedEvent) //for the digitals
 					TUIClientLibary.sendUnityEvent (tuiUnityTest, tuiObject.Value.TUIObjectName, tuiObject.Value.portName, System.Convert.ToInt16(tuiObject.Value.bool_value).ToString());
-				//on est oblige de convertir le booleen en int correspondant, sinon ça marche pas
+				//We have to convert the Boolean to the corresponding int, otherwise it doesn't work
+
 				if (tuiObject.Value.TUI == null)
 					continue;
 
@@ -143,7 +150,7 @@ public class TUIUnity : MonoBehaviour {
 				if (tuiObject.Value.trafoType.CompareTo ("rot") == 0)
 					tuiObject.Value.TUI.transform.Rotate ((-1) * movement);
 				else if (tuiObject.Value.trafoType.CompareTo ("trans") == 0)
-					tuiObject.Value.TUI.transform.Translate (movement/1000f); //les translate sont en metre, on divise donc le vector par 1000f
+					tuiObject.Value.TUI.transform.Translate (movement/1000f); //translate function works with meters, we divide then the vector by 1000f
 			}
         } 
     }
@@ -154,7 +161,7 @@ public class TUIUnity : MonoBehaviour {
     */
     public void connecting() {
 		// Erstellt eine Unity C#-Instanz und übergibt diesen die TUI C#-Instanz
-		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback), new TUIClientLibary.boolCallback(this.boolCalback));
+		TUIClientLibary.connectingParametersAll (tuiUnityTest, new TUIClientLibary.floatCallback(this.floatCallback), new TUIClientLibary.boolCallback(this.boolCallback));
 		outText.printOut ("Connection proceeded");
     }
 
@@ -180,13 +187,20 @@ public class TUIUnity : MonoBehaviour {
     }
 
 	/**
-	 * Recoit les informations des ports analog de TUI, creer ou met à jour les informations dans la map
+	 * Receive the analog port information of TUI, creates or updates the information in the map (for float)
+	 * @param TUIObjectName Instance name
+	 * @param portName Port name
+	 * @param description Node name
+	 * @param value Float value
+	 * @param trafoType Type of transformation (translation or rotation)
+	 * @param trafoNo Transformation number: 1 <=> x-axis ; 2 <=> y-axis ; 3 <=> z-axis
+	 * @param constraintMin Value of the minimum constraint
+	 * @param constraintMax Value of the maximum constraint
 	 */
 	private void floatCallback (string TUIObjectName, string portName, string description, float value, string trafoType, string trafoNo, string constraintMin, string constraintMax) {
 		try {
 			lock (_locker) {
-				//Debug.Log ("ANALOG" + " " + TUIObjectName + " " + portName + " " + description + " " + trafoType + " " + trafoNo + " " + constraintMin + " " + constraintMax);
-				string key = TUIObjectName + " " + portName;
+				string key = TUIObjectName + " " + portName; //creation of a specific key
 				if (!tuiOjectMap.ContainsKey(key)) {
 					tuiOjectMap.Add(key, new TUIObject());
 					tuiOjectMap [key].TUIObjectName = TUIObjectName;
@@ -207,12 +221,19 @@ public class TUIUnity : MonoBehaviour {
 	}
 
 	/**
-	 * Recoit les informations des ports digital de TUI, creer ou met à jour les informations dans la map
+	 * Receive the digital port information of TUI, creates or updates the information in the map (for Boolean)
+	 * @param TUIObjectName Instance name
+	 * @param portName Port name
+	 * @param description Node name
+	 * @param value Boolean value
+	 * @param trafoType Type of transformation (translation or rotation)
+	 * @param trafoNo Transformation number: 1 <=> x-axis ; 2 <=> y-axis ; 3 <=> z-axis
+	 * @param constraintMin Value of the minimum constraint
+	 * @param constraintMax Value of the maximum constraint
 	 */
-	private void boolCalback (string TUIObjectName, string portName, string description, bool value, string trafoType, string trafoNo, string constraintMin, string constraintMax) {
+	private void boolCallback (string TUIObjectName, string portName, string description, bool value, string trafoType, string trafoNo, string constraintMin, string constraintMax) {
 		try {
 			lock (_locker) {
-				//Debug.Log ("DIGITAL" + " " + TUIObjectName + " " + portName + " " + description + " " + trafoType + " " + trafoNo + " " + constraintMin + " " + constraintMax);
 				string key = TUIObjectName + " " + portName;
 				if (!tuiOjectMap.ContainsKey(key)) {
 					tuiOjectMap.Add(key, new TUIObject());
@@ -227,8 +248,8 @@ public class TUIUnity : MonoBehaviour {
 				}
 				if (tuiOjectMap [key].bool_value != value) {
 					tuiOjectMap [key].bool_value = value;
-					tuiOjectMap [key].received_value += 1;	//permet de ne pas changer la condition de sortie dans la fonction Fixed Update
-					tuiOjectMap [key].received_value %= 10;	//on pourrait même mettre un %2 mais bon, ça marche comme ça et 10 c'est rond
+					tuiOjectMap [key].received_value += 1;	//Allow to keep the out condition in the FixedUpdate fucntion for the boolean values
+					tuiOjectMap [key].received_value %= 10; //Avoid too big received_value
 				}
 			}
 		}
@@ -238,20 +259,19 @@ public class TUIUnity : MonoBehaviour {
 	}
 
 	/**
-	 * Fonction recursive qui recherche le gameobject description, sous l'instance TUIObjectName.
-	 * Les nodes que l'on veut bouger portant tous les memes noms, cette fonction est obligatoire.
-	 * Au pire, même s'il ne porte pas les mêmes noms, ça marche quand même. (mais normalement dans le futur si)
+	 * Recursive function which researchs the gameObject named description under the instance TUIObjectName
+	 * The nodes that we want to move,  can have the same name, this function is necessary 
 	 * 
-	 * Sortie : null si l'on n'a pas trouve, le bon gameobject sinon
+	 * @param return null if the gameobject has not been found, the right GameObject otherwise
 	 */
 	private GameObject findNode(string TUIOjectName, string description) {
 		GameObject node = GameObject.Find (TUIOjectName);
 
 		if (node != null)
-			foreach (Transform child in node.transform) {	//node.transform renvoi la liste des enfants d'un gameobject, mais des enfants d'un seul niveau
+			foreach (Transform child in node.transform) {	//node.transform sends back the children list of a gameObject, but only the first "level" children
 				if (child.name.CompareTo (description) == 0)
-					return child.gameObject;				//si on n'a trouver le node, on le retourne
-				node = findNode (child.name, description);	//on appelle a nouveau pour l'enfant
+					return child.gameObject;				//If we found the node, we return it
+				node = findNode (child.name, description);	//otherwise we call it again for the child
 			}
 
 		if (node != null) {
@@ -262,5 +282,3 @@ public class TUIUnity : MonoBehaviour {
 		return node;
 	}
 }
-
-

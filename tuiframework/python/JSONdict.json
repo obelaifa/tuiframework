@@ -1,13 +1,15 @@
 {
-    "HT100": {
-        "M01.$v_Ist": {
-            "ConstraintMax": "300.0",
-            "ConstraintMin": "-300.0",
-            "TrafoType": "trans",
-            "TrafoNo": "1",
-            "Description": "",
+    "ButtonTest": {
+        "Button_result": {
+            "ConstraintMax": "empty",
+            "ConstraintMin": "empty",
+            "TrafoType": "empty",
+            "TrafoNo": "empty",
+            "Description": "Button_Result",
             "Value": 0.0
-        },
+        }
+    },
+    "HT100": {
         "M02.$pos_Ist": {
             "ConstraintMax": "800.0",
             "ConstraintMin": "0.0",
@@ -18,14 +20,6 @@
         }
     },
     "HT200": {
-        "M01.$v_Ist": {
-            "ConstraintMax": "300.0",
-            "ConstraintMin": "-300.0",
-            "TrafoType": "trans",
-            "TrafoNo": "1",
-            "Description": "",
-            "Value": 0.0
-        },
         "M02.$pos_Ist": {
             "ConstraintMax": "800.0",
             "ConstraintMin": "0.0",
@@ -36,14 +30,16 @@
         }
     },
     "HT300": {
-        "M01.$v_Ist": {
-            "ConstraintMax": "300.0",
-            "ConstraintMin": "-300.0",
+        "M02.$pos_Ist": {
+            "ConstraintMax": "800.0",
+            "ConstraintMin": "0.0",
             "TrafoType": "trans",
-            "TrafoNo": "1",
-            "Description": "",
+            "TrafoNo": "2",
+            "Description": "HT_sub_59",
             "Value": 0.0
-        },
+        }
+    },
+    "HT400": {
         "M02.$pos_Ist": {
             "ConstraintMax": "800.0",
             "ConstraintMin": "0.0",
@@ -55,7 +51,7 @@
     },
     "LBR100": {
         "GR.$pos_l": {
-            "ConstraintMax": "12.5",
+            "ConstraintMax": "25.0",
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "1",
@@ -63,7 +59,7 @@
             "Value": 0.0
         },
         "GR.$pos_r": {
-            "ConstraintMax": "12.5",
+            "ConstraintMax": "26.0",
             "ConstraintMin": "0.0",
             "TrafoType": "trans",
             "TrafoNo": "1",
