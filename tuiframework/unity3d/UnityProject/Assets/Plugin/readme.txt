@@ -1,0 +1,2 @@
+Once the TUIUnityInterface compiled copy the TUIUnityClient.dll into the Plugin-Folder. (automatic when the compilation is done with the Visual Studio Project)
+Also copy the x64-Version of pthreadVC2.dll into the Folder.
