@@ -108,11 +108,11 @@ void UDPReceiverWinSock2::run() {
     }
 
     while (true) {
-        char buffer[4096];
+        char buffer[16384];
         struct sockaddr_in other_sin;
         int other_sin_size = (int)sizeof(other_sin);
 
-        int receivedByteCount = recvfrom(this->connectSocket, (char *)buffer, 4096, 0, (struct sockaddr *)&other_sin, &other_sin_size);
+        int receivedByteCount = recvfrom(this->connectSocket, (char *)buffer, 16384, 0, (struct sockaddr *)&other_sin, &other_sin_size);
 		/*			
 		/// {
 		HostAddress ipAddress(ntohl(other_sin.sin_addr.s_addr), ntohs(other_sin.sin_port));

@@ -99,7 +99,6 @@ namespace tuiframework {
 			PackedAnalogEvent* event = new PackedAnalogEvent(-1, -1, packedFloat);
 
 			this->out->push(event);
-
 		}
 	}
 
@@ -111,9 +110,8 @@ namespace tuiframework {
 			packedFloat.getItems().at(this->id).second = this->eventAnalog;
 
 			PackedAnalogEvent* event = new PackedAnalogEvent(-1, -1, packedFloat);
-			this->out->push(event);
 
+			this->out->push(event);
 		}
-		
 	}
 }

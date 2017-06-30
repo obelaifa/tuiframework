@@ -1,11 +1,5 @@
 #include "TUIClient.h"
 
-#include "EventDelegationFactory.h"
-#include <tuiframework/client/TUIObjectStub.h>
-#include <iostream>
-#include <sstream>
-#include <stdio.h>
-
 
 using namespace std;
 using namespace tuiframework;
@@ -41,37 +35,28 @@ void TUIClient::setEventCallback(PyObject * callback) {
 
 	std::vector<TUIObjectInstance> objectInstances = getAttachedObjects().getTUIObjectInstanceVector();
 	std::vector<TUIObjectType> objectTypes = getAttachedObjects().getTUIObjectTypeVector();
+	int instanceID = 0;
 
-	for (vector<TUIObjectInstance>::iterator it = objectInstances.begin(); it != objectInstances.end(); it++)
-		for (vector<TUIObjectType>::iterator typeIt = objectTypes.begin(); typeIt != objectTypes.end(); typeIt++)
-			if (typeIt->getName() == it->getTypeName())
-				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin();typeMapIt2 != typeIt->getPortMap().end();typeMapIt2++)
+	for (vector<TUIObjectInstance>::iterator it = objectInstances.begin(); it != objectInstances.end(); it++) {
+		for (vector<TUIObjectType>::iterator typeIt = objectTypes.begin(); typeIt != objectTypes.end(); typeIt++) {
+			if (typeIt->getName() == it->getTypeName() && instanceID != it->getID()) {
+				instanceID = it->getID();
+				for (map<string, tuiframework::Port>::iterator typeMapIt2 = typeIt->getPortMap().begin(); typeMapIt2 != typeIt->getPortMap().end(); typeMapIt2++)
 				{
 					if (typeMapIt2->second.getDataFlowDirection() == 2)
 						continue;
 
-                    std::string constraintMin = "empty";
-                    std::string constraintMax = "empty";
-                    std::string trafoType = "empty";
-                    std::string trafoNo = "empty";
-
-                    if (typeMapIt2->second.getTypeName().compare("AnalogChannel") == 0) {
-                        constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
-                        constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
-                        trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
-                        trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
-                    }
-
-                    /*if(typeMapIt2->second.getName().compare("value.GreiferPosR") == 0  || typeMapIt2->second.getName().compare("value.GreiferPosL") == 0)
-                    {
-
-                            constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
-                            constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
-                            trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
-                            trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
-                   }*/
-
-                    //cout << it->getName() << " " << typeMapIt2->second.getName() << " " << constraintMin << " " << constraintMax << " " << trafoType << " " << trafoNo << endl;
+					std::string constraintMin = "empty";
+					std::string constraintMax = "empty";
+					std::string trafoType = "empty";
+					std::string trafoNo = "empty";
+					
+					if (!typeMapIt2->second.getParameterGroup().getParameterGroupMap().empty()) {
+						constraintMin = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("min");
+						constraintMax = typeMapIt2->second.getParameterGroup().getParameterGroup("Constraint").getParameterMap().at("max");
+						trafoType = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoType");
+						trafoNo = typeMapIt2->second.getParameterGroup().getParameterGroup("Meta").getParameterMap().at("TrafoNo");
+					}
 
 					TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
 					TUIObjectStub * t = tc.getStub(it->getName());
@@ -88,6 +73,9 @@ void TUIClient::setEventCallback(PyObject * callback) {
 
 					ied->createConnection(it->getName(), typeMapIt2->second.getName(), callback, typeMapIt2->second.getDescription(), constraintMin, constraintMax, trafoType, trafoNo);
 				}
+			}
+		}
+	}
 }
 
 
@@ -106,19 +94,16 @@ void TUIClient::removeEventCallback(const std::string & tuiObjectName, const std
 
 
 void TUIClient::sendEvent(const std::string & tuiObjectName, const std::string & portName, const std::string & serializedPayload) {
-
     TUIObjectStubContainer & tc = TUIClientAppProvider::getInstance()->getTUIObjectStubContainer();
     TUIObjectStub * t = tc.getStub(tuiObjectName);
     IEventChannel * iec = t->getSinkChannel(portName);
    
     IEvent * event = TUIClientAppProvider::getInstance()->getEventFactory().createInstance(iec->getChannelTypeID());
-    // IEvent * event = EventFactorySingleton::getInstance()->createInstance(iec->getChannelTypeID());
+
     if (event) {
         stringstream ss;
         ss << "-1 -1 " << serializedPayload;
-        //ss.str(serializedPayload);
         ss >> event;
-        //cout << "payload: " << serializedPayload << "Event: " <<  event << endl;
         iec->push(event);
     }
 }

@@ -1,24 +1,24 @@
 /*
-    Copyright (C) 2010, 2011, 2012 The Fraunhofer Institute for Production Systems and
-    Design Technology IPK. All rights reserved.
+	Copyright (C) 2010, 2011, 2012 The Fraunhofer Institute for Production Systems and
+	Design Technology IPK. All rights reserved.
 
-    This file is part of the TUIFramework library.
-    It includes a software framework which contains common code
-    providing generic functionality for developing applications
-    with a tangible user interface (TUI).
-    
-    The TUIFramework library is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+	This file is part of the TUIFramework library.
+	It includes a software framework which contains common code
+	providing generic functionality for developing applications
+	with a tangible user interface (TUI).
 
-    The TUIFramework is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
+	The TUIFramework library is free software: you can redistribute it and/or modify
+	it under the terms of the GNU Lesser General Public License as
+	published by the Free Software Foundation, either version 3 of the
+	License, or (at your option) any later version.
 
-    You should have received a copy of the GNU Lesser General Public License
-    along with the TUIFramework.  If not, see <http://www.gnu.org/licenses/>.
+	The TUIFramework is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU Lesser General Public License for more details.
+
+	You should have received a copy of the GNU Lesser General Public License
+	along with the TUIFramework.  If not, see <http://www.gnu.org/licenses/>.
 */
 #define USE_TFDEBUG
 
@@ -41,216 +41,210 @@
 
 #include <iostream>
 
+#include <fstream>
+
 using namespace std;
 
 namespace tuiframework {
 
-TUIClientApp::TUIClientApp()  :
-    udpSenderSocket(outHostMsgQueue),
-    udpReceiverSocket(inSerializedDataQueue),
-    multicastListener(inSerializedDataQueue),
-    outHostMsgDispatcher(outHostMsgQueue),
-    eventSerializer(outEventQueue, outHostMsgDispatcher),
-    eventDeserializer(inSerializedDataQueue, inEventQueue, eventFactory),
-    stubContainer(*this, this->eventChannelFactory),
-    systemNotificationSink(0),
-    connectedWithServer(false),
-    created(false),
-    multicastListenerActivated(false),
-    myReceivePortNr(0) {
+	TUIClientApp::TUIClientApp() :
+		udpSenderSocket(outHostMsgQueue),
+		udpReceiverSocket(inSerializedDataQueue),
+		multicastListener(inSerializedDataQueue),
+		outHostMsgDispatcher(outHostMsgQueue),
+		eventSerializer(outEventQueue, outHostMsgDispatcher),
+		eventDeserializer(inSerializedDataQueue, inEventQueue, eventFactory),
+		stubContainer(*this, this->eventChannelFactory),
+		systemNotificationSink(0),
+		connectedWithServer(false),
+		created(false),
+		multicastListenerActivated(false),
+		myReceivePortNr(0) {
 
-	TFINFO("Booting TUI Client")
-}
-
-
-TUIClientApp::~TUIClientApp() {
-}
+		TFINFO("Booting TUI Client")
+	}
 
 
-
-void TUIClientApp::exit() {
-}
-
-
-void TUIClientApp::create() {
-    //@@TODO make it thread safe
-    if ( ! this->created) {
-        this->udpReceiverSocket.create();
-        this->eventDeserializer.create();
-        this->eventSerializer.create();
-        this->udpSenderSocket.create();
-        this->created = true;
-    }
-}
+	TUIClientApp::~TUIClientApp() {
+	}
 
 
-void TUIClientApp::cancel() {
-    //@@TODO make it thread safe
-    this->udpReceiverSocket.cancel();
-    this->eventDeserializer.cancel();
-    this->eventSerializer.cancel();
-    this->udpSenderSocket.cancel();
-    
+
+	void TUIClientApp::exit() {
+	}
+
+
+	void TUIClientApp::create() {
+		//@@TODO make it thread safe
+		if (!this->created) {
+			this->udpReceiverSocket.create();
+			this->eventDeserializer.create();
+			this->eventSerializer.create();
+			this->udpSenderSocket.create();
+			this->created = true;
+		}
+	}
+
+
+	void TUIClientApp::cancel() {
+		//@@TODO make it thread safe
+		this->udpReceiverSocket.cancel();
+		this->eventDeserializer.cancel();
+		this->eventSerializer.cancel();
+		this->udpSenderSocket.cancel();
+
 #ifndef _WIN32
-    if (this->multicastListenerActivated) {
-        this->multicastListener.cancel();
-    }
+		if (this->multicastListenerActivated) {
+			this->multicastListener.cancel();
+		}
 #endif
 
-    this->created = false;
-    this->outputLoopRunning = false;
-}
+		this->created = false;
+		this->outputLoopRunning = false;
+	}
 
 
-void TUIClientApp::handleAttachedObjectsMsg(AttachedObjectsMsg * event) {
-  TFDEBUG("TUIClientApp::handleAttachedObjectsMsg " << event);
-  if ( ! this->connectedWithServer) {
-    this->stubContainer.createStubs(event->getPayload().getTUIObjectInstanceVector(), event->getPayload().getTUIObjectTypeVector());
-    this->attachedObjects = event->getPayload();
-
-			/*
-			for (int i = 0; i < this->attachedObjects.getTUIObjectInstanceVector().size(); ++i)
-			{
-			cout << "TUIObject Instance Vector ####" << this->attachedObjects.getTUIObjectInstanceVector().at(i).getName();
-			for (std::map<string, int>::const_iterator it = this->attachedObjects.getTUIObjectInstanceVector().at(i).getNameChannelNrMap().cbegin(); it != this->attachedObjects.getTUIObjectInstanceVector().at(i).getNameChannelNrMap().cend(); ++it)
-			{
-			cout << it->first << " => " << it->second << endl;
+	void TUIClientApp::handleAttachedObjectsMsg(AttachedObjectsMsg * event) {
+		TFDEBUG("TUIClientApp::handleAttachedObjectsMsg " << event);
+		if (!this->connectedWithServer) {
+			this->stubContainer.createStubs(event->getPayload().getTUIObjectInstanceVector(), event->getPayload().getTUIObjectTypeVector());
+			this->attachedObjects = event->getPayload();
+			
+			this->connectedWithServer = true;
+			if (this->systemNotificationSink) {
+				this->systemNotificationSink->push(new SystemMsg(CONNECTION_ESTABLISHED));
 			}
+		}
+	}
 
+
+	void TUIClientApp::handleMulticastGroupInvitationMsg(MulticastGroupInvitationMsg * event) {
+		TFDEBUG("TUIClientApp::handleMulticastGroupInvitationMsg " << event);
+		const HostAddress & address = event->getPayload();
+		this->multicastListener.setMCGroupIPAddress(address.getIPAddress());
+		this->multicastListener.setPort(address.getPortNr());
+		this->multicastListener.create();
+		this->multicastListenerActivated = true;
+		SystemCmdMsg * msg = new SystemCmdMsg();
+		msg->setPayload(SystemCmd(SystemCmd::removeConnection, static_cast<unsigned short>(this->myReceivePortNr)));
+		this->outEventQueue.push(msg);
+	}
+
+
+	void TUIClientApp::push(IEvent * event) {
+		this->outEventQueue.push(event);
+	}
+
+
+
+	TUIObjectStubContainer & TUIClientApp::getTUIObjectStubContainer() {
+		return this->stubContainer;
+	}
+
+
+	void TUIClientApp::processEvents() {
+		while (this->inEventQueue.size()) {
+			IEvent * event = this->inEventQueue.pop();
+
+			if (event) {
+				if (event->getEventTypeID() == HostEvent::EventTypeID()) {
+					HostEvent * ipEventMsg = static_cast<HostEvent *>(event);
+					IEvent * event2 = ipEventMsg->getPayload();
+
+					if (event2->getEventTypeID() >= EPEventMsgTypeIDOffset) {
+						this->stubContainer.handleEvent(static_cast<IEventMsg<EPAddress> *>(event2));
+					}
+					else if (event2->getEventTypeID() == AttachedObjectsMsg::EventTypeID()) {
+						this->handleAttachedObjectsMsg(static_cast<AttachedObjectsMsg *>(event2));
+					}
+					else if (event2->getEventTypeID() == MulticastGroupInvitationMsg::EventTypeID()) {
+						this->handleMulticastGroupInvitationMsg(static_cast<MulticastGroupInvitationMsg *>(event2));
+					}
+				}
+				delete event;
 			}
-			*/
-    this->connectedWithServer = true;
-    if (this->systemNotificationSink) {
-      this->systemNotificationSink->push(new SystemMsg(CONNECTION_ESTABLISHED));
-    }
-  }
-}
+		}
+	}
 
 
-void TUIClientApp::handleMulticastGroupInvitationMsg(MulticastGroupInvitationMsg * event) {
-    TFDEBUG("TUIClientApp::handleMulticastGroupInvitationMsg " << event);
-    const HostAddress & address = event->getPayload();
-    this->multicastListener.setMCGroupIPAddress(address.getIPAddress());
-    this->multicastListener.setPort(address.getPortNr());
-    this->multicastListener.create();
-    this->multicastListenerActivated = true;
-    SystemCmdMsg * msg = new SystemCmdMsg();
-    msg->setPayload(SystemCmd(SystemCmd::removeConnection, static_cast<unsigned short>(this->myReceivePortNr)));
-    this->outEventQueue.push(msg);
-}
+	IEventFactory & TUIClientApp::getEventFactory() {
+		return this->eventFactory;
+	}
 
 
-void TUIClientApp::push(IEvent * event) {
-    this->outEventQueue.push(event);
-}
+	IEventChannelFactory & TUIClientApp::getEventChannelFactory() {
+		return this->eventChannelFactory;
+	}
 
 
+	void TUIClientApp::executeOutputLoop() {
+		this->outputLoopRunning = true;
+		int i = 0;
+		while (this->outputLoopRunning) {
 
-TUIObjectStubContainer & TUIClientApp::getTUIObjectStubContainer() {
-    return this->stubContainer;
-}
+			this->inEventQueue.waitForData();
 
-
-void TUIClientApp::processEvents() {
-  while (this->inEventQueue.size()) {
-    IEvent * event = this->inEventQueue.pop();
-    // cout << event << endl;
-    // cout.flush();
-    if (event) {
-      if (event->getEventTypeID() == HostEvent::EventTypeID()) {
-        HostEvent * ipEventMsg = static_cast<HostEvent *>(event);
-        IEvent * event2 = ipEventMsg->getPayload();
-
-					/*
-					if(event2->getEventTypeID() == ByteChangedEvent::EventTypeID())
-					{
-					ByteChangedEvent* byteEvent = (ByteChangedEvent*)event2;
-					unsigned char byteTest = byteEvent->getPayload();
-					cout <<"Hex" << hex << (int)byteTest << endl;
-
-					for(int i = 0; i < 8; i++){
-					cout << ((byteTest >> i) & 1);
-					}
-					cout << endl;
-					}
-					*/
-
-        if (event2->getEventTypeID() >= EPEventMsgTypeIDOffset) {
-          this->stubContainer.handleEvent(static_cast<IEventMsg<EPAddress> *>(event2));
-        } else if (event2->getEventTypeID() == AttachedObjectsMsg::EventTypeID()) {
-          this->handleAttachedObjectsMsg(static_cast<AttachedObjectsMsg *>(event2));
-        } else if (event2->getEventTypeID() == MulticastGroupInvitationMsg::EventTypeID()) {
-          this->handleMulticastGroupInvitationMsg(static_cast<MulticastGroupInvitationMsg *>(event2));
-        }
-      }
-      delete event;
-    }
-  }
-}
+			if (this->outputLoopRunning) {
+				this->processEvents();
+			}
+			
+			i++;
+		}
+		this->inEventQueue.pop(); //get our empty message out of the queue
+	}
 
 
-IEventFactory & TUIClientApp::getEventFactory() {
-    return this->eventFactory;
-}
+	bool TUIClientApp::connectWithTUIServer(
+		int mySendPortNr,
+		int myReceivePortNr,
+		const std::string & serverAddress,
+		IEventSink * systemNotificationSink,
+		bool ownership) {
+
+		this->myReceivePortNr = myReceivePortNr;
+		this->systemNotificationSink = systemNotificationSink;
+
+		this->outHostMsgDispatcher.addDstAddress(HostAddress(serverAddress));
+		this->udpSenderSocket.setMyPort(mySendPortNr);
+		this->udpReceiverSocket.setMyPort(myReceivePortNr);
+
+		this->create();
+
+		SystemCmdMsg * msg = new SystemCmdMsg();
+		msg->setPayload(SystemCmd(SystemCmd::requestConnection, static_cast<unsigned short>(this->myReceivePortNr)));
+		this->outEventQueue.push(msg);
+
+		if (ownership) {
+			this->executeOutputLoop();
+		}
+
+		return true;
+	}
 
 
-IEventChannelFactory & TUIClientApp::getEventChannelFactory() {
-    return this->eventChannelFactory;
-}
+	bool TUIClientApp::disconnectFromTUIServer() {
+
+		this->systemNotificationSink->push(new SystemMsg(REMOVE_CONNECTION));
+
+		SystemCmdMsg * msg = new SystemCmdMsg();
+		msg->setPayload(SystemCmd(0, static_cast<unsigned short>(this->myReceivePortNr)));
+		this->connectedWithServer = false;
+		this->outputLoopRunning = false;
+
+		this->inEventQueue.push(msg); //send an empty message to the server in order to make the function connectwithTUIserver end
+
+		this->cancel();
+		
+		this->attachedObjects = AttachedObjects();
+		this->stubContainer.deleteStubs();
+
+		return true;
+	}
 
 
-void TUIClientApp::executeOutputLoop() {
-    this->outputLoopRunning = true;
-    while (outputLoopRunning) {
-        this->inEventQueue.waitForData();
-        this->processEvents();
-    }
-}
-
-
-bool TUIClientApp::connectWithTUIServer(
-        int mySendPortNr,
-        int myReceivePortNr,
-        const std::string & serverAddress,
-        IEventSink * systemNotificationSink,
-        bool ownership) {
-
-    this->myReceivePortNr = myReceivePortNr;
-    this->systemNotificationSink = systemNotificationSink;
-
-
-    this->outHostMsgDispatcher.addDstAddress(HostAddress(serverAddress));
-    this->udpSenderSocket.setMyPort(mySendPortNr);
-    this->udpReceiverSocket.setMyPort(myReceivePortNr);
-
-    this->create();
-
-    SystemCmdMsg * msg = new SystemCmdMsg();
-    msg->setPayload(SystemCmd(SystemCmd::requestConnection, static_cast<unsigned short>(this->myReceivePortNr)));
-    this->outEventQueue.push(msg);
-
-    if (ownership) {
-        this->executeOutputLoop();
-    }
-
-    return true;
-}
-
-
-bool TUIClientApp::disconnectFromTUIServer() {
-    this->cancel();
-    this->connectedWithServer = false;
-
-    this->attachedObjects = AttachedObjects();
-    this->stubContainer.deleteStubs();
-
-    return true;
-}
-
-
-const AttachedObjects & TUIClientApp::getAttachedObjects() const {
-    return this->attachedObjects;
-}
+	const AttachedObjects & TUIClientApp::getAttachedObjects() const {
+		return this->attachedObjects;
+	}
 
 }
 
