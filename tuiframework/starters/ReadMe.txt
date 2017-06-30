@@ -7,7 +7,12 @@ In this folder, you have at your disposal three batch files:
 	*	startPythonInterface: it starts the python interface
 	*	startBedianApp: it starts the BedienApp
 
+(the dll allowed the connection between the TUI and WindMOD)
+
 We will explain in details how each works.
+
+In the folder xmlconfig, you can find the xml configurations usable with the TUI and also the xml visualization tool.
+In the folder example_clients, there is a UDP test client, useful to connect to the Python Interface, in order to avoid the starting of VRED for simple tests.
 
 #####################
 #### startServer ####

@@ -11,7 +11,7 @@ If the build is correctly done, go to the "Automatic test" section.
 
 ### Automatic test ###
 
-To start the python interface, you have to click on startPI.bat in the "starters" folder, which is going to start the python interface, and probably follow the instruction contained in the ReadMe.txt of this folder.
+To start the python interface, you have to click on startPythonInterface.bat in the "starters" folder, which is going to start the python interface, and probably follow the instruction contained in the ReadMe.txt of this folder.
 
 ### Build manually ###
 
